@@ -10,11 +10,11 @@
 carpentry: "swc"
 
 # Overall title for pages.
-title: "Introduction to Machine Learning using R"
+title: "Introduction to Machine Learning using Python"
 
 # Life cycle stage of the lesson
 # possible values: "pre-alpha", "alpha", "beta", "stable"
-life_cycle: "stable"
+life_cycle: "pre-alpha"
 
 #------------------------------------------------------------
 # Generic settings (should not need to change).
