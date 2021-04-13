@@ -33,20 +33,11 @@ as well as other functionality.
 $ pip3 install -U scikit-learn`
 
 
-## Pre-processing using `caret`
-There are several steps that we will use `caret` for. For preprocessing raw data, we gonna use `caret` in these tasks:
-- Visualize important variables
+## Pre-processing using `sklearn`
+There are several steps that we will use `sklearn` for. For preprocessing raw data, we gonna use `sklearn` in these tasks:
 - Preprocessing with missing value
 - Preprocessing: transform data
 - Data partition: training and testing
-
-### Visualize important variables
-Here we introduce the library `GGally`  with function `ggpairs` to help user in visualizing the input data
-```r
-library(GGally)
-ggpairs(data=iris,aes(colour=Species))
-```
-![image](https://user-images.githubusercontent.com/43855029/114196055-01e8c500-991f-11eb-8eaf-816f25e6c534.png)
 
 ### Pre-processing with missing value
 - Most of the time the input data has missing values (`NA, NaN, Inf`) due to data collection issue (power, sensor, personel). 
