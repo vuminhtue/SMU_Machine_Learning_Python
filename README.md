@@ -1,4 +1,4 @@
-# Machine Learning using R
+# Machine Learning using Python
 
 This repository generates the corresponding course website based on the original templates
 from [The Carpentries](https://carpentries.org/).
