@@ -1,55 +1,37 @@
 ---
-title: "Introduction to Caret"
+title: "Introduction to Scikit Learn"
 teaching: 40
 exercises: 0
 questions:
-- "What is Caret"
+- "What is Scikit Learn"
 objectives:
-- "Master Caret package for Machine Learning"
+- "Master Scikit Learn for Machine Learning"
 keypoints:
-- "Caret"
+- "sklearn"
 ---
 
-## What is Caret
-![image](https://user-images.githubusercontent.com/43855029/114192772-de704b00-991b-11eb-977e-d6706d4aca33.png)
+## What is Scikit-Learn
+![image](https://user-images.githubusercontent.com/43855029/114609814-30db9f80-9c6d-11eb-8d4e-781f578e1d79.png)
 
-The caret package (short for **C**lassification **A**nd **RE**gression **T**raining) is a set of functions that attempt to streamline the process for creating predictive models. The package contains tools for:
-
-data splitting
-pre-processing
-feature selection
-model tuning using resampling
-variable importance estimation
+- Scikit-learn is probably the most useful library for machine learning in Python. 
+- The sklearn library contains a lot of efficient tools for machine learning and statistical modeling including classification, regression, clustering and dimensionality reduction.
+- The sklearn package contains tools for:
+```
+- data splitting
+- pre-processing
+- feature selection
+- model tuning using resampling
+- variable importance estimation
 as well as other functionality.
-
-There are many different modeling functions in R. Some have different syntax for model training and/or prediction. The package started off as a way to provide a uniform interface the functions themselves, as well as a way to standardize common tasks (such parameter tuning and variable importance).
-
-The current release version can be found on CRAN and the project is hosted on github.
-Caret was developed by [Max Kuhn](https://topepo.github.io/caret/index.html)
-Here only touch some of the very basic command that is useful for our Machine Learning class.
-
-[caret cheatsheet](https://www.analyticsvidhya.com/infographics/Caret-Package-Infographic.pdf)
-
-## Why using Caret
-- R has so many ML algorithms, challenge to keep track, different syntax for different packages
-- Possibly the biggest project in R
-- All in one supervised learning problem
-- Uniform interface
-- Standard pre & post processing
-
-## Install `caret`
-In R console:
-```r
-install.packages("caret", dependencies = c("Depends", "Suggests"))
 ```
-In R studio:
-```
-Select Tools\Install Packages and select caret from CRAN
-```
-Once installed, load the caret package to make sure that it works:
-```r
-library(caret)
-```
+## Install `sklearn`
+- In local Anaconda Navigator:
+`Select Environment => base (root) => In *not installed* search for **scikit-learn** package to install (apply).`
+
+- In Linux conda management:
+`Create conda package management then run
+$ pip3 install -U scikit-learn`
+
 
 ## Pre-processing using `caret`
 There are several steps that we will use `caret` for. For preprocessing raw data, we gonna use `caret` in these tasks:
