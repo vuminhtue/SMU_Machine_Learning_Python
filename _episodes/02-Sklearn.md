@@ -45,8 +45,14 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 - These missing values need to be treated/cleaned before we can use because "Garbage in => Garbage out".
 - There are several ways to treat the missing values:
 - Method 1: remove all missing `NA` values
-```r
-library(base)
+```python
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
+data_df.head()
+
+
 data("airquality") # Here we use this sample data because it contains missing value
 new_airquality1 <- na.omit(airquality)
 ``` 
