@@ -25,12 +25,8 @@ keypoints:
 as well as other functionality.
 ```
 ## Install `sklearn`
-- In local Anaconda Navigator:
-`Select Environment => base (root) => In *not installed* search for **scikit-learn** package to install (apply).`
-
-- In Linux conda management:
-`Create conda package management then run
-$ pip3 install -U scikit-learn`
+We have installed kernel **MLP** which contains the scikit-learn package in Palmetto. However for new conda environment installation, here is the command:
+`$ pip3 install -U scikit-learn`
 
 
 ## Pre-processing using `sklearn`
@@ -44,47 +40,41 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 - There are three main problems that missing data causes: missing data can introduce a substantial amount of bias, make the handling and analysis of the data more arduous, and create reductions in efficiency
 - These missing values need to be treated/cleaned before we can use because "Garbage in => Garbage out".
 - There are several ways to treat the missing values:
+
 - Method 1: remove all missing `NA` values
 ```python
 import pandas as pd
-from sklearn.impute import SimpleImputer
-
 data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
 data_df.head()
-
-
-data("airquality") # Here we use this sample data because it contains missing value
-new_airquality1 <- na.omit(airquality)
+data1 = data_df.dropna()
 ``` 
+
 - Method 2: Set `NA` to mean value 
-```r
-NA2mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
-new_airquality2 <-replace(airquality, TRUE, lapply(airquality, NA2mean))
+```python
+data2 = data_df.copy()
+data2.fillna(data2.mean(), inplace=True)
 ```
+Or
+```python
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+data3 = imputer.fit_transform(data_df)
+```
+**Note:**
+SimpleImputer converts missing values to **mean, median, most_frequent and constant**.
+
 - Method 3: Use `Impute` to handle missing values
 In statistics, imputation is the process of replacing missing data with substituted values. Because missing data can create problems for analyzing data, imputation is seen as a way to avoid pitfalls involved with listwise deletion of cases that have missing values. That is to say, when one or more values are missing for a case, most statistical packages default to discarding any case that has a missing value, which may introduce bias or affect the representativeness of the results. Imputation preserves all cases by replacing missing data with an estimated value based on other available information. Once all missing values have been imputed, the data set can then be analysed using standard techniques for complete data. There have been many theories embraced by scientists to account for missing data but the majority of them introduce bias. A few of the well known attempts to deal with missing data include: hot deck and cold deck imputation; listwise and pairwise deletion; mean imputation; non-negative matrix factorization; regression imputation; last observation carried forward; stochastic imputation; and multiple imputation.
 
-Here we use `preProcess` function from `caret` to perform `bagImpute` (Bootstrap Aggregation Imputation):
-```r
-library(caret)
-PreImputeBag <- preProcess(airquality,method="bagImpute")
-DataImputeBag <- predict(PreImputeBag,airquality)
+`knnImpute` can also be used to fill in missing value
+```python
+from sklearn.impute import KNNImputer
+imputer = KNNImputer(n_neighbors=2, weights="uniform")
+data4 = imputer.fit_transform(data_df)
 ```
-In addition to `bagImpute`, we also can use `knnImpute` (K-Nearest Neighbour Imputation)
-`knnImpute` can also be used to normalized the data
-```r
-library(gridExtra)
-PreImpute <- preProcess(airquality[,-c(5,6)],method="knnImpute")
-TraImpute <- predict(PreImpute,airquality[,-c(5,6)])
-
-plot1 <- ggplot(airquality,aes(Ozone)) + geom_histogram(bins=30)+labs(title="Original Probability")
-plot2 <- ggplot(TraImpute,aes(Ozone)) + geom_histogram(bins=30)+labs(title="KnnImpute Transform to Normal Distribution")
-grid.arrange(plot1,plot2,nrow=2)
-```
-![image](https://user-images.githubusercontent.com/43855029/114202025-cd780780-9924-11eb-999f-b89c9080cfdf.png)
-
-**Note** 
-`bagImpute` is more powerful and computational cost than `knnImpute`
+**Note:**
+- In addition to KNNImputer, there are **IterativeImputer** (Multivariate imputer that estimates each feature from all the others) and **MissingIndicator**(Binary indicators for missing values)
+- More information on sklearn.impute can be found [here](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.impute)
 
 ### Pre-processing with Transforming data
 #### Using Standardization
