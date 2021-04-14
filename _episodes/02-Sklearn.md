@@ -84,16 +84,13 @@ data4 = imputer.fit_transform(data_df)
 - Standardition Convert all independent variables into the same scale (mean=0, std=1) 
 - These differences in the ranges of initial features causes trouble to many machine learning models. For example, for the models that are based on distance computation, if one of the features has a broad range of values, the distance will be governed by this particular feature.
 - The example below use data from above:
-```r
-PreStd <- preProcess(training[,-c(1,5,6)],method=c("center","scale")) 
-TrainStd <- predict(PreStd,training[,-c(1,5,6)])
-apply(TrainStd,2,mean)
-apply(TrainStd,2,sd)
-
-TestStd <- predict(PreStd,testing[,-c(1,5,6)])
-apply(TestStd,2,mean)
-apply(TestStd,2,sd)
+```python
+data4 = pd.DataFrame(data4)
+data5 = sklearn.preprocessing.scale(data4,axis=0, with_mean=True, with_std=True, copy=True)
 ```
+- axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
+
+
 
 #### Using Box-Cox Transformation
 - A Box Cox transformation is a transformation of a non-normal dependent variables into a normal shape. 
