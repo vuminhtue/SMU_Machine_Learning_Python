@@ -11,32 +11,38 @@ keypoints:
 ---
 # Supervised Learning training
 ## Train model using Linear Regression
-Pre-processing data and create partition
-```r
-library(caret)
-data(airquality)
+Let use the **airquality** data in previous episodes:
 
-set.seed(123)
-#Impute missing value using Bagging approach
-PreImputeBag <- preProcess(airquality,method="bagImpute")
-airquality_imp <- predict(PreImputeBag,airquality)
+```python
+import pandas as pd
+from sklearn.impute import KNNImputer
+from sklearn.model_selection import train_test_split
 
-indT <- createDataPartition(y=airquality_imp$Ozone,p=0.6,list=FALSE)
-training <- airquality_imp[indT,]
-testing  <- airquality_imp[-indT,]
+data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
+
+imputer = KNNImputer(n_neighbors=2, weights="uniform")
+data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
+
+X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Solar.R','Wind']],
+                                                    data_knnimpute['Ozone'],
+                                                    train_size=0.6,random_state=123)
 ```
 Fit a Linear model using `method=lm`
-```r
-ModFit <- train(Ozone~Temp,data=training,
-                preProcess=c("center","scale"),
-                method="lm")
-summary(ModFit$finalModel)
+```python
+from sklearn.linear_model import LinearRegression
+model_linreg = LinearRegression().fit(X_train,y_train)
 ```
-Apply trained model to testing data set and evaluate output
+
+Several attribute of Linear Regression in sklearn:
+```
+model_linreg.coef_
+model_linreg.intercept_
+```
+
+Apply trained model to testing data set and evaluate output using R-squared:
 ```r
-prediction <- predict(ModFit,testing)
-cor.test(prediction,testing$Ozone)
-postResample(prediction,testing$Ozone)
+model_linreg.score(X_train, y_train)
+model_linreg.score(X_test, y_test)
 ```
 
 ## Train model using Multi-Linear Regression
