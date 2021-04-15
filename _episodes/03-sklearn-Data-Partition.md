@@ -86,3 +86,8 @@ for train_index, test_index in kf.split(iris_df, iris_df["target"]):
     model.fit(X_train, y_train) #Training the model
     print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")
 ```
+## Data spliting using **Other methods**
+- RepeatKfold
+- ShuffleSplit
+- LeaveOneOut
+- LeavePOut
