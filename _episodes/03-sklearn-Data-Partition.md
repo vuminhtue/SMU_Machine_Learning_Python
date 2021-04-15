@@ -50,7 +50,8 @@ X_train, X_test, y_train, y_test = train_test_split(iris_df.loc[:,features],
 The procedure has a single parameter called k that refers to the number of groups that a given data sample is to be split into. As such, the procedure is often called k-fold cross-validation. When a specific value for k is chosen, it may be used in place of k in the reference to the model, such as k=10 becoming 10-fold cross-validation.
 ![image](https://user-images.githubusercontent.com/43855029/114211785-103edd00-992f-11eb-89d0-bbd7bd0c0178.png)
 ```python
-for train_index, test_index in kf3.split(iris_df):
+kf10 = KFold(n_splits=10,shuffle=True,random_state=20)
+for train_index, test_index in kf10.split(iris_df):
     X_train = iris_df.iloc[train_index].loc[:, features]
     X_test = iris_df.iloc[test_index][features]
     y_train = iris_df.iloc[train_index].loc[:,'target']
