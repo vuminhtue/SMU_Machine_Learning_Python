@@ -90,6 +90,17 @@ data_std = pd.DataFrame(scale(data3,axis=0, with_mean=True, with_std=True, copy=
 # axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
 ```
 
+#### Using scaling with predefine range
+Transform features by scaling each feature to a given range.
+This estimator scales and translates each feature individually such that it is in the given range on the training set, e.g. between zero and one.
+
+```python
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+#By default, it scales for (0, 1) range
+data_scaler = pd.DataFrame(scaler.fit_transform(data3))
+```
+
 #### Using Box-Cox Transformation
 - A [Box Cox](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.2517-6161.1964.tb00553.x) transformation is a transformation of a non-normal dependent variables into a normal shape. 
 - Normality is an important assumption for many statistical techniques; if your data isn’t normal, applying a Box-Cox means that you are able to run a broader number of tests.
