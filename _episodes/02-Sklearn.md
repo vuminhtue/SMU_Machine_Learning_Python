@@ -70,7 +70,7 @@ In statistics, imputation is the process of replacing missing data with substitu
 ```python
 from sklearn.impute import KNNImputer
 imputer = KNNImputer(n_neighbors=2, weights="uniform")
-data4 = imputer.fit_transform(data_df)
+data_knnimpute = imputer.fit_transform(data_df)
 ```
 **Note:**
 - In addition to KNNImputer, there are **IterativeImputer** (Multivariate imputer that estimates each feature from all the others) and **MissingIndicator**(Binary indicators for missing values)
@@ -86,50 +86,22 @@ data4 = imputer.fit_transform(data_df)
 - The example below use data from above:
 ```python
 data4 = pd.DataFrame(data4)
-data5 = sklearn.preprocessing.scale(data4,axis=0, with_mean=True, with_std=True, copy=True)
+data_std = sklearn.preprocessing.scale(data4,axis=0, with_mean=True, with_std=True, copy=True)
+# axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
 ```
-- axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
-
-
 
 #### Using Box-Cox Transformation
-- A Box Cox transformation is a transformation of a non-normal dependent variables into a normal shape. 
+- A [Box Cox](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.2517-6161.1964.tb00553.x) transformation is a transformation of a non-normal dependent variables into a normal shape. 
 - Normality is an important assumption for many statistical techniques; if your data isn’t normal, applying a Box-Cox means that you are able to run a broader number of tests.
 - The Box Cox transformation is named after statisticians George Box and Sir David Roxbee Cox who collaborated on a 1964 paper and developed the technique.
-```r
-PreBxCx <- preProcess(training[,-c(5,6)],method="BoxCox")
-TrainBxCx <- predict(PreBxCx,training[,-c(5,6)])
-
-plot1 <- ggplot(training,aes(Ozone)) + geom_histogram(bins=30)+labs(title="Original Probability")
-plot2 <- ggplot(TrainBxCx,aes(Ozone)) + geom_histogram(bins=30)+labs(title="Box-Cox Transform to Normal")
-library(gridExtra)
-grid.arrange(plot1,plot2,nrow=2)
+- BoxCox can only be applied to stricly positive values
+```python
+data_BxCx = sklearn.preprocessing.power_transform(data3,method="box-cox")
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114201422-298e5c00-9924-11eb-9e40-0b8b45138f46.png)
- 
- ### Pre-processing as argument:
- When using Preprocessing as argument in the training process in caret, the method is changed to preProcess, for example:
-```r
-modelFit2 <- train(Ozone~Temp,data=training,
-                  preProcess=c("center","scale","BoxCox"),
-                  method="lm")
-prediction2 <- predict(modelFit2,testing)
+#### Using Yeo Johnson Transformation
+While BoxCox only works with positive value, a more recent transformation method [Yeo Johnson](https://www.jstor.org/stable/2673623) can transform both positive and negative values
+```python
+data_yeo_johnson = sklearn.preprocessing.power_transform(data3,method="yeo-johnson")
 ```
 
-## Post-processing - Evaluate the test result
-Once getting the prediction coming out from Machine Learning training model, user is ready to evaluate the output with observed data from testing set.
-There are 2 main types of output: (1) Continuous data & (2) Discreet/Classification/Categorical data
-
-- For Regression with continuous data
-```r
-cor(prediction,testing)
-cor.test(prediction,testing)
-postResample(prediction,testing)
-```
-
-- For categorical data
-```r
-confusionMatrix(predict,testing)
-```
-
-We will discuss more in detail in the training section.
