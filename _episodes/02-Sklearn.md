@@ -33,7 +33,6 @@ We have installed kernel **MLP** which contains the scikit-learn package in Palm
 There are several steps that we will use `sklearn` for. For preprocessing raw data, we gonna use `sklearn` in these tasks:
 - Preprocessing with missing value
 - Preprocessing: transform data
-- Data partition: training and testing
 
 ### Pre-processing with missing value
 - Most of the time the input data has missing values (`NA, NaN, Inf`) due to data collection issue (power, sensor, personel). 
