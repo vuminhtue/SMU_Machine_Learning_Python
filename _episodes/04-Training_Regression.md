@@ -10,7 +10,7 @@ keypoints:
 - "Regression training"
 ---
 # Supervised Learning training
-## Train model using Linear Regression
+## Train model using Linear Regression with 1 predictor
 Let use the **airquality** data in previous episodes:
 
 ```python
@@ -23,7 +23,7 @@ data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/
 imputer = KNNImputer(n_neighbors=2, weights="uniform")
 data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
 
-X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Solar.R','Wind']],
+X_train, X_test, y_train, y_test = train_test_split(data_knnimpute['Temp'],
                                                     data_knnimpute['Ozone'],
                                                     train_size=0.6,random_state=123)
 ```
@@ -46,12 +46,8 @@ model_linreg.score(X_test, y_test)
 ```
 
 ## Train model using Multi-Linear Regression
-From the above model, the `postResample` only show the reasonable result:
-```r
-> postResample(prediction,testing$Ozone)
-      RMSE   Rsquared        MAE 
-27.6743204  0.4313953 18.5866936 
-```
+From the above model, the `R^2` only show the reasonable result 0.37:
+
 The reason is that we only build the model with 1 input `Temp`.
 In this section, we will build the model with more input `Solar Radiation, Wind, Temperature`:
 ```r
