@@ -100,7 +100,6 @@ data_std = pd.DataFrame(scale(data3,axis=0, with_mean=True, with_std=True, copy=
 from sklearn.preprocessing import power_transform
 data_BxCx = pd.DataFrame(power_transform(data3,method="box-cox"))
 ```
-![image](https://user-images.githubusercontent.com/43855029/114201422-298e5c00-9924-11eb-9e40-0b8b45138f46.png)
 #### Using Yeo Johnson Transformation
 While BoxCox only works with positive value, a more recent transformation method [Yeo Johnson](https://www.jstor.org/stable/2673623) can transform both positive and negative values
 ```python
