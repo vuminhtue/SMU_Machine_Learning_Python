@@ -58,7 +58,8 @@ Or
 ```python
 from sklearn.impute import SimpleImputer
 imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
-data3 = imputer.fit_transform(data_df)
+data3 = pd.DataFrame(imputer.fit_transform(data_df))
+data3.columns = data_df.columns
 ```
 **Note:**
 SimpleImputer converts missing values to **mean, median, most_frequent and constant**.
@@ -70,7 +71,7 @@ In statistics, imputation is the process of replacing missing data with substitu
 ```python
 from sklearn.impute import KNNImputer
 imputer = KNNImputer(n_neighbors=2, weights="uniform")
-data_knnimpute = imputer.fit_transform(data_df)
+data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
 ```
 **Note:**
 - In addition to KNNImputer, there are **IterativeImputer** (Multivariate imputer that estimates each feature from all the others) and **MissingIndicator**(Binary indicators for missing values)
@@ -85,8 +86,8 @@ data_knnimpute = imputer.fit_transform(data_df)
 - These differences in the ranges of initial features causes trouble to many machine learning models. For example, for the models that are based on distance computation, if one of the features has a broad range of values, the distance will be governed by this particular feature.
 - The example below use data from above:
 ```python
-data4 = pd.DataFrame(data4)
-data_std = sklearn.preprocessing.scale(data4,axis=0, with_mean=True, with_std=True, copy=True)
+from sklearn.preprocessing import scale
+data_std = pd.DataFrame(scale(data3,axis=0, with_mean=True, with_std=True, copy=True))
 # axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
 ```
 
@@ -96,7 +97,8 @@ data_std = sklearn.preprocessing.scale(data4,axis=0, with_mean=True, with_std=Tr
 - The Box Cox transformation is named after statisticians George Box and Sir David Roxbee Cox who collaborated on a 1964 paper and developed the technique.
 - BoxCox can only be applied to stricly positive values
 ```python
-data_BxCx = sklearn.preprocessing.power_transform(data3,method="box-cox")
+from sklearn.preprocessing import power_transform
+data_BxCx = pd.DataFrame(power_transform(data3,method="box-cox"))
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114201422-298e5c00-9924-11eb-9e40-0b8b45138f46.png)
 #### Using Yeo Johnson Transformation
@@ -104,4 +106,19 @@ While BoxCox only works with positive value, a more recent transformation method
 ```python
 data_yeo_johnson = sklearn.preprocessing.power_transform(data3,method="yeo-johnson")
 ```
+
+```python
+import matplotlib.pyplot as plt
+ax1 = plt.subplot(1,2,1)
+ax1.hist(data3["Ozone"])
+ax1.set_title("Original probability")
+ax1.set_xlabel('Ozone')
+ax1.set_ylabel('Count')
+ax2 = plt.subplot(1,2,2)
+ax2.hist(data_BxCx["Ozone"])
+ax2.set_title("Box-Cox Transformation")
+ax2.set_xlabel('Ozone')
+ax2.set_ylabel('Count')
+```
+![image](https://user-images.githubusercontent.com/43855029/114884951-30a9e400-9dd4-11eb-9c42-4d108743a551.png)
 
