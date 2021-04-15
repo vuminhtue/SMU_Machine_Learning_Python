@@ -1,18 +1,18 @@
 ---
-title: "Data Partition with caret"
+title: "Data Partition with Scikit-Learn"
 teaching: 20
 exercises: 0
 questions:
 - "What is Data Partition"
 objectives:
-- "Learn how to split data using caret"
+- "Learn how to split data using sklearn"
 keypoints:
-- "Caret"
+- "sklearn, data partition"
 ---
 
 # Data partition: training and testing
 - In Machine Learning, it is mandatory to have training and testing set. Some time a verification set is also recommended.
-Here are some functions for spliting training/testing set in `caret`:
+Here are some functions for spliting training/testing set in `sklearn`:
 
 - `createDataPartition`: create series of test/training partitions
 - `createResample` creates one or more bootstrap samples.
@@ -22,11 +22,11 @@ Here are some functions for spliting training/testing set in `caret`:
 
 Due to time constraint, we only focus on `createDataPartition` and `createFolds`
 
-## Data spliting using `Data Partition`
-Here we use `createDataPartition` to randomly split 60% data for training and the rest for testing:
+## Data spliting using `train_test_split`
+Here we use `train_test_split` to randomly split 60% data for training and the rest for testing:
 ![image](https://user-images.githubusercontent.com/43855029/114209883-22b81700-992d-11eb-83a4-c4ab1538a1e5.png)
 
-```r
+```python
 ind1 <- createDataPartition(y=iris$Species,p=0.6,list=FALSE,times=1)
 #list=FALSE, prevent returning result as a list
 #times=1 to create the resample size. Default value is 1.
