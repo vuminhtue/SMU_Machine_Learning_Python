@@ -82,30 +82,51 @@ The **R2=0.58** shows improvement using polynomial regression!
 - Logistic regression is another technique borrowed by machine learning from the field of statistics. It is the go-to method for binary classification problems (problems with two class values).
 - Typical binary classification: True/False, Yes/No, Pass/Fail, Spam/No Spam, Male/Female
 - Unlike linear regression, the prediction for the output is transformed using a non-linear function called the logistic function.
-- The standard logistic function has formulation: ![image](https://user-images.githubusercontent.com/43855029/114233181-f7dcbb80-994a-11eb-9c89-58d7802d6b49.png)
+- The standard logistic function has formulation:
+
+![image](https://user-images.githubusercontent.com/43855029/114233181-f7dcbb80-994a-11eb-9c89-58d7802d6b49.png)
 
 ![image](https://user-images.githubusercontent.com/43855029/114233189-fb704280-994a-11eb-9019-8355f5337b37.png)
 
+In this example, we use `breast cancer` data set built-in [sklearn data](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html#sklearn.datasets.load_breast_cancer).
 
-In this example, we use `spam` data set from package `kernlab`.
-This is a data set collected at Hewlett-Packard Labs, that classifies **4601** e-mails as spam or non-spam. In addition to this class label there are **57** variables indicating the frequency of certain words and characters in the e-mail.
-More information on this data set can be found [here](https://rdrr.io/cran/kernlab/man/spam.html)
+This is a data set that classify breast cancer to `malignant` or `benign` based on different input data on the breast's measurement from 569 patients
 
-Train the model:
-```r
-library(kernlab)
-data(spam)
-names(spam)
-
-indTrain <- createDataPartition(y=spam$type,p=0.6,list = FALSE)
-training <- spam[indTrain,]
-testing  <- spam[-indTrain,]
-
-ModFit_glm <- train(type~.,data=training,method="glm")
-summary(ModFit_glm$finalModel)
+First import necessary package:
+```python
+import pandas as pd
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import scale
+from sklearn.Linear_Model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 ```
-Predict based on testing data and evaluate model output:
-```r
-predictions <- predict(ModFit_glm,testing)
-confusionMatrix(predictions, testing$type)
+Read in data:
+```python
+datab = load_breast_cancer()
+datab_df = pd.DataFrame(data=datab.data,columns=datab.feature_names)
+features = datab['feature_names']
+datab_df['target'] = datab.target
+datab_df["target_name"] = datab_df['target'].map({i:name for i,name in enumerate(datab.target_names)})
+datab_df.sample(5)
 ```
+Standardize input data:
+```python
+data_std = pd.DataFrame(scale(datab_df.loc[:,features],axis=0, with_mean=True, with_std=True, copy=True))
+```
+Partitioning Data to train/test:
+```python
+X_train, X_test, y_train, y_test = train_test_split(data_std,
+                                                    datab_df['target_name'],
+                                                    train_size=0.6,random_state=123)
+```
+Train model using Logistic Regression
+```python
+model_LogReg = LogisticRegression().fit(X_train, y_train)
+y_pred = model_LogReg.predict(X_test)
+```
+Evaluate output with accurary level:
+```python
+metrics.accuracy_score(y_test,y_pred)
+```
+We retrieve the **accuracy = 0.99**
