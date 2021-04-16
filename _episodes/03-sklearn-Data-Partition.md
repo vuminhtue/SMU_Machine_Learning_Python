@@ -27,10 +27,10 @@ Due to time constraint, we only focus on `train_test_split`, `KFolds` and `Strat
 The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html)
 ```
 For each dataset, there are 4 varibles:
-- data: numpy array of predictors/X
-- target: numpy array of predictant/target/y
-- 'feature_names': names of all predictors in X
-- 'target.names': names of all predictand in y
+- **data**: numpy array of predictors/X
+- **target**: numpy array of predictant/target/y
+- **feature_names**: names of all predictors in X
+- **target.names**: names of all predictand in y
 ```
 For example:
 ```python
@@ -38,8 +38,8 @@ from sklearn.datasets import load_iris
 data = load_iris()
 print(data.data)
 print(data.target)
-print(data['feature_names'])
-print(data['target_names'])
+print(data.feature_names.)
+print(data.target_names)
 ```
 
 In this example we gonna use the renowned iris flower data
