@@ -42,7 +42,7 @@ metrics.r2_score(y_test,y_pred) # R^2
 metrics.mean_squared_error(y_test,y_pred,squared=False) #RMSE
 ```
 
-## Train model using Multi-Linear Regression
+## Train model using Multi-Linear Regression (with 2 or more predictors)
 From the above model, the `R^2` only show the reasonable result 0.39:
 
 The reason is that we only build the model with 1 input `Temp`.
@@ -57,7 +57,26 @@ y_pred2 = model_linreg.predict(X_test)
 metrics.r2_score(y_test,y_pred)
 metrics.mean_squared_error(y_test,y_pred,squared=False)
 ```
-Output is therefore better with smaller RMSE and higher Rsquared
+Output is therefore better with smaller RMSE and higher Rsquared at **0.5**
+
+## Train model using Polynomial Regression
+From Multi-Linear Regression, the best **R2=0.5** using 3 predictors.
+We can slightly improve this by using Polynomial Regression
+![image](https://user-images.githubusercontent.com/43855029/115059030-f7e13c00-9eb3-11eb-9887-52461d7a87aa.png)
+
+In this study, let use polynomial regression with `degree of freedom=2`
+```python
+from sklearn.preprocessing import PolynomialFeatures
+poly = PolynomialFeatures(degree=2)
+X_train_poly = poly.fit_transform(data_knnimpute[['Temp','Wind','Solar.R']])
+X_train, X_test, y_train, y_test = train_test_split(X_train_poly,
+                                                    data_knnimpute['Ozone'],
+                                                    train_size=0.6,random_state=123)
+model_linreg_poly = LinearRegression().fit(X_train,y_train)
+y_pred_poly = model_linreg_poly.predict(X_test)
+metrics.r2_score(y_test,y_pred_poly)
+```
+The **R2=0.58** shows improvement using polynomial regression!
 
 ## Train model using Logistic Regression
 - Logistic regression is another technique borrowed by machine learning from the field of statistics. It is the go-to method for binary classification problems (problems with two class values).
