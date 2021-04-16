@@ -92,41 +92,34 @@ In this example, we use `breast cancer` data set built-in [sklearn data](https:/
 
 This is a data set that classify breast cancer to `malignant` or `benign` based on different input data on the breast's measurement from 569 patients
 
-First import necessary package:
+Read in data:
 ```python
 import pandas as pd
 from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import scale
-from sklearn.Linear_Model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
-```
-Read in data:
-```python
+
 datab = load_breast_cancer()
-datab_df = pd.DataFrame(data=datab.data,columns=datab.feature_names)
-features = datab['feature_names']
-datab_df['target'] = datab.target
-datab_df["target_name"] = datab_df['target'].map({i:name for i,name in enumerate(datab.target_names)})
-datab_df.sample(5)
+X = datab.data
+y = datab.target
 ```
 Standardize input data:
 ```python
-data_std = pd.DataFrame(scale(datab_df.loc[:,features],axis=0, with_mean=True, with_std=True, copy=True))
+from sklearn.preprocessing import scale
+Xstd = pd.DataFrame(scale(X,axis=0, with_mean=True, with_std=True, copy=True))
 ```
 Partitioning Data to train/test:
 ```python
-X_train, X_test, y_train, y_test = train_test_split(data_std,
-                                                    datab_df['target_name'],
-                                                    train_size=0.6,random_state=123)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(Xstd,y,train_size=0.6,random_state=123)
 ```
 Train model using Logistic Regression
 ```python
+from sklearn.Linear_Model import LogisticRegression
 model_LogReg = LogisticRegression().fit(X_train, y_train)
 y_pred = model_LogReg.predict(X_test)
 ```
 Evaluate output with accurary level:
 ```python
+from sklearn import metrics
 metrics.accuracy_score(y_test,y_pred)
 ```
 We retrieve the **accuracy = 0.99**
