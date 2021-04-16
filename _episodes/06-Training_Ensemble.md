@@ -57,9 +57,39 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
 iris = load_iris()
-X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state = 123)
-
+X = iris.data
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6, random_state = 123)
 ```
+First apply **Bagging** with **DecisionTree** model:
+```python
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import BaggingClassifier
+model_DT = DecisionTreeClassifier()
+
+model_bag_DT = BaggingClassifier(base_estimator=model_DT, n_estimators=100,
+                            bootstrap=True, n_jobs=-1,
+                            random_state=123)
+model_bag_DT.fit(X_train, y_train)
+
+model_bag_DT.score(X_train,y_train),model_bag_DT.score(X_test,y_test)
+```
+The output accuracy from **Bagging** with **DecisionTree** for train/testing have : `(1.0, 0.9666666666666667)`
+
+Aternatively, apply **Bagging** with **RandomForest** model:
+```python
+from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
+model_RF = RandomForestClassifier()
+
+model_bag_RF = BaggingClassifier(base_estimator=model_RF, n_estimators=100,
+                            bootstrap=True, n_jobs=-1,
+                            random_state=123)
+model_bag_RF.fit(X_train, y_train)
+
+model_bag_RF.score(X_train,y_train),model_bag_RF.score(X_test,y_test)
+```
+The output accuracy from **Bagging** with **RandomForest**  for train/testing have : `(0.9888888888888889, 0.9666666666666667)`
+
 ## Train model using Boosting
 - Boosting is an approach to convert weak predictors to get stronger predictors.
 - Boosting follows a sequential order: output of base learner will be input to another
@@ -75,31 +105,27 @@ X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, rand
 - Better for classification rather than regression.
 - Sensitive to noise
 
-In the following example, we use the package `adabag`, not from `caret`
+#### Implementation of Adaboost
+```python
+from sklearn.ensemble import AdaBoostClassifier
+model_AD = AdaBoostClassifier(n_estimators=100, learning_rate=0.03).fit(X_train, y_train)
 
-```r
-library(adabag)
-
-ModFit_adaboost <- boosting(Species~.,data=training,mfinal = 10, coeflearn = "Breiman")
-importanceplot(ModFit_adaboost)
-predict_Ada <- predict(ModFit_adaboost,newdata=testing)
-confusionMatrix(testing$Species,as.factor(predict_Ada$class))
+model_AD.score(X_train,y_train),model_AD.score(X_test,y_test)
 ```
-![image](https://user-images.githubusercontent.com/43855029/114237033-77b95480-9950-11eb-854d-fe4ae34dd2e1.png)
-
-You can see the weight of different predictors from boosting model
+The output accuracy from **AdaBoost**  for train/testing have : `(0.9333333333333333, 0.8333333333333334)`
 
 ### Gradient Boosting Machines: 
 - Extremely popular ML algorithm
 - Widely used in Kaggle competition
 - Ensemble of shallow and weak successive tree, with each tree learning and improving on the previous
 
-```r
-ModFit_GBM <- train(Species~.,data=training,method="gbm",verbose=FALSE)
-ModFit_GBM$finalModel
-predict_GBM <- predict(ModFit_GBM,newdata=testing)
-confusionMatrix(testing$Species,predict_GBM)
+```python
+from sklearn.ensemble import GradientBoostingClassifier
+model_GBM = GradientBoostingClassifier(n_estimators=100).fit(X_train,y_train)
+
+model_GBM.score(X_train,y_train),model_GBM.score(X_test,y_test)
 ```
+The output accuracy from **GradientBoosting**  for train/testing have : `(1.0, 0.9333333333333333)`
 
 ## Compare Bagging and Boosting technique:
 ![image](https://user-images.githubusercontent.com/43855029/115079914-e443ce80-9ecf-11eb-8b19-622abbfe026c.png)
