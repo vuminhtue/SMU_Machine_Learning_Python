@@ -33,7 +33,7 @@ X_train, X_test, y_train, y_test = train_test_split(data_knnimpute['Temp'],
 Fit a Linear model using `method=lm`
 ```python
 from sklearn.linear_model import LinearRegression
-model_linreg = LinearRegression().fit(X_train,y_train)
+model_linreg = LinearRegression().fit(X_train[:,None],y_train)
 ```
 Apply trained model to testing data set and evaluate output using R-squared:
 ```python
