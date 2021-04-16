@@ -41,7 +41,7 @@ X_train, X_test, y_train, y_test = train_test_split(iris.data,
 Next we will train using `DecisionTree` with `gini` splitting algorithm:
 ```python
 from sklearn.tree import DecisionTreeClassifier
-model_DT = DecisionTreeClassifier(max_depth=3).fit(X_train,y_train)
+model_DT = DecisionTreeClassifier(max_depth=3,criterion="gini").fit(X_train,y_train)
 ```
 Once done, we can visualize the tree:
 ```python
