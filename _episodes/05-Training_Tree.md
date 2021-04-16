@@ -29,35 +29,46 @@ keypoints:
 
 ### Implementation
 Here we will use `iris` data
-```r
-library(caret)
-data(iris)
-set.seed(123)
-indT <- createDataPartition(y=iris$Species,p=0.6,list=FALSE)
-training <- iris[indT,]
-testing  <- iris[-indT,]
-```
-Next we will train using `method="rpart"` with `gini` splitting algorithm:
-```r
-ModFit_rpart <- train(Species~.,data=training,method="rpart",
-                      parms = list(split = "gini"))
-# gini can be replaced by chisquare, entropy, information
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-#fancier plot
-library(rattle)
-fancyRpartPlot(ModFit_rpart$finalModel)
+iris = load_iris()
+X_train, X_test, y_train, y_test = train_test_split(iris.data,
+                                                    iris.target,
+                                                    train_size=0.6,random_state=123)
 ```
-![image](https://user-images.githubusercontent.com/43855029/114234603-ff04c900-994c-11eb-9999-0c5d5f85b76e.png)
+Next we will train using `DecisionTree` with `gini` splitting algorithm:
+```python
+from sklearn.tree import DecisionTreeClassifier
+model_DT = DecisionTreeClassifier(max_depth=3).fit(X_train,y_train)
+```
+Once done, we can visualize the tree:
+```python
+from sklearn import tree
+tree.plot_tree(model_DT)
+```
+However, in order to have a nicer plot:
+```python
+import graphviz
+ot_data = tree.export_graphviz(model_DT, out_file=None,                      
+                      filled=True, rounded=True,  
+                      special_characters=True)  
+graph = graphviz.Source(dot_data) 
+graph.render("iris") 
+```
+![image](https://user-images.githubusercontent.com/43855029/115074998-6f20cb00-9ec8-11eb-9dfd-ff747655ff6a.png)
+
+
 Apply decision tree model to predic output of testing data
-```r
-predict_rpart <- predict(ModFit_rpart,testing)
-confusionMatrix(predict_rpart, testing$Species)
-
-testing$PredRight <- predict_rpart==testing$Species
-ggplot(testing,aes(x=Petal.Width,y=Petal.Length))+
-  geom_point(aes(col=PredRight))
+```python
+from sklearn import metrics
+y_pred = model_DT.predict(X_test)
+metrics.accuracy_score(y_test,y_pred)
 ```
-![image](https://user-images.githubusercontent.com/43855029/114234661-117f0280-994d-11eb-950f-d07ed91cda09.png)
+The **accuracy=0.95**
+
+
 
 ## Train model using Random Forest
 - Random Forest is considered to be a panacea of all data science problems. On a funny note, when you can’t think of any algorithm (irrespective of situation), use random forest!
