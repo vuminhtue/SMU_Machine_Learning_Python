@@ -59,39 +59,6 @@ metrics.mean_squared_error(y_test,y_pred,squared=False)
 ```
 Output is therefore better with smaller RMSE and higher Rsquared
 
-## Train model using Stepwise Linear Regression
-It’s a step by step Regression to determine which covariates set best match with the dependent variable. Using AIC as criteria:
-
-```r
-modFit_SLR <- train(Ozone~Solar.R+Wind+Temp,data=training,method="lmStepAIC")
-summary(modFit_SLR$finalModel)
-
-prediction_SLR <- predict(modFit_SLR,testing)
-
-cor.test(prediction_SLR,testing$Ozone)
-postResample(prediction_SLR,testing$Ozone)
-```
-
-```r
-> postResample(prediction_SLR,testing$Ozone)
-      RMSE   Rsquared        MAE 
-25.0004212  0.5239849 17.0977421 
-```
-
-## Train model using Principal Component Regression
-Linear Regression using the output of a Principal Component Analysis (PCA). 
-PCR is skillful when data has lots of highly correlated predictors
-
-```r
-modFit_PCR <- train(Ozone~Solar.R+Wind+Temp,data=training,method="pcr")
-summary(modFit_PCR$finalModel)
-
-prediction_PCR <- predict(modFit_PCR,testing)
-
-cor.test(prediction_PCR,testing$Ozone)
-postResample(prediction_PCR,testing$Ozone)
-```
-
 ## Train model using Logistic Regression
 - Logistic regression is another technique borrowed by machine learning from the field of statistics. It is the go-to method for binary classification problems (problems with two class values).
 - Typical binary classification: True/False, Yes/No, Pass/Fail, Spam/No Spam, Male/Female
