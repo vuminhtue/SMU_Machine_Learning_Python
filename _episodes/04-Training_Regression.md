@@ -43,7 +43,7 @@ metrics.mean_squared_error(y_test,y_pred,squared=False) #RMSE
 ```
 
 ## Train model using Multi-Linear Regression (with 2 or more predictors)
-From the above model, the `R^2` only show the reasonable result 0.39:
+From the above model, the `R^2=0.39`:
 
 The reason is that we only build the model with 1 input `Temp`.
 In this section, we will build the model with more input `Solar Radiation, Wind, Temperature`:
