@@ -14,11 +14,9 @@ keypoints:
 - In Machine Learning, it is mandatory to have training and testing set. Some time a verification set is also recommended.
 Here are some functions for spliting training/testing set in `sklearn`:
 
-- `createDataPartition`: create series of test/training partitions
-- `createResample` creates one or more bootstrap samples.
-- `createFolds` splits the data into k groups
-- `createTimeSlices` creates cross-validation split for series data. 
-- `groupKFold` splits the data based on a grouping factor.
+- `train_test_split`: create series of test/training partitions
+- `Kfold` splits the data into k groups
+- `StratifiedKFold` splits the data into k groups based on a grouping factor.
 
 Due to time constraint, we only focus on `createDataPartition` and `createFolds`
 ## Scikit-Learn data
