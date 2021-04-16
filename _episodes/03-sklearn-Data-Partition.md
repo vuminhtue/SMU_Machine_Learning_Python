@@ -24,16 +24,28 @@ Here are some functions for spliting training/testing set in `sklearn`:
 
 Due to time constraint, we only focus on `train_test_split`, `KFolds` and `StratifiedKFold` 
 ## Scikit-Learn data
-The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html):
+The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html)
+```
+For each dataset, there are 4 varibles:
+- data: numpy array of predictors/X
+- target: numpy array of predictant/target/y
+- 'feature_names': names of all predictors in X
+- 'target.names': names of all predictand in y
+```
+For example:
+```python
+from sklearn.datasets import load_iris
+data = load_iris()
+print(data.data)
+print(data.target)
+print(data['feature_names'])
+print(data['target_names'])
+```
+
 In this example we gonna use the renowned iris flower data
 ```python
 from sklearn.datasets import load_iris
 iris = load_iris()
-iris_df = pd.DataFrame(data=iris.data,columns=iris.feature_names)
-features = iris['feature_names']
-iris_df['target'] = iris.target
-iris_df["target_name"] = iris_df['target'].map({i:name for i,name in enumerate(iris.target_names)})
-iris_df.sample(5)
 ```
 
 ## Data spliting using `train_test_split`: **Single fold**
@@ -42,8 +54,8 @@ Here we use `train_test_split` to randomly split 60% data for training and the r
 
 ```python
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(iris_df.loc[:,features],
-                                                    iris_df['target_name'],
+X_train, X_test, y_train, y_test = train_test_split(iris.data,
+                                                    iris.target,
                                                     train_size=0.6,random_state=123)
 #random_state: int, similar to R set_seed function
 ```
