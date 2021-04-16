@@ -38,7 +38,7 @@ from sklearn.datasets import load_iris
 data = load_iris()
 print(data.data)
 print(data.target)
-print(data.feature_names.)
+print(data.feature_names)
 print(data.target_names)
 ```
 
@@ -46,6 +46,8 @@ In this example we gonna use the renowned iris flower data
 ```python
 from sklearn.datasets import load_iris
 iris = load_iris()
+X = iris.data
+y = iris.target
 ```
 
 ## Data spliting using `train_test_split`: **Single fold**
@@ -54,9 +56,7 @@ Here we use `train_test_split` to randomly split 60% data for training and the r
 
 ```python
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(iris.data,
-                                                    iris.target,
-                                                    train_size=0.6,random_state=123)
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 #random_state: int, similar to R set_seed function
 ```
 
@@ -72,10 +72,10 @@ X_train, X_test, y_train, y_test = train_test_split(iris.data,
 from sklearn.model_selection import KFold
 kf10 = KFold(n_splits=10,shuffle=True,random_state=20)
 for train_index, test_index in kf10.split(iris.target):
-    X_train = iris.data[train_index]
-    y_train = iris.target[train_index]
-    X_test = iris.data[test_index]
-    y_test = iris.target[test_index]
+    X_train = X[train_index]
+    y_train = y[train_index]
+    X_test = X[test_index]
+    y_test = y[test_index]
     
     model.fit(X_train, y_train) #Training the model, not running now
     y_pred = model.predict(X_test)
@@ -92,10 +92,10 @@ kf = StratifiedKFold(n_splits=10, shuffle=True, random_state=123)
 i = 1
 
 for train_index, test_index in kf.split(iris.target):
-    X_train = iris.data[train_index]
-    y_train = iris.target[train_index]
-    X_test = iris.data[test_index]
-    y_test = iris.target[test_index]
+    X_train = X[train_index]
+    y_train = y[train_index]
+    X_test = X[test_index]
+    y_test = y[test_index]
     
     model.fit(X_train, y_train) #Training the model
     y_pred = model.predict(X_test)
