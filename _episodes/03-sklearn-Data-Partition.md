@@ -17,8 +17,12 @@ Here are some functions for spliting training/testing set in `sklearn`:
 - `train_test_split`: create series of test/training partitions
 - `Kfold` splits the data into k groups
 - `StratifiedKFold` splits the data into k groups based on a grouping factor.
+- `RepeatKfold`
+- `ShuffleSplit`
+- `LeaveOneOut`
+- `LeavePOut`
 
-Due to time constraint, we only focus on `createDataPartition` and `createFolds`
+Due to time constraint, we only focus on `train_test_split`, `KFolds` and `StratifiedKFold` 
 ## Scikit-Learn data
 The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html):
 In this example we gonna use the renowned iris flower data
@@ -84,8 +88,3 @@ for train_index, test_index in kf.split(iris_df, iris_df["target"]):
     model.fit(X_train, y_train) #Training the model
     print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")
 ```
-## Data spliting using **Other methods**
-- RepeatKfold
-- ShuffleSplit
-- LeaveOneOut
-- LeavePOut
