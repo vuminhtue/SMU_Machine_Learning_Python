@@ -63,16 +63,16 @@ graph.render("iris")
 Apply decision tree model to predic output of testing data
 ```python
 from sklearn import metrics
-y_pred = model_DT.predict(X_test)
-metrics.accuracy_score(y_test,y_pred)
+y_pred_DT = model_DT.predict(X_test)
+metrics.accuracy_score(y_test,y_pred_DT)
 ```
 The **accuracy=0.95**
 
+More information on Decision Treen can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
 
 
 ## Train model using Random Forest
 ![image](https://user-images.githubusercontent.com/43855029/115076000-f3278280-9ec9-11eb-89b4-b07f3713b105.png)
-![image](https://user-images.githubusercontent.com/43855029/115075969-e9058400-9ec9-11eb-9c0b-f18cd35929ea.png)
 
 - Random Forest is considered to be a panacea of all data science problems. On a funny note, when you can’t think of any algorithm (irrespective of situation), use random forest!
 - Opposite to Decision Tree, Random Forest use bootstrapping technique to grow multiple tree
@@ -91,15 +91,13 @@ The **accuracy=0.95**
 ### Implementation of Random Forest
 
 ```r
-ModFit_rf <- train(Species~.,data=training,method="rf",prox=TRUE)
-
-predict_rf <- predict(ModFit_rf,testing)
-confusionMatrix(predict_rf, testing$Species)
-
-testing$PredRight <- predict_rf==testing$Species
-ggplot(testing,aes(x=Petal.Width,y=Petal.Length))+
-  geom_point(aes(col=PredRight))
+from sklearn.ensemble import RandomForestClassifier
+model_RF = RandomForestClassifier(n_estimators=20,criterion="gini").fit(X_train,y_train)
+y_pred_RF = model_RF.predict(X_test)
+metrics.accuracy_score(y_test,y_pred_RF)
 ```
-![image](https://user-images.githubusercontent.com/43855029/114235296-fb257680-994d-11eb-93ff-54702cbf87b8.png)
+The **accuracy=0.97**
 
+In this example, we use `n_estimators=20` to grow `n` number of trees in the forest.
 We can see that Random Forest result has better prediction than Decision Tree
+More information on Random Forest can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html?highlight=random#sklearn.ensemble.RandomForestClassifier)
