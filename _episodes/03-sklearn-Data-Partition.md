@@ -69,15 +69,15 @@ X_train, X_test, y_train, y_test = train_test_split(iris.data,
 
 ![image](https://user-images.githubusercontent.com/43855029/114211785-103edd00-992f-11eb-89d0-bbd7bd0c0178.png)
 ```python
+from sklearn.model_selection import KFold
 kf10 = KFold(n_splits=10,shuffle=True,random_state=20)
-for train_index, test_index in kf10.split(iris_df):
-    X_train = iris_df.iloc[train_index].loc[:, features]
-    X_test = iris_df.iloc[test_index][features]
-    y_train = iris_df.iloc[train_index].loc[:,'target']
-    y_test = iris_df.loc[test_index]['target']
+for train_index, test_index in kf10.split(iris.target):
+    X_train = iris.data[train_index]
+    y_train = iris.target[train_index]
+    X_test = iris.data[test_index]
+    y_test = iris.target[test_index]
     
-    # Do not run this part as we have not defined a model. This will be introduced in the next part.
-    model.fit(X_train, y_train) #Training the model
+    model.fit(X_train, y_train) #Training the model, not running now
     y_pred = model.predict(X_test)
     print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")
 ```
@@ -87,16 +87,17 @@ for train_index, test_index in kf10.split(iris_df):
 - As y you use the target variable so that the Kfold and pick balanced distribution of the targets in each folds.
 
 ```python
-dfs = []
+from sklearn.model_selection import StratifiedKFold
 kf = StratifiedKFold(n_splits=10, shuffle=True, random_state=123)
 i = 1
-for train_index, test_index in kf.split(iris_df, iris_df["target"]):
-    X_train = iris_df.iloc[train_index].loc[:, features]
-    X_test = iris_df.iloc[test_index].loc[:,features]
-    y_train = iris_df.iloc[train_index].loc[:,'target']
-    y_test = iris_df.loc[test_index].loc[:,'target']
 
-    #Train the model
+for train_index, test_index in kf.split(iris.target):
+    X_train = iris.data[train_index]
+    y_train = iris.target[train_index]
+    X_test = iris.data[test_index]
+    y_test = iris.target[test_index]
+    
     model.fit(X_train, y_train) #Training the model
-    print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")
+    y_pred = model.predict(X_test)
+    print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")    
 ```
