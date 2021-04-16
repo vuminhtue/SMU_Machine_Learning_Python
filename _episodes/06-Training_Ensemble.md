@@ -50,46 +50,16 @@ Step 2: Train each sub-sample data using ML algorithm
 
 Step 3: Lastly, you use an average value to combine the predictions of all the classifiers, depending on the problem. Generally, these combined values are more robust than a single model.
 
-Bagging in R can be used in many different model:
-
-- ctreebag: used for Decision Tree
-- bagFDA: used for Flexible Discriminant Analysis
-- ldaBag: Bagging for Linear Discriminant Analysis
-- plsBag: Bagging for Principal Linear Regression
-
 ### Implementation of Bagging
-```r
-library(ElemStatLearn)
-dozone <- data.frame(ozone$ozone)
-temperature <- ozone$temperature
-treebag <- bag(dozone,temperature,B=10,
-               bagControl = bagControl(fit=ctreeBag$fit,
-                                       pred=ctreeBag$pred,
-                                       aggregate=ctreeBag$aggregate))
-predict_bag1 <- predict(treebag$fits[[1]]$fit,dozone)
-predict_bag2 <- predict(treebag$fits[[2]]$fit,dozone)
-predict_bag  <- predict(treebag,dozone)
+Here we use iris data set:
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-p1 <- ggplot(ozone,aes(ozone,temperature))+
-      geom_point(color="grey")
-p1
-p2 <- p1+geom_point(aes(ozone,predict_bag1),color="blue")
-p2
-p3 <- p2+geom_point(aes(ozone,predict_bag2),color="green")
-p3
-p4 <- p3+geom_point(aes(ozone,predict_bag),color="red")
-p4
-```
-Treebag for `iris`
-```r
-ModFit_bag <- train(as.factor(Species) ~ .,data=training,
-                   method="treebag",
-                   importance=TRUE)
-predict_bag <- predict(ModFit_bag,testing)
-confusionMatrix(predict_bag, testing$Species)
-plot(varImp(ModFit_bag))
-```
+iris = load_iris()
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state = 123)
 
+```
 ## Train model using Boosting
 - Boosting is an approach to convert weak predictors to get stronger predictors.
 - Boosting follows a sequential order: output of base learner will be input to another
