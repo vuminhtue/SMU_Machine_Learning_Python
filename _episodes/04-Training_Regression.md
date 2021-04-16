@@ -43,27 +43,22 @@ metrics.mean_squared_error(y_test,y_pred,squared=False) #RMSE
 ```
 
 ## Train model using Multi-Linear Regression
-From the above model, the `R^2` only show the reasonable result 0.37:
+From the above model, the `R^2` only show the reasonable result 0.39:
 
 The reason is that we only build the model with 1 input `Temp`.
 In this section, we will build the model with more input `Solar Radiation, Wind, Temperature`:
 ```r
-modFit2 <- train(Ozone~Solar.R+Wind+Temp,data=training,
-                 preProcess=c("center","scale"),
-                 method="lm")
-summary(modFit2$finalModel)
+X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Temp','Wind','Solar.R']],
+                                                    data_knnimpute['Ozone'],
+                                                    train_size=0.6,random_state=123)
+model_linreg = LinearRegression().fit(X_train,y_train)
+y_pred2 = model_linreg.predict(X_test)
 
-prediction2 <- predict(modFit2,testing)
+metrics.r2_score(y_test,y_pred)
+metrics.mean_squared_error(y_test,y_pred,squared=False)
+```
+Output is therefore better with smaller RMSE and higher Rsquared
 
-cor.test(prediction2,testing$Ozone)
-postResample(prediction2,testing$Ozone)
-```
-Output is therefore better with smaller RMSE and higher Rsquared:
-```r
-> postResample(prediction2,testing$Ozone)
-      RMSE   Rsquared        MAE 
-24.3388752  0.5512334 16.5798881 
-```
 ## Train model using Stepwise Linear Regression
 It’s a step by step Regression to determine which covariates set best match with the dependent variable. Using AIC as criteria:
 
