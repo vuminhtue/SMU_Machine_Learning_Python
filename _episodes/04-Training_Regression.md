@@ -15,13 +15,16 @@ Let use the **airquality** data in previous episodes:
 
 ```python
 import pandas as pd
+import numpy as np
 from sklearn.impute import KNNImputer
 from sklearn.model_selection import train_test_split
+from sklearn import metrics
 
 data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
 
 imputer = KNNImputer(n_neighbors=2, weights="uniform")
 data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
+data_knnimpute.columns = data_df.columns
 
 X_train, X_test, y_train, y_test = train_test_split(data_knnimpute['Temp'],
                                                     data_knnimpute['Ozone'],
@@ -32,17 +35,11 @@ Fit a Linear model using `method=lm`
 from sklearn.linear_model import LinearRegression
 model_linreg = LinearRegression().fit(X_train,y_train)
 ```
-
-Several attribute of Linear Regression in sklearn:
-```
-model_linreg.coef_
-model_linreg.intercept_
-```
-
 Apply trained model to testing data set and evaluate output using R-squared:
-```r
-model_linreg.score(X_train, y_train)
-model_linreg.score(X_test, y_test)
+```python
+y_pred = model_linreg.predict(X_test[:,None])
+metrics.r2_score(y_test,y_pred) # R^2
+metrics.mean_squared_error(y_test,y_pred,squared=False) #RMSE
 ```
 
 ## Train model using Multi-Linear Regression
