@@ -99,5 +99,6 @@ metrics.accuracy_score(y_test,y_pred_RF)
 The **accuracy=0.97**
 
 In this example, we use `n_estimators=20` to grow `n` number of trees in the forest.
-We can see that Random Forest result has better prediction than Decision Tree
+We can see that Random Forest result has better prediction than Decision Tree.
+
 More information on Random Forest can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html?highlight=random#sklearn.ensemble.RandomForestClassifier)
