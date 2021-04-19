@@ -52,32 +52,41 @@ The Ridge Regression loss function contains 2 elements: (1) RSS is actually the 
 
 #### Implementation
 Setting up training/testing model:
-```r
-library(caret)
-library(ElemStatLearn)
-data(prostate)
-set.seed(123)
-indT <- which(prostate$train==TRUE)
-training <- prostate[indT,]
-testing  <- prostate[-indT,]
-
-library(PerformanceAnalytics)
-chart.Correlation(training[,-10])
+```python
+import pandas as pd
+data=pd.read_csv("https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/prostate_data.csv")
+ind_train = data["train"]=="T"
+data = data.drop(["train"],axis=1)
+X_train = data.drop(["lpsa"],axis=1)[ind_train]
+X_test = data.drop(["lpsa"],axis=1)[~ind_train]
+y_train = data["lpsa"][ind_train]
+y_test = data["lpsa"][~ind_train]
 ```
 Predict using Ridge Regression method:
-```r
-library(glmnet)
-library(plotmo)
-y <- training$lpsa
-x <- training[,-c(9,10)]
-x <- as.matrix(x)
+```python
+from sklearn.linear_model import Ridge
+import numpy as np
+import matplotlib.pyplot as plt
+n_lambda = 200
+lambdas = np.logspace(-2,6, n_lambda)
+coefs = []
+for ld in lambdas:
+    model_RR = Ridge(alpha=ld, fit_intercept=False)
+    model_RR.fit(X, y)
+    coefs.append(model_RR.coef_)
 
-cvfit_Ridge    <- cv.glmnet(x,y,alpha=0)
-plot(cvfit_Ridge)
 
-log(cvfit_Ridge$lambda.min)
-log(cvfit_Ridge$lambda.1se)
-coef(cvfit_Ridge,s=cvfit_Ridge$lambda.1se)
+ax = plt.gca()
+
+ax.plot(lambdas, coefs)
+ax.set_xscale('log')
+ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
+plt.xlabel('alpha')
+plt.ylabel('weights')
+plt.title('Ridge coefficients as a function of the regularization')
+plt.axis('tight')
+plt.show()
+
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114437356-70828880-9b94-11eb-9463-ca9d33b20746.png)
 
