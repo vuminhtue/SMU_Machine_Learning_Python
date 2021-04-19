@@ -20,11 +20,23 @@ keypoints:
 ![image](https://user-images.githubusercontent.com/43855029/114339516-6f654300-9b23-11eb-838c-aaf600ca922a.png)
 
 ### Implementation Naive Bayes
-```r
-ModFit_NB <- train(Species~., data=training, method="nb")
+Split data
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-predict_NB <- predict(ModFit_NB,testing)
-confusionMatrix(testing$Species,predict_NB)
+iris = load_iris()
+X = iris.data
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6, random_state = 123)
+```
+
+Train data using Naive Bayes 
+```python
+from sklearn.naive_bayes import GaussianNB
+model_NB = GaussianNB().fit(X_train,y_train)
+model_NB.score(X_train,y_train)
+model_NB.score(X_test,y_test)
 ```
 
 ## Linear Discriminent Analysis
