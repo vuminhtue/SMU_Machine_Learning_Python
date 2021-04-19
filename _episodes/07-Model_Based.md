@@ -38,6 +38,8 @@ model_NB = GaussianNB().fit(X_train,y_train)
 model_NB.score(X_train,y_train)
 model_NB.score(X_test,y_test)
 ```
+In addition to **GaussianNB**, sklearn also includes: **MultinomialNB, ComplementNB, BernoulliNB, CategoricalNB**.
+More information on Naive Bayes using sklearn can be found [here](https://scikit-learn.org/stable/modules/naive_bayes.html)
 
 ## Linear Discriminent Analysis
 - LDA is a supervised learning model that is similar to logistic regression in that the outcome variable is categorical and can therefore be used for classification.
@@ -47,20 +49,22 @@ model_NB.score(X_test,y_test)
 
 
 ### Implementation LDA
-```r
-ModFit_LDA <- train(Species~., data=training, method="lda")
+Using the same iris data set, the LDA model is built:
 
-predict_LDA <- predict(ModFit_LDA,testing)
-confusionMatrix(testing$Species,predict_LDA)
+```python
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+model_LDA = LinearDiscriminantAnalysis().fit(X_train,y_train)
+model_LDA.score(X_train,y_train)
+model_LDA.score(X_test,y_test)
 ```
 
-- Ensemble approach (Bagging) with LDA
-```r
-ModFit_ldabag <- train(training[,-5],training$Species,method="bag",B=500,
-                       bagControl=bagControl(fit=ldaBag$fit,
-                                             predict=ldaBag$pred,
-                                             aggregate = ldaBag$aggregate))
-
-predict_bag <- predict(ModFit_ldabag,testing)
-confusionMatrix(predict_bag, testing$Species)
+- Ensemble approach (Bagging) with LDA based on previously built model_LDA:
+```python
+from sklearn.ensemble import BaggingClassifier
+model_LDAbag = BaggingClassifier(base_estimator = model_LDA,n_estimators=100,
+                                 bootstrap=True, n_jobs=-1,
+                                 random_state=123)
+model_LDAbag.fit(X_train,y_train)
+model_LDAbag.score(X_train,y_train)
+model_LDAbag.score(X_test,y_test)
 ```
