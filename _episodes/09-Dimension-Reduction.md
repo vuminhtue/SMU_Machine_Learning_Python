@@ -39,66 +39,59 @@ in which, the covariance value between 2 data sets can be computed as:
 … and so on …***
 
 ### Implementation
+Here we gonna use iris data set:
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+import numpy as np
+import pandas as pd
+iris = load_iris()
+X = iris.data
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+```
+
 #### Compute PCA using eigenvector:
 ```r
-library(PerformanceAnalytics)
-data(mtcars)
-#Ignore vs & am (PCA works good with numeric data )
-datain <- mtcars[,c(1:7,10:11)]
-chart.Correlation(datain)
-cin <- cov(scale(datain))
-ein <- eigen(cin)
-newpca <-   -scale(datain) %*% ein$vectors
+from sklearn.preprocessing import StandardScaler
+X_train_scaled = StandardScaler().fit_transform(X_train)
+cin = pd.DataFrame(X_train_scaled).cov()
+eigvals, eigvecs = np.linalg.eig(cin)
+newpca = pd.DataFrame(X_train_scaled).dot(eigvecs)
 ```
 
-#### Compute PCA using built-in function:
-```r
-mtcars.pca <- prcomp(datain,center=TRUE,scale=TRUE)
-summary(mtcars.pca)
+#### Compute PCA using sklearn:
+```python
+from sklearn.decomposition import PCA
+pca = PCA(n_components=4)
+PCs = pca.fit_transform(X_train_scaled)
+PCs = pd.DataFrame(PCs,columns = ['PC1','PC2','PC3','PC4'])
 ```
-
-#### A nice way to plot PCA:
-Install `ggbiplot` package:
-```r
-library(devtools)
-install_github("vqv/ggbiplot")
-``` 
-
-```r
-library(ggbiplot)
-ggbiplot(mtcars.pca)
-ggbiplot(mtcars.pca, labels=rownames(mtcars))
-ggbiplot(mtcars.pca,ellipse=TRUE,  labels=rownames(mtcars))
-
-mtcars.country <- c(rep("Japan", 3), rep("US",4), rep("Europe", 7),rep("US",3), "Europe", rep("Japan", 3), rep("US",4), rep("Europe", 3), "US", rep("Europe", 3))
-
-ggbiplot(mtcars.pca,ellipse=TRUE,labels=rownames(mtcars),groups = mtcars.country)
+We can see that PCs computed from sklearn package are similar to newpca computed from using eigen vectors
+#### Explained Variance
+The explained variance tells you how much information (variance) can be attributed to each of the principal components. 
+```python
+pca.explained_variance_ratio_
 ```
-![image](https://user-images.githubusercontent.com/43855029/114462147-aa618800-9bb0-11eb-8123-919e89fdfc0c.png)
-
+In this example: the PC1(0.74) and PC2 (0.21) consume 0.95 percent of explained variance. Therefore, using 2 Principal Components should be good enough
 #### Application of PCA model in Machine Learning:
 
 ```r
-data(mtcars)
-set.seed(123)
-datain <- mtcars[,c(1:7,10:11)]
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score as acc_score
 
-indT <- createDataPartition(y=datain$mpg,p=0.6,list=FALSE)
-training <- datain[indT,]
-testing  <- datain[-indT,]
+X_train_scaled = StandardScaler().fit_transform(X_train)
+X_test_scaled = StandardScaler().fit_transform(X_test)
 
-preProc <- preProcess(training[,-1],method="pca",pcaComp = 1)
-trainPC <- predict(preProc,training[,-1])
-testPC  <- predict(preProc,testing[,-1])
+pca = PCA(n_components=2) #We choose number of principal components to be 2
 
-traindat<- cbind(training$mpg,trainPC)
-testdat <- cbind(testing$mpg,testPC)
+X_train_pca = pca.fit_transform(X_train_scaled)
+X_test_pca = pca.transform(X_test_scaled)
 
-names(traindat) <- c("mpg","PC1")
-names(testdat)  <- names(traindat) 
+print(pca.explained_variance_ratio_)
 
-modFitPC<- train(mpg~.,method="lm",data=traindat)
-
-predictand <- predict(modFitPC,testdat)
-postResample(testing$mpg,as.vector(predictand))
+# Use random forest to train model
+model_RF = RandomForestClassifier(n_estimators=20,criterion="gini",random_state=1234).fit(X_train_pca, y_train)
+y_pred_RF = model_RF.predict(X_test_pca)
+acc_score(y_test,y_pred_RF)
 ```
