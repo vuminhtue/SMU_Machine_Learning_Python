@@ -213,9 +213,22 @@ Elastic Nets Regularization is a method that includes both LASSO and Ridge Regre
 - 0<𝛼<1: Elastic Nets
 
 #### Implementation 
-```r
-cvfit_ELN    <- cv.glmnet(x,y,alpha=0.5)
-plot(cvfit_ELN)
+```python
+MSE_train = []
+MSE_test = []
+coefs = []
+for ld in lambdas1:
+    Elastic_cv = ElasticNet(alpha=ld,l1_ratio=0.5)
+    model_EN = Elastic_cv.fit(X_train, y_train)
+    y_predEN_cv_train = model_EN.predict(X_train)
+    y_predEN_cv_test = model_EN.predict(X_test)
+    MSE_train.append(mse(y_train,y_predEN_cv_train))
+    MSE_test.append(mse(y_test,y_predEN_cv_test))
+    coefs.append(model_EN.coef_)
 ```
 
+- The ElasticNet mixing parameter, with **0 <= l1_ratio <= 1.** 
+- For **l1_ratio = 0** the penalty is an L2 penalty (**Ridge Regression**). 
+- For **l1_ratio = 1** it is an L1 penalty (**LASSO**).
+- For **0 < l1_ratio < 1**, the penalty is a combination of L1 and L2.
 
