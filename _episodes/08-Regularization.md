@@ -197,7 +197,7 @@ plt.axis('tight')
 plt.show()
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/115447534-9b00c100-a1e6-11eb-9c8d-b787f92db113.png)
+![image](https://user-images.githubusercontent.com/43855029/115447833-f0d56900-a1e6-11eb-967f-e04515421010.png)
 
 The plot shows different coefficients for all predictors with **𝜆** variation. Depending on **𝜆** values that the **β** varying and it can be 0 at certain point.
 
