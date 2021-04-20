@@ -51,9 +51,10 @@ The Ridge Regression loss function contains 2 elements: (1) RSS is actually the 
 - It is good practice to normalize predictors to the same sacle before performing Ridge Regression (Because in OLS, the coefficients are scale equivalent)
 
 #### Implementation
-Setting up training/testing model:
+Setting up training/testing model using the Stanford's [prostate cancer data](https://web.stanford.edu/~hastie/ElemStatLearn/datasets/prostate.data)
 ```python
 import pandas as pd
+import numpy as np
 data=pd.read_csv("https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/prostate_data.csv")
 ind_train = data["train"]=="T"
 data = data.drop(["train"],axis=1)
@@ -62,72 +63,70 @@ X_test = data.drop(["lpsa"],axis=1)[~ind_train]
 y_train = data["lpsa"][ind_train]
 y_test = data["lpsa"][~ind_train]
 ```
-Predict using Ridge Regression method:
+
+Predict using Ridge Regression method and Cross Validation approach:
 ```python
-from sklearn.linear_model import Ridge
-import numpy as np
-import matplotlib.pyplot as plt
-n_lambda = 200
+from sklearn.linear_model import Ridge, RidgeCV
+from sklearn.metrics import mean_squared_error as mse
+
+n_lambda = 100
 lambdas = np.logspace(-2,6, n_lambda)
+
+MSE1 = []
 coefs = []
 for ld in lambdas:
-    model_RR = Ridge(alpha=ld, fit_intercept=False)
-    model_RR.fit(X, y)
+    ridgecv = RidgeCV(alphas = ld, scoring = 'neg_mean_squared_error', normalize = True)
+    model_RR = ridgecv.fit(X_train, y_train)
+    y_pred_cv = model_RR.predict(X_train)
+    MSE1.append(mse(y_train,y_pred_cv))
     coefs.append(model_RR.coef_)
 
+coef_df = pd.DataFrame(coefs)
+coef_df.columns = X_train.columns
+```
+
+Plotting the Mean Square Error
+```python
+fig, ax = plt.subplots(1, 2, figsize=(16, 8), constrained_layout=False)
+
+ax1 = plt.subplot(221)
+ax1.scatter(np.log10(lambdas), MSE_train,color="red")
+ax1.set_title("Training Set")
+ax2 = plt.subplot(222)
+ax2.scatter(np.log10(lambdas), MSE_test,color="red")
+ax2.set_title("Testing Set")
+
+ax1.set_xlabel("log($\\lambda$)")
+ax2.set_xlabel("log($\\lambda$)")
+ax1.set_ylabel('MSE')
+ax2.set_ylabel('MSE')
+
+plt.show()
+```
+![image](https://user-images.githubusercontent.com/43855029/115435103-7bae6780-a1d7-11eb-995b-31a69408469e.png)
+
+Plotting the coefficient of different predictors based on **𝜆**
+```python
 
 ax = plt.gca()
-
-ax.plot(lambdas, coefs)
-ax.set_xscale('log')
-ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
-plt.xlabel('alpha')
-plt.ylabel('weights')
-plt.title('Ridge coefficients as a function of the regularization')
+for i in range(0,coef_df.columns.size):
+    ax.plot(np.log10(lambdas), coef_df.iloc[:,i])
+    
+ax.legend(coef_df.columns)
+#ax.set_xscale('log')
+plt.xlabel("log($\\lambda$)")
+plt.ylabel('Coefficients')
+plt.title('Ridge coefficients Coefficients')
 plt.axis('tight')
 plt.show()
-
-```
-![image](https://user-images.githubusercontent.com/43855029/114437356-70828880-9b94-11eb-9463-ca9d33b20746.png)
-
-- The plot shows the Mean Square Error based on training model with **𝜆** variation. 
-- Top of the chart shows number of predictors used.
-- There are 2 **𝜆** values: (1) **𝜆.min** which can be computed using `log(cvfit_Ridge$lambda.min)` and (2) **𝜆.1se** (1 standard error from min value) which can be computed using `log(cvfit_Ridge$lambda.1se)`
-- The **β** values for each predictors can be found using `coef(cvfit_Ridge,s=cvfit_Ridge$lambda.1se) or coef(cvfit_Ridge,s=cvfit_Ridge$lambda.min)`
-
-```r
-Fit_Ridge <- glmnet(x,y,alpha=0,standardize = TRUE)
-plot_glmnet(Fit_Ridge,label=TRUE,xvar="lambda",
-            col=seq(1,8),grid.col = 'lightgray')
-
-xtest <- testing[,-c(9,10)]
-xtest <- as.matrix(xtest)
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/114437734-ef77c100-9b94-11eb-94ac-df2794777c81.png)
+![image](https://user-images.githubusercontent.com/43855029/115433549-b44d4180-a1d5-11eb-8e75-1f0c5d43898c.png)
 
 The plot shows different coefficients for all predictors with **𝜆** variation.
-Using **𝜆.1se**, we obtain reasonable result.
 
-```r
-> predict_Ridge <- predict(cvfit_Ridge,newx=xtest,s="lambda.1se")
-> cor.test(predict_Ridge,testing$lpsa)
 
-	Pearson's product-moment correlation
 
-data:  predict_Ridge and testing$lpsa
-t = 5.5527, df = 28, p-value = 6.138e-06
-alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
- 0.4919694 0.8599222
-sample estimates:
-      cor 
-0.7239285 
-
-> postResample(predict_Ridge,testing$lpsa)
-     RMSE  Rsquared       MAE 
-0.7365551 0.5240725 0.5499648
-```
 - Ridge Regression's pros: the pros of RR method over OLS is rooted in the bias variance trade-off. As when **𝜆** increases, the flexibility of RR fit decreases, hence decrease the variance but increase the bias
 - Ridge Regression's cons: **β** never be 0, so all predictors are included in the final model. Therefore, it is not good for best feature selection.
 
