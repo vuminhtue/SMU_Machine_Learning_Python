@@ -141,6 +141,8 @@ The plot shows different coefficients for all predictors with **𝜆** variation
 Predict using Lasso method:
 
 ```python
+from sklearn.linear_model import Lasso, LassoCV
+
 n_lambda = 100
 lambdas1 = np.logspace(-6,0, n_lambda)
 
