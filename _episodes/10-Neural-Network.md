@@ -62,6 +62,7 @@ Between the input and the output layer, there can be one or more non-linear laye
 **The advantages of Multi-layer Perceptron:**
 - Capability to learn non-linear models.
 - Capability to learn models in real-time (on-line learning) using partial_fit.
+
 **The disadvantages of Multi-layer Perceptron:**
 - MLP with hidden layers have a non-convex loss function where there exists more than one local minimum. Therefore different random weight initializations can lead to different validation accuracy.
 - MLP requires tuning a number of hyperparameters such as the number of hidden neurons, layers, and iterations.
@@ -70,21 +71,32 @@ Between the input and the output layer, there can be one or more non-linear laye
 ### Implementation
 Split the data
 ```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
 
+import numpy as np
+import pandas as pd
+iris = load_iris()
+X = iris.data
+y = pd.DataFrame(iris.target)
+y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+
+scaler = MinMaxScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 ```
 
-- Fit the MLP Neural Network using **1** hidden layer:
+The Class **MLPClassifier** implements a multi-layer perceptron (MLP) algorithm that trains using Backpropagation.
+There are lots of parameters in MLPClassifier:
+- **hidden_layer_sizes** which is the number of hidden layers and neurons for each layer:
+for example `hidden_layer_sizes=(50,20)` means there are 2 hidden layers used, the first layer has 50 neuron and the second has 20 neurons.
+- **solver** `lbfgs, sgd, adam`
+- **activation** `identity, logistic, tanh, relu`
+More information can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html)
+
 ```python
-set.seed(123)
-ModNN <- neuralnet(mpg~cyl+disp+hp+drat+wt+qsec+carb,trainNN, hidden=10,linear.output = T)
-plot(ModNN)
-```
-![image](https://user-images.githubusercontent.com/43855029/114492632-f0d1d980-9be6-11eb-89c5-196f9f3546d9.png)
-```r
-#Predict using Neural Network
-predictNN <- compute(ModNN,testNN[,c(2:7,11)])
-predictmpg<- predictNN$net.result*(smax-smin)[1]+smin[1]
-postResample(testing$mpg,predictmpg)
-     RMSE  Rsquared       MAE 
-3.0444857 0.8543388 2.3276645 
+model_NN = MLPClassifier(hidden_layer_sizes = [50, 20],solver='lbfgs',random_state=123).fit(X_train_scaled, y_train['Species'])
+model_NN.score(X_test_scaled,y_test['Species'])
 ```
