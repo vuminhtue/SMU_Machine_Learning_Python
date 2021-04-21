@@ -11,7 +11,11 @@ keypoints:
 ---
 
 ## Support Vector Machine
-The objective of the support vector machine (SVM) algorithm is to find a hyperplane in an N-dimensional space that distinctly classifies the data points.
+- A support vector machine is a very important and versatile machine learning algorithm, 
+- It is capable of doing linear and nonlinear classification, regression and outlier detection. 
+- It is preferred over other classification algorithms because it uses less computation and gives notable accuracy. 
+- It is good because it gives reliable results even if there is less data
+- The objective of the support vector machine (SVM) algorithm is to find a hyperplane in an N-dimensional space that distinctly classifies the data points.
 
 ### Applications of Support Vector Machine:
 ![image](https://user-images.githubusercontent.com/43855029/114576381-1394da00-9c49-11eb-95b1-cff9d87c6029.png)
@@ -36,18 +40,27 @@ Removing **SVs** will change the position of the hyperplane. These are the point
 
 ![image](https://user-images.githubusercontent.com/43855029/114577489-09271000-9c4a-11eb-8b4a-b7837463288f.png)
 
-### Support Vector Machines's Estimators:
-There are 2 main types of SVM in sklearn, depending on the model output:
 
-- **SVC**: for Classification problem using **C-support vector classification**
-- **SVR**: for Regression problem using **Epsilon-support vector regression**
+### SVM's kernel
+#### For linear separable data, it is quite straight forward to create a hyperplane to distinguish them
+![image](https://user-images.githubusercontent.com/43855029/115606536-d0beac00-a2b1-11eb-9ba7-18dbc1c7ff28.png)
 
-In addition there are other model under **sklearn.svm**: NuSVC, LinearSVC, NuSVR, LinearSVR
+#### For linearly non-separable data, SVM makes use of kernel tricks to make it linearly separable.
+![image](https://user-images.githubusercontent.com/43855029/115606589-e3d17c00-a2b1-11eb-98a2-aebd6417eaf6.png)
+
+- The concept of transformation of non-linearly separable data into linearly separable is called Cover’s theorem - “given a set of training data that is not linearly separable, with high probability it can be transformed into a linearly separable training set by projecting it into a higher-dimensional space via some non-linear transformation”.
+- Kernel tricks help in projecting data points to the higher dimensional space by which they became relatively more easily separable in higher-dimensional space.
+- Kernel tricks also known as Generalized dot product. 
+- Kernel tricks are the way of calculating dot product of two vectors to check how much they make an effect on each other.
+- According to Cover’s theorem the chances of linearly non-separable data sets becoming linearly separable increase in higher dimensions.
+- Kernel functions are used to get the dot products to solve SVM constrained optimization.
+
+The following [kernel trick](https://gist.github.com/WittmannF/60680723ed8dd0cb993051a7448f7805) compared different kernel `‘linear’ , ’poly’ , ‘rbf’ , ‘sigmoid’`:
+
+![image](https://user-images.githubusercontent.com/43855029/115606803-2d21cb80-a2b2-11eb-9421-64642195fa5a.png)
 
 
 
-### Kernel function:
-![image](https://user-images.githubusercontent.com/43855029/115589944-6cdeb800-a29e-11eb-858b-ff278bb56a3d.png)
 
 ### Implementation
 Here we use the regular **iris** dataset with Classification problem
