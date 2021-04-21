@@ -55,6 +55,7 @@ Here we use the regular **iris** dataset with Classification problem
 ```python
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
 
 import numpy as np
 import pandas as pd
@@ -63,6 +64,10 @@ X = iris.data
 y = pd.DataFrame(iris.target)
 y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+
+scaler = MinMaxScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 ```
 
 Fit Support Vector Classifier model
@@ -73,4 +78,7 @@ model_svm.score(X_test,y_test['Species'])
 ```
 In this model, **C** is the regularization parameter `Default C=1`. The strength of the regularization is inversely proportional to C. Must be strictly positive.
 
-
+### Tips on using SVM
+- Setting `C=1` is reasonable choice for default. If you have a lot of noisy observations you should decrease it: decreasing C corresponds to more regularization.
+- Support Vector Machine algorithms are not scale invariant, so it is highly recommended to **scale your data**. 
+- More information [here](https://scikit-learn.org/stable/modules/svm.html#tips-on-practical-use)
