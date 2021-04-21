@@ -60,8 +60,6 @@ The following [kernel trick](https://gist.github.com/WittmannF/60680723ed8dd0cb9
 ![image](https://user-images.githubusercontent.com/43855029/115606803-2d21cb80-a2b2-11eb-9421-64642195fa5a.png)
 
 
-
-
 ### Implementation
 Here we use the regular **iris** dataset with Classification problem
 
@@ -95,3 +93,14 @@ In this model, **C** is the regularization parameter `Default C=1`. The strength
 - Setting `C=1` is reasonable choice for default. If you have a lot of noisy observations you should decrease it: decreasing C corresponds to more regularization.
 - Support Vector Machine algorithms are not scale invariant, so it is highly recommended to **scale your data**. 
 - More information [here](https://scikit-learn.org/stable/modules/svm.html#tips-on-practical-use)
+
+### Pros of SVM
+- High stability due to dependency on support vectors and not the data points.
+- Does not get influenced by Outliers. 
+- No assumptions made of the datasets.
+- Numeric predictions problem can be dealt with SVM.
+
+### Cons of SVM
+- Blackbox method.
+- Inclined to overfitting method.
+- Very rigorous computation.
