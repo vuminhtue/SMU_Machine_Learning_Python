@@ -90,13 +90,15 @@ X_test_scaled = scaler.transform(X_test)
 
 The Class **MLPClassifier** implements a multi-layer perceptron (MLP) algorithm that trains using Backpropagation.
 There are lots of parameters in MLPClassifier:
-- **hidden_layer_sizes** which is the number of hidden layers and neurons for each layer:
+- **hidden_layer_sizes** which is the number of hidden layers and neurons for each layer. Default=`(100,)`
+for example `hidden_layer_sizes=(100,)` means there is 1 hidden layers used, with 100 neurons.
 for example `hidden_layer_sizes=(50,20)` means there are 2 hidden layers used, the first layer has 50 neuron and the second has 20 neurons.
-- **solver** `lbfgs, sgd, adam`
-- **activation** `identity, logistic, tanh, relu`
+- **solver** `lbfgs, sgd, adam`. Default=`adam`
+- **activation** `identity, logistic, tanh, relu`. Default='relu`
+
 More information can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html)
 
 ```python
-model_NN = MLPClassifier(hidden_layer_sizes = [50, 20],solver='lbfgs',random_state=123).fit(X_train_scaled, y_train['Species'])
+model_NN = MLPClassifier(hidden_layer_sizes = (50,20),solver='lbfgs',random_state=123).fit(X_train_scaled, y_train['Species'])
 model_NN.score(X_test_scaled,y_test['Species'])
 ```
