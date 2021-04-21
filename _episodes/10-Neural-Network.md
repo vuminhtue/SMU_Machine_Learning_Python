@@ -49,11 +49,24 @@ plt.show()
 ![image](https://user-images.githubusercontent.com/43855029/115565946-d3a4a700-a287-11eb-93b8-3209fa182436.png)
 
 
-- Neural Network formulation
+- Neural Network formulation: Multi-Layer Perceptron (MLP)
+**Multi-layer Perceptron (MLP)** is a supervised learning algorithm.
+Given a set of features `X = x1, x2, ... xm`, and target `y`, MLP can learn a non-linear function approximator for either classification or regression.
+
+Between the input and the output layer, there can be one or more non-linear layers, called hidden layers. Figure below shows a one hidden layer MLP with scalar output.
 
 ![image](https://user-images.githubusercontent.com/43855029/114472972-51e6b680-9bc1-11eb-9e78-90ec739844ee.png)
 
 ![image](https://user-images.githubusercontent.com/43855029/114575549-48546180-9c48-11eb-8c9c-c5eac3180df1.png)
+
+- The advantages of Multi-layer Perceptron are:
+
+Capability to learn non-linear models.
+Capability to learn models in real-time (on-line learning) using partial_fit.
+The disadvantages of Multi-layer Perceptron (MLP) include:
+MLP with hidden layers have a non-convex loss function where there exists more than one local minimum. Therefore different random weight initializations can lead to different validation accuracy.
+MLP requires tuning a number of hyperparameters such as the number of hidden neurons, layers, and iterations.
+MLP is sensitive to feature scaling.
 
 
 - Basic Type of Neural Network:
