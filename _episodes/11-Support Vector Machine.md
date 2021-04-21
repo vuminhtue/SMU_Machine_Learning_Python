@@ -36,47 +36,36 @@ Removing **SVs** will change the position of the hyperplane. These are the point
 
 ![image](https://user-images.githubusercontent.com/43855029/114577489-09271000-9c4a-11eb-8b4a-b7837463288f.png)
 
+### Type of Support Vector Machines:
+There are 2 main types of SVM in sklearn, depending on the model output:
+
+**SVC**: for Classification problem
+**SVR**: for Regression problem
+
+### Kernel function:
+![image](https://user-images.githubusercontent.com/43855029/115589944-6cdeb800-a29e-11eb-858b-ff278bb56a3d.png)
+
 ### Implementation
-- Using `caret` package:
+Here we use the regular **iris** dataset with Classification problem
 
-```r
-library(caret)
-indT <- createDataPartition(y=iris$Species,p=0.6,list=FALSE)
-training <- iris[indT,]
-testing  <- iris[-indT,]
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-ModFit_SVM <- train(Species~.,training,method="svmLinear",preProc=c("center","scale"))
-predict_SVM<- predict(ModFit_SVM,newdata=testing)
-confusionMatrix(testing$Species,predict_SVM)
-```
-Note: there are other function in `method = “svmPoly”, “svmRadial”, “svmRadialCost”, “svmRadialSigma”`
-
-- Using `e1071` package, we have better demonstration:
-
-```r
-library(e1071)
-Fit_SVM_ln <- svm(Species~Petal.Width+Petal.Length,
-               data=training,kernel="sigmoid")
-plot(Fit_SVM_ln,training[,3:5])
-
-Fit_SVM_rbg <- svm(Species~Petal.Width+Petal.Length,
-               data=training,kernel="radial",gamma=0.1)
-plot(Fit_SVM_rbg,training[,3:5])
-
-pred_rbg <- predict(Fit_SVM_ln,testing)
-confusionMatrix(testing$Species,pred_rbg)
+import numpy as np
+import pandas as pd
+iris = load_iris()
+X = iris.data
+y = pd.DataFrame(iris.target)
+y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/114579507-ea297d80-9c4b-11eb-928e-f64d266702e6.png)
-
-- Using different gamma parameter for kernal radial:
-```r
-Fit_SVM_rbg <- svm(Species~Petal.Width+Petal.Length,
-               data=training,kernel="radial",gamma=0.1)
-plot(Fit_SVM_rbg,training[,3:5])
+Fit Support Vector Classifier model
+```python
+from sklearn.svm import SVC
+model_svm = SVC(kernel='rbf', C=1).fit(X_train, y_train['Species'])
+model_svm.score(X_test,y_test['Species'])
 ```
-![image](https://user-images.githubusercontent.com/43855029/114579624-0c230000-9c4c-11eb-85ab-840a6ec09912.png)
 
-
-![image](https://user-images.githubusercontent.com/43855029/114580300-bb5fd700-9c4c-11eb-8d92-dc2138f0e6c2.png)
 
