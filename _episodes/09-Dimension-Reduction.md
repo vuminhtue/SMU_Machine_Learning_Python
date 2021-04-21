@@ -47,7 +47,8 @@ import numpy as np
 import pandas as pd
 iris = load_iris()
 X = iris.data
-y = iris.target
+y = pd.DataFrame(iris.target)
+y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
 
