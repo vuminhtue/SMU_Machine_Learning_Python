@@ -30,13 +30,15 @@ This mechanism of mapping inputs to output is known as Activation Function.
 ![image](https://user-images.githubusercontent.com/43855029/114575672-6752f380-9c48-11eb-8d53-c78d052cdf17.png)
 
 ```python
+import matplotlib.pyplot as plt
+
 xrange = np.linspace(-2, 2, 200)
 
 plt.figure(figsize=(7,6))
 
 plt.plot(xrange, np.maximum(xrange, 0), label = 'ReLU')
 plt.plot(xrange, np.tanh(xrange), label = 'Hyperbolic Tangent')
-plt.plot(xrange, 1 / (1 + np.exp(-xrange)), label = 'Sigmoid')
+plt.plot(xrange, 1 / (1 + np.exp(-xrange)), label = 'Sigmoid/Logistic')
 plt.plot(xrange, xrange, label = 'Linear')
 plt.plot(xrange, np.heaviside(xrange, 0.5), label = 'Step')
 plt.legend()
@@ -46,8 +48,7 @@ plt.ylabel('Activation function output')
 
 plt.show()
 ```
-![image](https://user-images.githubusercontent.com/43855029/115565946-d3a4a700-a287-11eb-93b8-3209fa182436.png)
-
+![image](https://user-images.githubusercontent.com/43855029/115588329-9e568400-a29c-11eb-92b3-abe0c2db16c5.png)
 
 - Neural Network formulation: Multi-Layer Perceptron (MLP)
 **Multi-layer Perceptron (MLP)** is a supervised learning algorithm.
@@ -104,7 +105,7 @@ for example `hidden_layer_sizes=(50,20)` means there are 2 hidden layers used, t
 More information can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html)
 
 ```python
-model_NN = MLPClassifier(hidden_layer_sizes = (50,20),solver='lbfgs',random_state=123).fit(X_train_scaled, y_train['Species'])
+model_NN = MLPClassifier(hidden_layer_sizes = (50,20),solver='lbfgs',activation='relu',random_state=123).fit(X_train_scaled, y_train['Species'])
 model_NN.score(X_test_scaled,y_test['Species'])
 ```
 
@@ -135,7 +136,7 @@ X_test_scaled = scaler.transform(X_test)
 Fit **MLPRegressor** model
 ```python
 from sklearn.neural_network import MLPRegressor
-model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',max_iter=10000).fit(X_train_scaled, y_train)
+model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',activation='relu',max_iter=1000).fit(X_train_scaled, y_train)
 model_NN.score(X_test_scaled,y_test)
 ```
 
