@@ -68,8 +68,13 @@ Between the input and the output layer, there can be one or more non-linear laye
 - MLP requires tuning a number of hyperparameters such as the number of hidden neurons, layers, and iterations.
 - MLP is sensitive to feature scaling.
 
-### Implementation
-Split the data
+### Type of Neural Network Multi-Layer Perceptron in sklearn
+There are 2 main types of MLP in sklearn, depending on the model output:
+- MLPClassifier: for Classification problem
+- MLPRegressor: for Regression problem 
+
+### Implementation with Classification problem
+Here we use **iris** data for Classification problem
 ```python
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -102,3 +107,35 @@ More information can be found [here](https://scikit-learn.org/stable/modules/gen
 model_NN = MLPClassifier(hidden_layer_sizes = (50,20),solver='lbfgs',random_state=123).fit(X_train_scaled, y_train['Species'])
 model_NN.score(X_test_scaled,y_test['Species'])
 ```
+
+
+### Implementation with Regression problem
+- Class **MLPRegressor** implements a multi-layer perceptron (MLP) that trains using backpropagation with no activation function in the output layer, which can also be seen as using the identity function as activation function. 
+- Therefore, it uses the square error as the loss function, and the output is a set of continuous values.
+
+Here we use **airquality** data from Regression espisode:
+```python
+import pandas as pd
+import numpy as np
+from sklearn.impute import KNNImputer
+from sklearn.model_selection import train_test_split
+
+data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
+
+imputer = KNNImputer(n_neighbors=2, weights="uniform")
+data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
+data_knnimpute.columns = data_df.columns
+
+X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Temp','Wind','Solar.R']],
+                                                    data_knnimpute['Ozone'],
+                                                    train_size=0.6,random_state=123)
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+```                                                    
+Fit **MLPRegressor** model
+```python
+from sklearn.neural_network import MLPRegressor
+model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',max_iter=10000).fit(X_train_scaled, y_train)
+model_NN.score(X_test_scaled,y_test)
+```
+
