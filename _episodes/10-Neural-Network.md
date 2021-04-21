@@ -29,6 +29,26 @@ This mechanism of mapping inputs to output is known as Activation Function.
 - Activation functions:
 ![image](https://user-images.githubusercontent.com/43855029/114575672-6752f380-9c48-11eb-8d53-c78d052cdf17.png)
 
+```python
+xrange = np.linspace(-2, 2, 200)
+
+plt.figure(figsize=(7,6))
+
+plt.plot(xrange, np.maximum(xrange, 0), label = 'ReLU')
+plt.plot(xrange, np.tanh(xrange), label = 'Hyperbolic Tangent')
+plt.plot(xrange, 1 / (1 + np.exp(-xrange)), label = 'Sigmoid')
+plt.plot(xrange, xrange, label = 'Linear')
+plt.plot(xrange, np.heaviside(xrange, 0.5), label = 'Step')
+plt.legend()
+plt.title('Neural network activation functions')
+plt.xlabel('Input value (x)')
+plt.ylabel('Activation function output')
+
+plt.show()
+```
+![image](https://user-images.githubusercontent.com/43855029/115565946-d3a4a700-a287-11eb-93b8-3209fa182436.png)
+
+
 - Neural Network formulation
 
 ![image](https://user-images.githubusercontent.com/43855029/114472972-51e6b680-9bc1-11eb-9e78-90ec739844ee.png)
