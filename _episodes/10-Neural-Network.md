@@ -139,3 +139,7 @@ model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',max_iter=100
 model_NN.score(X_test_scaled,y_test)
 ```
 
+### Tips on using MLP
+- Multi-layer Perceptron is sensitive to feature scaling, so it is highly recommended to scale your data. 
+- There is built-in regularization parameter **alpha** (`Default 0.0001`). To find reasonable **alpha**, it's best to use **GridSearchCV**, usually in the range 10.0**-np.arange(1, 7)
+- Empirically, we observed that **L-BFGS** converges faster and with better solutions on small datasets. For relatively large datasets, however, **Adam** is very robust. It usually converges quickly and gives pretty good performance. **SGD** with momentum or nesterov’s momentum, on the other hand, can perform better than those two algorithms if learning rate is correctly tuned.
