@@ -51,15 +51,6 @@ y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
 
-#### Compute PCA using eigenvector:
-```r
-from sklearn.preprocessing import StandardScaler
-X_train_scaled = StandardScaler().fit_transform(X_train)
-cin = pd.DataFrame(X_train_scaled).cov()
-eigvals, eigvecs = np.linalg.eig(cin)
-newpca = pd.DataFrame(X_train_scaled).dot(eigvecs)
-```
-
 #### Compute PCA using sklearn:
 ```python
 from sklearn.decomposition import PCA
@@ -76,7 +67,7 @@ pca.explained_variance_ratio_
 In this example: the PC1(0.74) and PC2 (0.21) consume 0.95 percent of explained variance. Therefore, using 2 Principal Components should be good enough
 #### Application of PCA model in Machine Learning:
 
-```r
+```python
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score as acc_score
 
@@ -91,7 +82,26 @@ X_test_pca = pca.transform(X_test_scaled)
 print(pca.explained_variance_ratio_)
 
 # Use random forest to train model
-model_RF = RandomForestClassifier(n_estimators=20,criterion="gini",random_state=1234).fit(X_train_pca, y_train)
+model_RF = RandomForestClassifier(n_estimators=20,criterion="gini",random_state=1234).fit(X_train_pca, y_train['Species'])
 y_pred_RF = model_RF.predict(X_test_pca)
-acc_score(y_test,y_pred_RF)
+acc_score(y_test['Species'],y_pred_RF)
 ```
+Plotting the testing result with indicator of Wrong prediction
+```python
+ax = plt.gca()
+
+targets = np.unique(y_pred_RF)
+colors = ['r', 'g', 'b']
+
+for target, color in zip(targets,colors):
+    indp = y_pred_RF == target
+    ax.scatter(X_test_pca.loc[indp, 'PC1'], X_test_pca.loc[indp, 'PC2'],c = color)
+
+ind = y_pred_RF!=np.array(y_test['Species'])
+ax.scatter(X_test_pca.loc[ind, 'PC1'],X_test_pca.loc[ind, 'PC2'],c = 'black')
+ax.legend(['setosa','versicolor','virginica','Wrong Prediction'])  
+ax.set_title("Testing set from Random Forest using PCA 2 components")
+ax.set_xlabel('PC1')
+ax.set_ylabel('PC2')
+```
+![image](https://user-images.githubusercontent.com/43855029/115561017-24fe6780-a283-11eb-8d9e-4a04b3a2e9a2.png)
