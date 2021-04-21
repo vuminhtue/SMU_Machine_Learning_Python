@@ -36,11 +36,15 @@ Removing **SVs** will change the position of the hyperplane. These are the point
 
 ![image](https://user-images.githubusercontent.com/43855029/114577489-09271000-9c4a-11eb-8b4a-b7837463288f.png)
 
-### Type of Support Vector Machines:
+### Support Vector Machines's Estimators:
 There are 2 main types of SVM in sklearn, depending on the model output:
 
-**SVC**: for Classification problem
-**SVR**: for Regression problem
+- **SVC**: for Classification problem using **C-support vector classification**
+- **SVR**: for Regression problem using **Epsilon-support vector regression**
+
+In addition there are other model under **sklearn.svm**: NuSVC, LinearSVC, NuSVR, LinearSVR
+
+
 
 ### Kernel function:
 ![image](https://user-images.githubusercontent.com/43855029/115589944-6cdeb800-a29e-11eb-858b-ff278bb56a3d.png)
@@ -67,5 +71,6 @@ from sklearn.svm import SVC
 model_svm = SVC(kernel='rbf', C=1).fit(X_train, y_train['Species'])
 model_svm.score(X_test,y_test['Species'])
 ```
+In this model, **C** is the regularization parameter `Default C=1`. The strength of the regularization is inversely proportional to C. Must be strictly positive.
 
 
