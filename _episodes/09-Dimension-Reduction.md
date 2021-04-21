@@ -97,8 +97,11 @@ for target, color in zip(targets,colors):
     indp = y_pred_RF == target
     ax.scatter(X_test_pca.loc[indp, 'PC1'], X_test_pca.loc[indp, 'PC2'],c = color)
 
+# Ploting the Wrong Prediction
 ind = y_pred_RF!=np.array(y_test['Species'])
 ax.scatter(X_test_pca.loc[ind, 'PC1'],X_test_pca.loc[ind, 'PC2'],c = 'black')
+
+#axis control
 ax.legend(['setosa','versicolor','virginica','Wrong Prediction'])  
 ax.set_title("Testing set from Random Forest using PCA 2 components")
 ax.set_xlabel('PC1')
