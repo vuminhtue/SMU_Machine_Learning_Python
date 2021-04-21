@@ -59,44 +59,22 @@ Between the input and the output layer, there can be one or more non-linear laye
 
 ![image](https://user-images.githubusercontent.com/43855029/114575549-48546180-9c48-11eb-8c9c-c5eac3180df1.png)
 
-- The advantages of Multi-layer Perceptron are:
-
-Capability to learn non-linear models.
-Capability to learn models in real-time (on-line learning) using partial_fit.
-The disadvantages of Multi-layer Perceptron (MLP) include:
-MLP with hidden layers have a non-convex loss function where there exists more than one local minimum. Therefore different random weight initializations can lead to different validation accuracy.
-MLP requires tuning a number of hyperparameters such as the number of hidden neurons, layers, and iterations.
-MLP is sensitive to feature scaling.
-
-
-- Basic Type of Neural Network:
-
-![image](https://user-images.githubusercontent.com/43855029/114575945-aaad6200-9c48-11eb-96c2-12fd28866f48.png)
+**The advantages of Multi-layer Perceptron:**
+- Capability to learn non-linear models.
+- Capability to learn models in real-time (on-line learning) using partial_fit.
+**The disadvantages of Multi-layer Perceptron:**
+- MLP with hidden layers have a non-convex loss function where there exists more than one local minimum. Therefore different random weight initializations can lead to different validation accuracy.
+- MLP requires tuning a number of hyperparameters such as the number of hidden neurons, layers, and iterations.
+- MLP is sensitive to feature scaling.
 
 ### Implementation
-```r
-install.packages("neuralnet")
-```
 Split the data
-```r
-library(caret)
-library(neuralnet)
+```python
 
-datain <- mtcars
-set.seed(123)
-#Split training/testing
-indT <- createDataPartition(y=datain$mpg,p=0.6,list=FALSE)
-training <- datain[indT,]
-testing  <- datain[-indT,]
-#scale the data set
-smax <- apply(training,2,max)
-smin <- apply(training,2,min)
-trainNN <- as.data.frame(scale(training,center=smin,scale=smax-smin))
-testNN <- as.data.frame(scale(testing,center=smin,scale=smax-smin))
 ```
 
-- Fit the Neural Network using **10** hidden layer using backpropagation:
-```r
+- Fit the MLP Neural Network using **1** hidden layer:
+```python
 set.seed(123)
 ModNN <- neuralnet(mpg~cyl+disp+hp+drat+wt+qsec+carb,trainNN, hidden=10,linear.output = T)
 plot(ModNN)
