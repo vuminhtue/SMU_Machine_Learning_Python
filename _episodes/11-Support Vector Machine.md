@@ -72,26 +72,46 @@ import numpy as np
 import pandas as pd
 iris = load_iris()
 X = iris.data
-y = pd.DataFrame(iris.target)
-y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
-X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+X = X[:,2:4]
+y = iris.target
 
-scaler = MinMaxScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
 
 Fit Support Vector Classifier model
 ```python
 from sklearn.svm import SVC
-model_svm = SVC(kernel='rbf', C=1).fit(X_train, y_train['Species'])
-model_svm.score(X_test,y_test['Species'])
+from mlxtend.plotting import plot_decision_regions
+import matplotlib.pyplot as plt
+names = ["Linear SVM", "RBF SVM", "Poly SVM", "Sigmoid SVM"]
+classifiers = [
+    SVC(kernel="linear"),
+    SVC(kernel="rbf"),
+    SVC(kernel="poly"),
+    SVC(kernel="sigmoid")]
+
+i = 1
+figure = plt.figure(figsize=(27, 5))
+cm = plt.cm.jet
+
+for name, clf in zip(names, classifiers):
+    ax = plt.subplot(1,4, i)
+    clf.fit(X_train, y_train)
+    ax = plot_decision_regions(X=X_train, 
+                      y=y_train,
+                      clf=clf)
+    ax.set_xlabel(iris.feature_names[2], size=14)
+    ax.set_ylabel(iris.feature_names[3], size=14)
+    ax.set_title(name, size=20)
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles,iris.target_names)
+    i+=1
+
 ```
 In this model, **C** is the regularization parameter `Default C=1`. The strength of the regularization is inversely proportional to C. Must be strictly positive.
 
 ### Tips on using SVM
 - Setting `C=1` is reasonable choice for default. If you have a lot of noisy observations you should decrease it: decreasing C corresponds to more regularization.
-- Support Vector Machine algorithms are not scale invariant, so it is highly recommended to **scale your data**. 
 - More information [here](https://scikit-learn.org/stable/modules/svm.html#tips-on-practical-use)
 
 ### Pros of SVM
