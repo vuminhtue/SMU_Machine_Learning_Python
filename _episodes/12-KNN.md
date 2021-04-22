@@ -65,3 +65,7 @@ model_KNN.score(X_test,y_test)
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114583370-86a14f00-9c4f-11eb-96a0-59b3c5376952.png)
 
+### Other similar models from sklearn.neighbors:
+- KNeighborsRegressor: KNN estimators for Regression problem with continuous data
+- NearestCentroid
+- and [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.neighbors)
