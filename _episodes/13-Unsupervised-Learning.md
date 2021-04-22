@@ -120,7 +120,7 @@ E*n: expectation under a sample size of n from the reference distribution
 
 **Installation:** [here](https://github.com/milesgranger/gap_statistic)
 This version of Gap Statistics is not official. Until the moment of writing this documentation, no official Gap Statistics has been released in Python.
-
+We use the version from [milesgranger's github](https://github.com/milesgranger/gap_statistic)
 ```python
 pip install git+git://github.com/milesgranger/gap_statistic.git
 pip install gapstat-rs
