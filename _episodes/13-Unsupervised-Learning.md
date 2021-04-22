@@ -118,7 +118,8 @@ E*n: expectation under a sample size of n from the reference distribution
 
 ![image](https://user-images.githubusercontent.com/43855029/114586456-af771380-9c52-11eb-9fdb-99cc8df854fb.png)
 
-**Installation:** [here](https://github.com/milesgranger/gap_statistic)
+**Installation:**
+
 This version of Gap Statistics is not official. Until the moment of writing this documentation, no official Gap Statistics has been released in Python.
 We use the version from [milesgranger's github](https://github.com/milesgranger/gap_statistic)
 ```python
