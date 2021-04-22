@@ -41,23 +41,27 @@ Letting K running, we have the following graph for  the **Elbow approach**:
 ![image](https://user-images.githubusercontent.com/43855029/114583036-2f02e380-9c4f-11eb-81e3-6f82e4ea943c.png)
 
 ### Implementation
-```r
-library(caret)
-data(iris)
-set.seed(123)
-indT <- createDataPartition(y=iris$Species,p=0.6,list=FALSE)
-training <- iris[indT,]
-testing  <- iris[-indT,]
+Here we gonna use the **iris** dataset again:
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-ModFit_KNN <- train(Species~.,training,method="knn",preProc=c("center","scale"),tuneLength=20)
+import numpy as np
+import pandas as pd
+iris = load_iris()
+X = iris.data
+y = iris.target
 
-ggplot(ModFit_KNN$results,aes(k,AccuracySD))+
-      geom_point(color="blue")+
-      labs(title=paste("Optimum K is ",ModFit_KNN$bestTune),
-           y="Error")
-      
-predict_KNN<- predict(ModFit_KNN,newdata=testing)
-confusionMatrix(testing$Species,predict_KNN)
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+```
+
+Train the model using KNN model with 3 nearest neighbors
+```python
+from sklearn.neighbors import KNeighborsClassifier
+model_KNN = KNeighborsClassifier(n_neighbors=3).fit(X_train,y_train)
+
+model_KNN.score(X_train,y_train)
+model_KNN.score(X_test,y_test)
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114583370-86a14f00-9c4f-11eb-96a0-59b3c5376952.png)
 
