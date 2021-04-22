@@ -118,11 +118,32 @@ E*n: expectation under a sample size of n from the reference distribution
 
 ![image](https://user-images.githubusercontent.com/43855029/114586456-af771380-9c52-11eb-9fdb-99cc8df854fb.png)
 
-```r
-library(cluster)
-# B is number of Monte Carlo bootstrap samples
-gap_stat <- clusGap(iris[,3:4], FUN = kmeans, nstart=20, K.max = 10, B = 50)
-fviz_gap_stat(gap_stat)
-```
-![image](https://user-images.githubusercontent.com/43855029/114586485-b9007b80-9c52-11eb-9aae-24effc612e09.png)
+**Installation:** [here](https://github.com/milesgranger/gap_statistic)
+This version of Gap Statistics is not official. Until the moment of writing this documentation, no official Gap Statistics has been released in Python.
 
+```python
+pip install git+git://github.com/milesgranger/gap_statistic.git
+pip install gapstat-rs
+```
+Implement Gap-Statistics:
+```python
+from gap_statistic import OptimalK
+
+optimalK = OptimalK(n_jobs=1) # No parallel
+n_clusters = optimalK(X[:,1:4], cluster_array=np.arange(1, 15))
+print('Optimal clusters: ', n_clusters)
+```
+
+Plot Gap-Statistics:
+```python
+import matplotlib.pyplot as plt
+plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df.gap_value, linewidth=3)
+plt.scatter(optimalK.gap_df[optimalK.gap_df.n_clusters == n_clusters].n_clusters,
+            optimalK.gap_df[optimalK.gap_df.n_clusters == n_clusters].gap_value, s=250, c='r')
+plt.grid(True)
+plt.xlabel('Cluster Count')
+plt.ylabel('Gap Value')
+plt.title('Gap Values by Cluster Count')
+plt.show()
+```
+![image](https://user-images.githubusercontent.com/43855029/115745658-a298a500-a361-11eb-8071-6af68f7eb428.png)
