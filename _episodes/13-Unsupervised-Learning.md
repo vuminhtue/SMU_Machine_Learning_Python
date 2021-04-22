@@ -77,11 +77,10 @@ import matplotlib.pyplot as plt
 model_KMeans = KMeans(n_clusters=3)
 model_KMeans.fit(X)
 
-ax = plt.gca()
-ax.scatter(X[:,2],X[:,3],c=model_KMeans.labels_)
-ax.set_xlabel(iris.feature_names[2])
-ax.set_ylabel(iris.feature_names[3])
-ax.set_title('KMeans clustering with 3 clusters')
+plt.scatter(X[:,2],X[:,3],c=model_KMeans.labels_)
+plt.xlabel(iris.feature_names[2])
+plt.ylabel(iris.feature_names[3])
+plt.title('KMeans clustering with 3 clusters')
 ```
 
 ![image](https://user-images.githubusercontent.com/43855029/115735833-c99ea900-a358-11eb-87d8-774efc7fa459.png)
@@ -96,7 +95,6 @@ The optimal K-values can be found from the Elbow using **method="wss"**:
 ```python
 wss = []
 for k in range(1,10):
-    print(k)
     model = KMeans(n_clusters=k).fit(X)
     wss.append(model.inertia_)
     
