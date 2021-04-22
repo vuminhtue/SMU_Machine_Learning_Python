@@ -58,20 +58,33 @@ Partition Around Median (PAM)
 ![image](https://user-images.githubusercontent.com/43855029/114585502-b81b1a00-9c51-11eb-8015-973216b450ce.png)
 
 ### Implementation
-```r
-library(ggplot2)
-library(factoextra)
-library(purrr)
-data(iris)
-ggplot(iris,aes(x=Sepal.Length,y=Petal.Width))+
-      geom_point(aes(color=Species))
-set.seed(123)
-km <- kmeans(iris[,3:4],3,nstart=20)
+Here we use the iris data set with only predictors
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-table(km$cluster,iris$Species)
-fviz_cluster(km,data=iris[,3:4])
+import numpy as np
+import pandas as pd
+iris = load_iris()
+X = iris.data
 ```
-![image](https://user-images.githubusercontent.com/43855029/114585677-e567c800-9c51-11eb-8cb4-6db443f0698b.png)
+
+Apply Kmeans and plotting
+```python
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+model_KMeans = KMeans(n_clusters=3)
+model_KMeans.fit(X)
+
+ax = plt.gca()
+ax.scatter(X[:,2],X[:,3],c=model_KMeans.labels_)
+ax.set_xlabel(iris.feature_names[2])
+ax.set_ylabel(iris.feature_names[3])
+ax.set_title('KMeans clustering with 3 clusters')
+```
+
+![image](https://user-images.githubusercontent.com/43855029/115735833-c99ea900-a358-11eb-87d8-774efc7fa459.png)
 
 ### How to find optimal K values:
 #### Elbow approach
