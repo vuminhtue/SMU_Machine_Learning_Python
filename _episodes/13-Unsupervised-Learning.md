@@ -93,10 +93,20 @@ ax.set_title('KMeans clustering with 3 clusters')
 ![image](https://user-images.githubusercontent.com/43855029/114587068-4d6ade00-9c53-11eb-932d-0de0c9edef83.png)
 
 The optimal K-values can be found from the Elbow using **method="wss"**:
-```r
-fviz_nbclust(iris[,3:4], kmeans, method = "wss")
+```python
+wss = []
+for k in range(1,10):
+    print(k)
+    model = KMeans(n_clusters=k).fit(X)
+    wss.append(model.inertia_)
+    
+plt.scatter(range(1,10),wss)
+plt.plot(range(1,10),wss)
+plt.xlabel("Number of Clusters k")
+plt.ylabel("Within Sum of Square")
+plt.title("Optimal number of clusters based on WSS Method")
 ```
-![image](https://user-images.githubusercontent.com/43855029/114586165-5e671f80-9c52-11eb-9ad1-e9170fd6b5ef.png)
+![image](https://user-images.githubusercontent.com/43855029/115737965-9b21cd80-a35a-11eb-9bcd-0d63e685ec0f.png)
 
 #### Gap-Statistics approach
 - Developed by Prof. Tibshirani et al in Stanford
