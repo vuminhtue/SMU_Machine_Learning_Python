@@ -11,6 +11,10 @@ keypoints:
 ---
 
 # Data partition: training and testing
+
+![image](https://user-images.githubusercontent.com/43855029/120378647-b1716080-c2ec-11eb-8693-60defbbad7e2.png)
+
+
 - In Machine Learning, it is mandatory to have training and testing set. Some time a verification set is also recommended.
 Here are some functions for spliting training/testing set in `sklearn`:
 
