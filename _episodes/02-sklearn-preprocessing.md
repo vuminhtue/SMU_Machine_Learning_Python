@@ -16,13 +16,15 @@ keypoints:
 - Scikit-learn is probably the most useful library for machine learning in Python. 
 - The sklearn library contains a lot of efficient tools for machine learning and statistical modeling including classification, regression, clustering and dimensionality reduction.
 - The sklearn package contains tools for:
+
 ```
-- data splitting
-- pre-processing
-- feature selection
-- model tuning using resampling
-- variable importance estimation
-as well as other functionality.
+  - data splitting
+  - pre-processing
+  - feature selection
+  - model tuning using resampling
+  - variable importance estimation
+  as well as other functionality.
+  
 ```
 ## Install `sklearn`
 We have installed kernel **ML_SKLN** which contains the scikit-learn package in Palmetto. However for new conda environment installation, here is the command:
