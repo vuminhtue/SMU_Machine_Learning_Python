@@ -25,7 +25,7 @@ keypoints:
 as well as other functionality.
 ```
 ## Install `sklearn`
-We have installed kernel **MLP** which contains the scikit-learn package in Palmetto. However for new conda environment installation, here is the command:
+We have installed kernel **ML_SKLN** which contains the scikit-learn package in Palmetto. However for new conda environment installation, here is the command:
 `$ pip3 install -U scikit-learn`
 
 
