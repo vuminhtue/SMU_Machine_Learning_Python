@@ -117,6 +117,7 @@ data_scaler = pd.DataFrame(scaler.fit_transform(data3))
 ```python
 from sklearn.preprocessing import power_transform
 data_BxCx = pd.DataFrame(power_transform(data3,method="box-cox"))
+data_BxCx.columns = data3.columns
 ```
 #### Using Yeo Johnson Transformation
 While BoxCox only works with positive value, a more recent transformation method [Yeo Johnson](https://www.jstor.org/stable/2673623) can transform both positive and negative values
@@ -136,6 +137,7 @@ ax2.hist(data_BxCx["Ozone"])
 ax2.set_title("Box-Cox Transformation")
 ax2.set_xlabel('Ozone')
 ax2.set_ylabel('Count')
+plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114884951-30a9e400-9dd4-11eb-9c42-4d108743a551.png)
 
