@@ -96,6 +96,7 @@ More information on Decision Tree can be found [here](https://scikit-learn.org/s
 - If there are M input variables, a number m<M is specified such that at each node, m variables are selected at random out of the M. The best split on these m is used to split the node. The value of m is held constant while we grow the forest.
 - Each tree is grown to the largest extent possible and  there is no pruning.
 - Predict new data by aggregating the predictions of the ntree trees (i.e., majority votes for classification, average for regression).
+
 ![image](https://user-images.githubusercontent.com/43855029/114235192-d16c4f80-994d-11eb-9732-571463c2f3f5.png)
 
 ### Pros & Cons of Random Forest
