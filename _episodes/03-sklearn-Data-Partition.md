@@ -34,7 +34,7 @@ For each dataset, there are 4 varibles:
 - **data**: numpy array of predictors/X
 - **target**: numpy array of predictant/target/y
 - **feature_names**: names of all predictors in X
-- **target.names**: names of all predictand in y
+- **target_names**: names of all predictand in y
 ```
 For example:
 ```python
@@ -65,11 +65,17 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_st
 ```
 
 ## Data spliting using `K-fold`
-- The procedure has a single parameter called k that refers to the number of groups that a given data sample is to be split into. 
-- As such, the procedure is often called k-fold cross-validation. 
-- When a specific value for k is chosen, it may be used in place of k in the reference to the model, such as k=10 becoming 10-fold cross-validation.
-- Kfold method returns the order of the samples chosen for train and test sets in each fold. 
-- On a pandas dataframe we have use to .iloc function to get the correct rows. Because I haven't split the data into X (features) and y (target) I have to also use .loc, to choose the right columns (.loc[:,features]) or simply pick the columns (['target']) for the iris dataset
+- This is the Cross-validation approach.
+- This is a resampling process used to evaluate ML model on limited data sample.
+- The general procedure:
+    - Shuffle data randomly
+    - Split the data into **k** groups
+    For each group:
+        - Split into training & testing set
+        - Fit a model on each group's training & testing set
+        - Retain the evaluation score and summarize the skill of model
+
+
 
 ![image](https://user-images.githubusercontent.com/43855029/114211785-103edd00-992f-11eb-89d0-bbd7bd0c0178.png)
 ```python
@@ -87,8 +93,20 @@ for train_index, test_index in kf10.split(iris.target):
 ```
 
 ## Data spliting using `Stratified K-fold`
-- Instead of using random Kfold, we can use StratifiedKFold which needs extra parameter y. 
-- As y you use the target variable so that the Kfold and pick balanced distribution of the targets in each folds.
+- StratifiedKFold takes the cross validation one step further: it ensures that the target has balance class distribution.
+- Look at the sample below:
+The target has imbalanced class distribution with 12 values of 1 and 4 values of 0. KFold will not take that into consideration when splitting the Fold
+
+![image](https://user-images.githubusercontent.com/43855029/120677513-2667a600-c465-11eb-814e-f4979ac9d123.png)
+
+Here is the reuslt if using K-Fold:
+
+![image](https://user-images.githubusercontent.com/43855029/120677884-8c542d80-c465-11eb-832a-bf05e1d73d28.png)
+
+Here is the result of using Stratified K-Fold:
+
+![image](https://user-images.githubusercontent.com/43855029/120677539-2d8eb400-c465-11eb-8227-9921b6f32362.png)
+
 
 ```python
 from sklearn.model_selection import StratifiedKFold
