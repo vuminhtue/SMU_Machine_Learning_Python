@@ -1,0 +1,21 @@
+---
+title: "Evaluation Metrics with Scikit-Learn"
+teaching: 20
+exercises: 0
+questions:
+- "How do we measure the accuracy of ML model"
+objectives:
+- "Learn different metrics with sklearn"
+keypoints:
+- "sklearn, metrics"
+---
+
+# Evaluation Metrics
+
+- Evaluation Metric is an essential part in any Machine Learning project.
+- It measures how good or bad is your Machine Learning model
+- Different Evaluation Metrics are used for Regression model (Continuous output) or Classification model (Categorical output).
+
+## Regression model Evaluation Metrics
+
+### Correlation Coefficient (R) or Coefficient of Determination (R2):
