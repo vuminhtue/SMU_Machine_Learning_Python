@@ -54,8 +54,8 @@ X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Temp','Wind
 model_linreg = LinearRegression().fit(X_train,y_train)
 y_pred2 = model_linreg.predict(X_test)
 
-metrics.r2_score(y_test,y_pred)
-metrics.mean_squared_error(y_test,y_pred,squared=False)
+metrics.r2_score(y_test,y_pred2)
+metrics.mean_squared_error(y_test,y_pred2,squared=False)
 ```
 Output is therefore better with smaller RMSE and higher Rsquared at **0.5**
 
@@ -74,7 +74,8 @@ X_train, X_test, y_train, y_test = train_test_split(X_train_poly,
                                                     train_size=0.6,random_state=123)
 model_linreg_poly = LinearRegression().fit(X_train,y_train)
 y_pred_poly = model_linreg_poly.predict(X_test)
-metrics.r2_score(y_test,y_pred_poly)
+print(metrics.r2_score(y_test,y_pred_poly))
+print(metrics.mean_squared_error(y_test,y_pred_poly,squared=False))
 ```
 The **R2=0.58** shows improvement using polynomial regression!
 
@@ -113,7 +114,7 @@ X_train, X_test, y_train, y_test = train_test_split(Xstd,y,train_size=0.6,random
 ```
 Train model using Logistic Regression
 ```python
-from sklearn.Linear_Model import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 model_LogReg = LogisticRegression().fit(X_train, y_train)
 y_pred = model_LogReg.predict(X_test)
 ```
