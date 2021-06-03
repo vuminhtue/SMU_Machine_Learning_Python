@@ -26,8 +26,7 @@ Unlike a statistical ensemble in statistical mechanics, which is usually infinit
 Here we will be learning several ensemble models:
 - Random Forest
 - Bagging
-- Boosting with AdaBoost
-- Boosting with Gradient Boosting Machine
+- Boosting 
 
 ![image](https://user-images.githubusercontent.com/43855029/115079289-f6713d00-9ece-11eb-90cb-7084e8d7a536.png)
 
