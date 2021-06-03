@@ -81,7 +81,7 @@ plt.show()
 ![image](https://user-images.githubusercontent.com/43855029/120721080-25ea0200-c49b-11eb-9808-692c462bf288.png)
 
 
-More information on Decision Treen can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
+More information on Decision Tree can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
 
 
 ## Train model using Random Forest
