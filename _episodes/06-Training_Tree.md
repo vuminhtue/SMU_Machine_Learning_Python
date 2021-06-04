@@ -68,21 +68,7 @@ metrics.accuracy_score(y_test,y_pred_DT)
 ```
 The **accuracy=0.95**
 
-Compute and plot ROC-AUC curves:
-
-```python
-predicted_prob = model_DT.predict_proba(X_test)
-
-import scikitplot as skplt
-skplt.metrics.plot_roc(y_test, predicted_probas)
-plt.show()
-```
-
-![image](https://user-images.githubusercontent.com/43855029/120721080-25ea0200-c49b-11eb-9808-692c462bf288.png)
-
-
 More information on Decision Tree can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
-
 
 ## Train model using Random Forest
 ![image](https://user-images.githubusercontent.com/43855029/115076000-f3278280-9ec9-11eb-89b4-b07f3713b105.png)
