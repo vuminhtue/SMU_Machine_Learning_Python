@@ -10,13 +10,13 @@ keypoints:
 - "PCA"
 ---
 
-## Principal Component Analysis
+## 10 Principal Component Analysis
 - Handy with large data
 - Where many variables correlate with one another, they will all contribute strongly to the same principal component
 - Each principal component sums up a certain percentage of the total variation in the dataset
 - More Principal Components, more summarization of the original data sets
 
-### Explanation
+### 10.1 PCA formulation
 - For example, we have 3 data sets: `X, Y, Z`
 - We need to compute the covariance matrix **M** for the 3 data set:
 ![image](https://user-images.githubusercontent.com/43855029/114459677-d67c0980-9bae-11eb-85b2-758a98f0cd29.png)
@@ -38,7 +38,7 @@ in which, the covariance value between 2 data sets can be computed as:
 **Eigenvector with the largest eigenvalue forms the first principal component of the data set
 … and so on …***
 
-### Implementation
+### 10.2 Implementation
 Here we gonna use iris data set:
 ```python
 from sklearn.datasets import load_iris
@@ -52,7 +52,7 @@ y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
 
-#### Compute PCA using sklearn:
+#### 10.2.1 Compute PCA using sklearn:
 ```python
 from sklearn.decomposition import PCA
 pca = PCA(n_components=4)
@@ -60,13 +60,13 @@ PCs = pca.fit_transform(X_train_scaled)
 PCs = pd.DataFrame(PCs,columns = ['PC1','PC2','PC3','PC4'])
 ```
 We can see that PCs computed from sklearn package are similar to newpca computed from using eigen vectors
-#### Explained Variance
+#### 10.2.2 Explained Variance
 The explained variance tells you how much information (variance) can be attributed to each of the principal components. 
 ```python
 pca.explained_variance_ratio_
 ```
 In this example: the PC1(0.74) and PC2 (0.21) consume 0.95 percent of explained variance. Therefore, using 2 Principal Components should be good enough
-#### Application of PCA model in Machine Learning:
+#### 10.2.3 Application of PCA model in Machine Learning:
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
