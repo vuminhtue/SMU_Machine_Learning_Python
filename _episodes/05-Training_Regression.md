@@ -164,7 +164,7 @@ plt.show()
 
 ![image](https://user-images.githubusercontent.com/43855029/120822169-22e72400-c524-11eb-97fe-46f711a11072.png)
 
-An alternative way to plot AUC-ROC curve, using additional toolbox:
+An alternative way to plot AUC-ROC curve, using additional toolbox ["scikit-plot"](https://scikit-plot.readthedocs.io/en/stable/)
 ```python
 pip install scikit-plot
 ```
