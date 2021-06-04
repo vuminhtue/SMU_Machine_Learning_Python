@@ -8,7 +8,7 @@ Please follow this guideline to create a new conda environment and install sciki
 
 - Open terminal (**MobaXTerm** for Windows OS/**Terminal** for MacOS & Linux platform/**Terminal** in JupyterHub platform)(For JupyterHub platform, you need to login here: https://www.palmetto.clemson.edu/jhub/hub/home with Clemson username and DUO)
 - Login to Palmetto login node: your_username@login001
-- Request for a compute node with simple configuration: (Note: for JupyterHub platform above, you do not need to request for a computer node)
+- Request for a compute node with simple configuration: (Note: for JupyterHub platform above, you do not need to request for a compute node)
 
 ```bash
 $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
