@@ -11,21 +11,22 @@ Please follow this guideline to create a new conda environment and install sciki
 $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
 ```
 
-4. Load module:
+4. Load module
 
-```python
+
+```bash
 $ module load anaconda3/2020.07-gcc/8.3.1
 ```
 
 5. Create conda environment:
 
-```python
+```bash
 $ conda create -n skln python=3.8
 ```
 
 6. Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
 
-```python
+```bash
 $ source activate skln
 $ pip install numpy pandas scikit-learn seaborn
 $ conda install matplotlib
@@ -36,7 +37,7 @@ or **conda install** method.
 
 7. Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
 
-```python
+```bash
 $ conda install jupyter
 $ python -m ipykernel install --user --name skln --display-name "ML_SKLN"
 ```
