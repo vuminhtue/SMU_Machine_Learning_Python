@@ -21,7 +21,7 @@ keypoints:
 
 ## Requirement:
 - You can write the script in Jupyter Notebook and save it as your_username.ipynb and send it to my email: **tuev@clemson.edu**
-- **Note**: in order to get the Certificate of Attendence, you must send me the ipynb script on or before 06/30/2021.
+- **Note**: in order to get the **Certificate of Attendence**, you should send me the ipynb script on or before 06/30/2021.
 
 ## Data
 - You can use *any* data in your field of expertise (most preferred method). If so, please send along the dataset with the ipynb file
