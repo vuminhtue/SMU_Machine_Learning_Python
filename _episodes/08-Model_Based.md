@@ -14,6 +14,9 @@ keypoints:
 - Assuming data follow a probabilistic model
 - Assuming all predictors are independent (Naïve assumption)
 - Use Bayes’s theorem to identify optimal classifiers
+- More information on Aplication of Bayes's Theorem in ML can be found [here](https://machinelearningmastery.com/bayes-theorem-for-machine-learning/)
+
+
 ![image](https://user-images.githubusercontent.com/43855029/114339414-20b7a900-9b23-11eb-9ae1-39640f50e06c.png)
 ![image](https://user-images.githubusercontent.com/43855029/114339497-62485400-9b23-11eb-8511-29e1c9077946.png)
 
