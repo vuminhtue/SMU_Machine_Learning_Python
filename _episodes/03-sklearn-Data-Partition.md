@@ -27,7 +27,7 @@ Here are some functions for spliting training/testing set in `sklearn`:
 - `LeavePOut`
 
 Due to time constraint, we only focus on `train_test_split`, `KFolds` and `StratifiedKFold` 
-## Scikit-Learn data
+## 3.1 Scikit-Learn data
 The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html)
 ```
 For each dataset, there are 4 varibles:
@@ -54,7 +54,7 @@ X = iris.data
 y = iris.target
 ```
 
-## Data spliting using `train_test_split`: **Single fold**
+## 3.2 Data spliting using `train_test_split`: **Single fold**
 Here we use `train_test_split` to randomly split 60% data for training and the rest for testing:
 ![image](https://user-images.githubusercontent.com/43855029/114209883-22b81700-992d-11eb-83a4-c4ab1538a1e5.png)
 
@@ -64,7 +64,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_st
 #random_state: int, similar to R set_seed function
 ```
 
-## Data spliting using `K-fold`
+## 3.3 Data spliting using `K-fold`
 - This is the Cross-validation approach.
 - This is a resampling process used to evaluate ML model on limited data sample.
 - The general procedure:
@@ -92,7 +92,7 @@ for train_index, test_index in kf10.split(iris.target):
     print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")
 ```
 
-## Data spliting using `Stratified K-fold`
+## 3.4 Data spliting using `Stratified K-fold`
 - StratifiedKFold takes the cross validation one step further: it ensures that the target has balance class distribution.
 - Look at the sample below:
 The target has imbalanced class distribution with 12 values of 1 and 4 values of 0. KFold will not take that into consideration when splitting the Fold
