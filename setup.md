@@ -6,7 +6,7 @@ We will use Palmetto cluster for this workshop with Jupyter Lab.
 
 Please follow this guideline to create a new conda environment and install scikit-learn package.
 
-- Open terminal (**MobaXTerm** for Windows OS/**Terminal** for MacOS & Linux platform/**Terminal** in JupyterHub platform)(For JupyterHub platform, you need to login here: https://www.palmetto.clemson.edu/jhub/hub/home with Clemson username and DUO)
+- Open terminal (**MobaXTerm** for Windows OS/**Terminal** for MacOS & Linux platform/**Terminal** in JupyterHub platform)(For JupyterHub platform, you need to login here: https://www.palmetto.clemson.edu/jhub/hub/home with Clemson username and DUO and skip the next 2 steps)
 
 ![image](https://user-images.githubusercontent.com/43855029/120862838-98201c80-c557-11eb-8c80-73832a802412.png)
 
@@ -18,6 +18,7 @@ $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
 ```
 Next:
 
+*JupyterHub platform, start from here:*
 - Load module
 - Create conda environment:
 - Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
