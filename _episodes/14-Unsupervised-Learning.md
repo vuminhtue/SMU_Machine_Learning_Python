@@ -149,7 +149,7 @@ plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/43855029/115745658-a298a500-a361-11eb-8071-6af68f7eb428.png)
 
-### 14.1.5. Comparison between different clustering methods in sklearn:
+## 14.2. Comparison between different clustering methods in sklearn:
 - This is example from [sklearn](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html)
 - The source code for image below can be found [here](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html#sphx-glr-download-auto-examples-cluster-plot-cluster-comparison-py)
 
