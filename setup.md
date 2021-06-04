@@ -1,16 +1,18 @@
 ---
 title: Setup scikit-learn kernel in Palmetto's JupyterLab
 ---
+
 We will use Palmetto cluster for this workshop with Jupyter Lab
 Please follow this guideline to create a new conda environment and install scikit-learn package.
 1. Open terminal (MobaXTerm for Windows OS/Terminal for MacOS & Linux platform)
 2. Login to Palmetto login node: your_username@login001
 3. Request for a compute node with simple configuration:
 
-
 ```bash
 $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
 ```
+
+
 
 4. Load module
 5. Create conda environment:
