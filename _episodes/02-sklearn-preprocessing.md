@@ -10,7 +10,7 @@ keypoints:
 - "sklearn"
 ---
 
-## What is Scikit-Learn
+## 2.1 What is Scikit-Learn
 ![image](https://user-images.githubusercontent.com/43855029/114609814-30db9f80-9c6d-11eb-8d4e-781f578e1d79.png)
 
 - Scikit-learn is probably the most useful library for machine learning in Python. 
@@ -26,17 +26,17 @@ keypoints:
   as well as other functionality.
   
 ```
-## Install `sklearn`
+## 2.2 Install `sklearn`
 We have installed kernel **ML_SKLN** which contains the scikit-learn package in Palmetto. However for new conda environment installation, here is the command:
 `$ pip3 install -U scikit-learn`
 
 
-## Pre-processing using `sklearn`
+## 2.3 Pre-processing using `sklearn`
 There are several steps that we will use `sklearn` for. For preprocessing raw data, we gonna use `sklearn` in these tasks:
 - Preprocessing with missing value
 - Preprocessing: transform data
 
-### Pre-processing with missing value
+### 2.3.1 Pre-processing with missing value
 - Most of the time the input data has missing values (`NA, NaN, Inf`) due to data collection issue (power, sensor, personel). 
 - There are three main problems that missing data causes: missing data can introduce a substantial amount of bias, make the handling and analysis of the data more arduous, and create reductions in efficiency
 - These missing values need to be treated/cleaned before we can use because "Garbage in => Garbage out".
@@ -78,8 +78,8 @@ data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
 - In addition to KNNImputer, there are **IterativeImputer** (Multivariate imputer that estimates each feature from all the others) and **MissingIndicator**(Binary indicators for missing values)
 - More information on sklearn.impute can be found [here](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.impute)
 
-### Pre-processing with Transforming data
-#### Using Standardization
+### 2.3.2 Pre-processing with Transforming data
+#### 2.3.2.1 Using Standardization
 ![image](https://user-images.githubusercontent.com/43855029/114231774-df6ba180-9948-11eb-9c61-3d2e0d3df889.png)
 
 - Standardization comes into picture when features of input data set have large differences between their ranges, or simply when they are measured in different measurement units for example: rainfall (0-1000mm), temperature (-10 to 40oC), humidity (0-100%), etc.
@@ -92,7 +92,7 @@ data_std = pd.DataFrame(scale(data3,axis=0, with_mean=True, with_std=True, copy=
 # axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
 ```
 
-#### Using scaling with predefine range
+#### 2.3.2.2 Using scaling with predefine range
 Transform features by scaling each feature to a given range.
 This estimator scales and translates each feature individually such that it is in the given range on the training set, e.g. between zero and one.
 Formulation for this is:
@@ -109,7 +109,7 @@ scaler = MinMaxScaler()
 data_scaler = pd.DataFrame(scaler.fit_transform(data3))
 ```
 
-#### Using Box-Cox Transformation
+#### 2.3.2.3 Using Box-Cox Transformation
 - A [Box Cox](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.2517-6161.1964.tb00553.x) transformation is a transformation of a non-normal dependent variables into a normal shape. 
 - Normality is an important assumption for many statistical techniques; if your data isn’t normal, applying a Box-Cox means that you are able to run a broader number of tests.
 - The Box Cox transformation is named after statisticians George Box and Sir David Roxbee Cox who collaborated on a 1964 paper and developed the technique.
@@ -119,7 +119,7 @@ from sklearn.preprocessing import power_transform
 data_BxCx = pd.DataFrame(power_transform(data3,method="box-cox"))
 data_BxCx.columns = data3.columns
 ```
-#### Using Yeo Johnson Transformation
+#### 2.3.2.4 Using Yeo Johnson Transformation
 While BoxCox only works with positive value, a more recent transformation method [Yeo Johnson](https://www.jstor.org/stable/2673623) can transform both positive and negative values
 ```python
 data_yeo_johnson = sklearn.preprocessing.power_transform(data3,method="yeo-johnson")
