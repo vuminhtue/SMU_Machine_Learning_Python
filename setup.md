@@ -11,29 +11,16 @@ Please follow this guideline to create a new conda environment and install sciki
 ```bash
 $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
 ```
+Next:
 
-
-
-4. Load module
-5. Create conda environment:
-6. Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
-7. Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
-
-
+- Load module
+- Create conda environment:
+- Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
+- Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
 
 ```bash
 $ module load anaconda3/2020.07-gcc/8.3.1
-```
-
-5. Create conda environment:
-
-```bash
 $ conda create -n skln python=3.8
-```
-
-6. Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
-
-```bash
 $ source activate skln
 $ pip install numpy pandas scikit-learn seaborn
 $ conda install matplotlib
@@ -42,7 +29,7 @@ $ conda install matplotlib
 => Note: while using **skln** conda environment, if we are missing anything, we can always come back and update using **pip install**
 or **conda install** method.
 
-7. Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
+- Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
 
 ```bash
 $ conda install jupyter
@@ -50,7 +37,7 @@ $ python -m ipykernel install --user --name skln --display-name "ML_SKLN"
 ```
 
 
-8. Open Jupyter Lab in Palmetto, login and see if you have **ML_SKLN** kernel created
+- Open Jupyter Lab in Palmetto, login and see if you have **ML_SKLN** kernel created
 https://www.palmetto.clemson.edu/jhub/hub/home
 
 ![image](https://user-images.githubusercontent.com/43855029/117862252-74bbc780-b260-11eb-8dbb-4a07ae955c54.png)
