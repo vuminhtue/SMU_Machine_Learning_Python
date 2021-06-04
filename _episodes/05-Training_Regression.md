@@ -115,11 +115,11 @@ model_LogReg = LogisticRegression().fit(X_train, y_train)
 y_pred = model_LogReg.predict(X_test)
 
 from sklearn.linear_model import LogisticRegression
-model_LogReg = LogisticRegression.fit(X_train, y_train)
+model_LogReg = LogisticRegression().fit(X_train, y_train)
 # predict output:
 y_pred = model_LogReg.predict(X_test)
 # predict probabilities
-lr_probs = model.predict_proba(X_test)
+lr_probs = model_LogReg.predict_proba(X_test)
 # keep probabilities for the positive outcome only
 lr_probs = lr_probs[:, 1]
 ```
@@ -136,6 +136,9 @@ Now compute AUC-ROC and plot curve
 ```python
 from sklearn.metrics import roc_curve, roc_auc_score
 import matplotlib.pyplot as plt
+
+# generate a no skill prediction (majority class)
+ns_probs = np.zeros(len(y_test))
 
 # calculate scores
 ns_auc = roc_auc_score(y_test, ns_probs)
