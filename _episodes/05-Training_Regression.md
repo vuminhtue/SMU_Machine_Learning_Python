@@ -106,8 +106,6 @@ Partitioning Data to train/test:
 ```python
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=2)
-# generate a no skill prediction (majority class)
-ns_probs = [0 for _ in range(len(y_test))]
 ```
 
 Train model using Logistic Regression
@@ -122,8 +120,6 @@ model_LogReg = LogisticRegression().fit(X_train, y_train)
 y_pred = model_LogReg.predict(X_test)
 # predict probabilities
 lr_probs = model_LogReg.predict_proba(X_test)
-# keep probabilities for the positive outcome only
-lr_probs = lr_probs[:, 1]
 ```
 
 Evaluate output with accurary level:
@@ -145,13 +141,13 @@ ns_probs = np.zeros(len(y_test))
 
 # calculate scores
 ns_auc = roc_auc_score(y_test, ns_probs)
-lr_auc = roc_auc_score(y_test, lr_probs)
+lr_auc = roc_auc_score(y_test, lr_probs[:,1])
 # summarize scores
 print('No Skill: ROC AUC=%.3f' % (ns_auc))
 print('Logistic: ROC AUC=%.3f' % (lr_auc))
 # calculate roc curves
 ns_fpr, ns_tpr, _ = roc_curve(y_test, ns_probs)
-lr_fpr, lr_tpr, _ = roc_curve(y_test, lr_probs)
+lr_fpr, lr_tpr, _ = roc_curve(y_test, lr_probs[:,1])
 # plot the roc curve for the model
 plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
 plt.plot(lr_fpr, lr_tpr, marker='.', label='Logistic')
@@ -174,8 +170,6 @@ pip install scikit-plot
 The shorter code for using this library:
 
 ```python
-lr_probs = model_LogReg.predict_proba(X_test)
-
 import scikitplot as skplt
 skplt.metrics.plot_roc(y_test, lr_probs)
 plt.show()
