@@ -1,7 +1,7 @@
 ---
 title: "Mini-Project"
 teaching: 10
-exercises: 3 hour
+exercises: 180
 questions:
 - "What do you learn from Machine Learning workshop using scikit-learn?"
 objectives:
