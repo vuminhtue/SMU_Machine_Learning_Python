@@ -136,6 +136,7 @@ Now compute AUC-ROC and plot curve
 ```python
 from sklearn.metrics import roc_curve, roc_auc_score
 import matplotlib.pyplot as plt
+import numpy as np
 
 # generate a no skill prediction (majority class)
 ns_probs = np.zeros(len(y_test))
