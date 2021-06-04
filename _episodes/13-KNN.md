@@ -10,7 +10,7 @@ keypoints:
 - "KNN"
 ---
 
-## K-Nearest Neighbour
+## 13. K-Nearest Neighbour
 - Simplicity but powerful and fast for certain task
 - Work for both classification and regression
 - Named as Instance Based Learning; Non-parametrics; Lazy learner
@@ -18,7 +18,7 @@ keypoints:
 
 ![image](https://user-images.githubusercontent.com/43855029/114582045-3d043480-9c4e-11eb-8698-e1c31840401a.png)
 
-### Explanation
+### 13.1. Explanation
 
 ![image](https://user-images.githubusercontent.com/43855029/114582162-573e1280-9c4e-11eb-8a17-e0d91a38452e.png)
 
@@ -27,7 +27,7 @@ keypoints:
 
 ![image](https://user-images.githubusercontent.com/43855029/114582319-7a68c200-9c4e-11eb-93f2-37324c034784.png)
 
-### Implementation
+### 13.2. Implementation
 Here we gonna use the **iris** dataset again:
 ```python
 from sklearn.datasets import load_iris
@@ -52,7 +52,7 @@ model_KNN.score(X_test,y_test)
 ```
 ![image](https://user-images.githubusercontent.com/43855029/114583370-86a14f00-9c4f-11eb-96a0-59b3c5376952.png)
 
-### Other similar models from sklearn.neighbors:
+### 13.3. Other similar models from sklearn.neighbors:
 - KNeighborsRegressor: KNN estimators for Regression problem with continuous data
 - NearestCentroid
 - and [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.neighbors)
