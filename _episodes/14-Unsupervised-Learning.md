@@ -10,7 +10,7 @@ keypoints:
 - "K-mean"
 ---
 
-# Unsupervised Learning
+# 14. Unsupervised Learning
 
 - No labels are given to the learning algorithm leaving it on its own to find structure in its input. 
 - Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).
@@ -26,8 +26,8 @@ Hierarchical clustering
 Ward clustering
 Partition Around Median (PAM)
 ```
-## K-means clustering
-### Explanation of K-means clustering method:
+## 14.1. K-means clustering
+### 14.1.1. Explanation of K-means clustering method:
 - Given a set of data, we choose K=2 clusters to be splited:
 
 ![image](https://user-images.githubusercontent.com/43855029/114584415-a5ecac00-9c50-11eb-8919-807f83ddf23a.png)
@@ -52,12 +52,12 @@ Partition Around Median (PAM)
 
 ![image](https://user-images.githubusercontent.com/43855029/114585223-6b374380-9c51-11eb-8663-27474956ec61.png)
 
-### Example with K=3
+### 14.1.2. Example with K=3
 ![image](https://user-images.githubusercontent.com/43855029/114585361-8e61f300-9c51-11eb-965e-dc4d57e9c0eb.png)
 
 ![image](https://user-images.githubusercontent.com/43855029/114585502-b81b1a00-9c51-11eb-8015-973216b450ce.png)
 
-### Implementation
+### 14.1.3. Implementation
 Here we use the iris data set with only predictors
 ```python
 from sklearn.datasets import load_iris
@@ -85,8 +85,8 @@ plt.title('KMeans clustering with 3 clusters')
 
 ![image](https://user-images.githubusercontent.com/43855029/115735833-c99ea900-a358-11eb-87d8-774efc7fa459.png)
 
-### How to find optimal K values:
-#### Elbow approach
+### 14.1.4. How to find optimal K values:
+#### 14.1.4.1. Elbow approach
 - Similar to KNN method for supervised learning, for K-means approach, we are able to use Elbow approach to find the optimal K values.
 - The Elbow approach ues the Within-Cluster Sum of Square (WSS) to measure the compactness of the clusters:
 ![image](https://user-images.githubusercontent.com/43855029/114587068-4d6ade00-9c53-11eb-932d-0de0c9edef83.png)
@@ -106,7 +106,7 @@ plt.title("Optimal number of clusters based on WSS Method")
 ```
 ![image](https://user-images.githubusercontent.com/43855029/115737965-9b21cd80-a35a-11eb-9bcd-0d63e685ec0f.png)
 
-#### Gap-Statistics approach
+#### 14.1.4.2. Gap-Statistics approach
 - Developed by Prof. Tibshirani et al in Stanford
 - Applied to any clustering method (K-means, Hierarchical)
 - Maximize the Gap function:
@@ -149,7 +149,7 @@ plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/43855029/115745658-a298a500-a361-11eb-8071-6af68f7eb428.png)
 
-### Comparison between different clustering methods in sklearn:
+### 14.1.5. Comparison between different clustering methods in sklearn:
 - This is example from [sklearn](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html)
 - The source code for image below can be found [here](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html#sphx-glr-download-auto-examples-cluster-plot-cluster-comparison-py)
 
