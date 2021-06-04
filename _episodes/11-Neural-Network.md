@@ -10,7 +10,7 @@ keypoints:
 - "ANN"
 ---
 
-## 11 Neural Network
+## 11. Neural Network
 ![image](https://user-images.githubusercontent.com/43855029/114472746-da188c00-9bc0-11eb-913c-9dcd14f872ac.png)
 ![image](https://user-images.githubusercontent.com/43855029/114472756-dd137c80-9bc0-11eb-863d-7c4d054efa89.png)
 
@@ -69,12 +69,12 @@ Between the input and the output layer, there can be one or more non-linear laye
 - MLP requires tuning a number of hyperparameters such as the number of hidden neurons, layers, and iterations.
 - MLP is sensitive to feature scaling.
 
-### 11.1 Type of Neural Network Multi-Layer Perceptron in sklearn
+### 11.1. Type of Neural Network Multi-Layer Perceptron in sklearn
 There are 2 main types of MLP in sklearn, depending on the model output:
 - MLPClassifier: for Classification problem
 - MLPRegressor: for Regression problem 
 
-### 11.2 Implementation with Classification problem
+### 11.2. Implementation with Classification problem
 Here we use **iris** data for Classification problem
 ```python
 from sklearn.datasets import load_iris
@@ -110,7 +110,7 @@ model_NN.score(X_test_scaled,y_test['Species'])
 ```
 
 
-### 11.3 Implementation with Regression problem
+### 11.3. Implementation with Regression problem
 - Class **MLPRegressor** implements a multi-layer perceptron (MLP) that trains using backpropagation with no activation function in the output layer, which can also be seen as using the identity function as activation function. 
 - Therefore, it uses the square error as the loss function, and the output is a set of continuous values.
 
@@ -140,7 +140,7 @@ model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',activation='
 model_NN.score(X_test_scaled,y_test)
 ```
 
-### 11.4 Tips on using MLP
+### 11.4. Tips on using MLP
 - Multi-layer Perceptron is sensitive to feature scaling, so it is highly recommended to scale your data. 
 - There is built-in regularization parameter **alpha** (`Default 0.0001`). To find reasonable **alpha**, it's best to use **GridSearchCV**, usually in the range 10.0**-np.arange(1, 7)
 - Empirically, we observed that **L-BFGS** converges faster and with better solutions on small datasets. For relatively large datasets, however, **Adam** is very robust. It usually converges quickly and gives pretty good performance. **SGD** with momentum or nesterov’s momentum, on the other hand, can perform better than those two algorithms if learning rate is correctly tuned.
