@@ -28,6 +28,7 @@ keypoints:
 - You can also use *Kaggle* data which can be found [here](https://www.kaggle.com/datasets) (second preferred method). Please elaborate in the ipynb how did you retrieve the data
 - You can use use *Titanic* data from our [repo](https://github.com/clemsonciti/Workshop-Python-ML/tree/master/data/Titanic_data)
 Description for Titanic data can be found [here](https://www.kaggle.com/c/titanic/data)
+- You can use any of the *Toy* dataset from scikit learn which can be found [here](https://scikit-learn.org/stable/datasets/toy_dataset.html), **except** the *iris* data.
 
 ## Method
 In the ipynb solution file I would like to see the following:
