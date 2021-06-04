@@ -10,17 +10,17 @@ keypoints:
 - "SVM"
 ---
 
-## Support Vector Machine
+## 12. Support Vector Machine
 - A support vector machine is a very important and versatile machine learning algorithm, 
 - It is capable of doing linear and nonlinear classification, regression and outlier detection. 
 - It is preferred over other classification algorithms because it uses less computation and gives notable accuracy. 
 - It is good because it gives reliable results even if there is less data
 - The objective of the support vector machine (SVM) algorithm is to find a hyperplane in an N-dimensional space that distinctly classifies the data points.
 
-### Applications of Support Vector Machine:
+### 12.1. Applications of Support Vector Machine:
 ![image](https://user-images.githubusercontent.com/43855029/114576381-1394da00-9c49-11eb-95b1-cff9d87c6029.png)
 
-### Explanation
+### 12.2. Explanation
 - To separate the two classes of data points, there are many possible hyperplanes that could be chosen
 
 ![image](https://user-images.githubusercontent.com/43855029/114577032-af264a80-9c49-11eb-8e6c-b45120743f0d.png)
@@ -41,11 +41,11 @@ Removing **SVs** will change the position of the hyperplane. These are the point
 ![image](https://user-images.githubusercontent.com/43855029/114577489-09271000-9c4a-11eb-8b4a-b7837463288f.png)
 
 
-### SVM's kernel
-#### For linear separable data, it is quite straight forward to create a hyperplane to distinguish them
+### 12.3. SVM's kernel
+#### 12.3.1.  For linear separable data, it is quite straight forward to create a hyperplane to distinguish them
 ![image](https://user-images.githubusercontent.com/43855029/115606536-d0beac00-a2b1-11eb-9ba7-18dbc1c7ff28.png)
 
-#### For linearly non-separable data, SVM makes use of kernel tricks to make it linearly separable.
+#### 12.3.2. For linearly non-separable data, SVM makes use of kernel tricks to make it linearly separable.
 ![image](https://user-images.githubusercontent.com/43855029/115606589-e3d17c00-a2b1-11eb-98a2-aebd6417eaf6.png)
 
 - The concept of transformation of non-linearly separable data into linearly separable is called Cover’s theorem - “given a set of training data that is not linearly separable, with high probability it can be transformed into a linearly separable training set by projecting it into a higher-dimensional space via some non-linear transformation”.
@@ -60,7 +60,7 @@ The following [kernel trick](https://gist.github.com/WittmannF/60680723ed8dd0cb9
 ![image](https://user-images.githubusercontent.com/43855029/115606803-2d21cb80-a2b2-11eb-9421-64642195fa5a.png)
 
 
-### Implementation
+### 12.4. Implementation
 Here we use the regular **iris** dataset with Classification problem
 
 ```python
@@ -110,17 +110,17 @@ for name, clf in zip(names, classifiers):
 ```
 In this model, **C** is the regularization parameter `Default C=1`. The strength of the regularization is inversely proportional to C. Must be strictly positive.
 
-### Tips on using SVM
+### 12.5. Tips on using SVM
 - Setting `C=1` is reasonable choice for default. If you have a lot of noisy observations you should decrease it: decreasing C corresponds to more regularization.
 - More information [here](https://scikit-learn.org/stable/modules/svm.html#tips-on-practical-use)
 
-### Pros of SVM
+### 12.6. Pros of SVM
 - High stability due to dependency on support vectors and not the data points.
 - Does not get influenced by Outliers. 
 - No assumptions made of the datasets.
 - Numeric predictions problem can be dealt with SVM.
 
-### Cons of SVM
+### 12.7. Cons of SVM
 - Blackbox method.
 - Inclined to overfitting method.
 - Very rigorous computation.
