@@ -18,7 +18,6 @@ Next:
 - Load module
 - Create conda environment:
 - Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
-- Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
 
 ```bash
 $ module load anaconda3/2020.07-gcc/8.3.1
