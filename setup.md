@@ -6,16 +6,17 @@ Please follow this guideline to create a new conda environment and install sciki
 1. Open terminal (MobaXTerm for Windows OS/Terminal for MacOS & Linux platform)
 2. Login to Palmetto login node: your_username@login001
 3. Request for a compute node with simple configuration:
-4. Load module
-5. Create conda environment:
-6. Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
-7. Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
-8. 
+
+
 ```bash
 $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
 ```
 
 4. Load module
+5. Create conda environment:
+6. Once done, activate the environment and install numpy, pandas, scikit-learn, matplotlib, seaborn
+7. Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
+
 
 
 ```bash
