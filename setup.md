@@ -6,7 +6,7 @@ We will use Palmetto cluster for this workshop with Jupyter Lab.
 
 Please follow this guideline to create a new conda environment and install scikit-learn package.
 
-- Open terminal (MobaXTerm for Windows OS/Terminal for MacOS & Linux platform)
+- Open terminal (**MobaXTerm** for Windows OS/**Terminal** for MacOS & Linux platform/**Terminal** in JupyterHub platform)
 - Login to Palmetto login node: your_username@login001
 - Request for a compute node with simple configuration:
 
