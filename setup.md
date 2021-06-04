@@ -22,10 +22,9 @@ Next:
 
 ```bash
 $ module load anaconda3/2020.07-gcc/8.3.1
-$ conda create -n skln python=3.8
+$ conda create -n skln python=3.8 -y
 $ source activate skln
-$ pip install numpy pandas scikit-learn seaborn
-$ conda install matplotlib
+$ conda install numpy pandas scikit-learn seaborn matplotlib -y
 ```
 
 => Note: while using **skln** conda environment, if we are missing anything, we can always come back and update using **pip install**
