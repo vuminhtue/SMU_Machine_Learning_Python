@@ -32,7 +32,7 @@ or **conda install** method.
 - Last step: create Jupyter Hub kernel in order to work with Jupyter Notebook
 
 ```bash
-$ conda install jupyter
+$ conda install jupyter -y
 $ python -m ipykernel install --user --name skln --display-name "ML_SKLN"
 ```
 
