@@ -89,38 +89,91 @@ The **R2=0.58** shows improvement using polynomial regression!
 
 ![image](https://user-images.githubusercontent.com/43855029/114233189-fb704280-994a-11eb-9019-8355f5337b37.png)
 
-In this example, we use `breast cancer` data set built-in [sklearn data](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html#sklearn.datasets.load_breast_cancer).
+In this example, we create a sample data set and use logistic regression to solve it. The example is taken from [here](https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python/)
 
-This is a data set that classify breast cancer to `malignant` or `benign` based on different input data on the breast's measurement from 569 patients
+Load library and create sample data set:
 
-Read in data:
 ```python
-import pandas as pd
-from sklearn.datasets import load_breast_cancer
+from sklearn.datasets import make_classification
 
-datab = load_breast_cancer()
-X = datab.data
-y = datab.target
+# generate sample data
+X, y = make_classification(n_samples=1000, n_classes=2, random_state=1)
 ```
-Standardize input data:
-```python
-from sklearn.preprocessing import scale
-Xstd = pd.DataFrame(scale(X,axis=0, with_mean=True, with_std=True, copy=True))
-```
+
 Partitioning Data to train/test:
 ```python
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(Xstd,y,train_size=0.6,random_state=123)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=2)
+# generate a no skill prediction (majority class)
+ns_probs = [0 for _ in range(len(y_test))]
 ```
+
 Train model using Logistic Regression
 ```python
 from sklearn.linear_model import LogisticRegression
 model_LogReg = LogisticRegression().fit(X_train, y_train)
 y_pred = model_LogReg.predict(X_test)
+
+from sklearn.linear_model import LogisticRegression
+model_LogReg = LogisticRegression.fit(X_train, y_train)
+# predict output:
+y_pred = model_LogReg.predict(X_test)
+# predict probabilities
+lr_probs = model.predict_proba(X_test)
+# keep probabilities for the positive outcome only
+lr_probs = lr_probs[:, 1]
 ```
+
 Evaluate output with accurary level:
 ```python
 from sklearn import metrics
 metrics.accuracy_score(y_test,y_pred)
 ```
-We retrieve the **accuracy = 0.99**
+We retrieve the **accuracy = 0.834**
+
+Now compute AUC-ROC and plot curve
+
+```python
+from sklearn.metrics import roc_curve, roc_auc_score
+import matplotlib.pyplot as plt
+
+# calculate scores
+ns_auc = roc_auc_score(y_test, ns_probs)
+lr_auc = roc_auc_score(y_test, lr_probs)
+# summarize scores
+print('No Skill: ROC AUC=%.3f' % (ns_auc))
+print('Logistic: ROC AUC=%.3f' % (lr_auc))
+# calculate roc curves
+ns_fpr, ns_tpr, _ = roc_curve(y_test, ns_probs)
+lr_fpr, lr_tpr, _ = roc_curve(y_test, lr_probs)
+# plot the roc curve for the model
+plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
+plt.plot(lr_fpr, lr_tpr, marker='.', label='Logistic')
+# axis labels
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+# show the legend
+plt.legend()
+# show the plot
+plt.show()
+```
+
+![image](https://user-images.githubusercontent.com/43855029/120822169-22e72400-c524-11eb-97fe-46f711a11072.png)
+
+An alternative way to plot AUC-ROC curve, using additional toolbox:
+```python
+pip install scikit-plot
+```
+
+The shorter code for using this library:
+
+```python
+lr_probs = model_LogReg.predict_proba(X_test)
+
+import scikitplot as skplt
+skplt.metrics.plot_roc(y_test, lr_probs)
+plt.show()
+```
+
+![image](https://user-images.githubusercontent.com/43855029/120822378-588c0d00-c524-11eb-9cdc-431bd927ad48.png)
+
