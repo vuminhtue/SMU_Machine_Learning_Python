@@ -7,7 +7,7 @@ Please follow this guideline to create a new conda environment and install sciki
 2. Login to Palmetto login node: your_username@login001
 3. Request for a compute node with simple configuration:
 
-```python
+```bash
 $ qsub -I -l select=1:ncpus=8:mem=32gb:interconnect=any,walltime=24:00:00
 ```
 
