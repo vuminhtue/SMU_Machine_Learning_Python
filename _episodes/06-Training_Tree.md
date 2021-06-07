@@ -53,7 +53,7 @@ tree.plot_tree(model_DT)
 However, in order to have a nicer plot:
 ```python
 import graphviz
-ot_data = tree.export_graphviz(model_DT, out_file=None,                      
+dot_data = tree.export_graphviz(model_DT, out_file=None,                      
                       filled=True, rounded=True,  
                       special_characters=True)  
 graph = graphviz.Source(dot_data) 
