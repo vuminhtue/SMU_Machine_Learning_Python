@@ -24,6 +24,8 @@ keypoints:
 - Cross-Entropy & Information gain (Categorical)
 - Reduction Variance (Continuous)
 
+More information on how to apply the spliting algorithm to split the data can be found [here](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/)
+
 ### Pros & Cons
 ![image](https://user-images.githubusercontent.com/43855029/114234120-548ca600-994c-11eb-889e-e8ec6d313e52.png)
 
