@@ -52,7 +52,7 @@ As there are 3 input variables (Gender, Class, Height), the algorithm will be sp
 
 Base on the 3 Gini Impurity on the splitting, we go with the smallest values, which is splitting by Gender.
 
-The process is continue with the next nodes.
+The process is continue with the next nodes with other variables.
 
 ### Chi-Squared
 
