@@ -57,7 +57,7 @@ dot_data = tree.export_graphviz(model_DT, out_file=None,
                       filled=True, rounded=True,  
                       special_characters=True)  
 graph = graphviz.Source(dot_data) 
-graph.render("iris") 
+graph
 ```
 ![image](https://user-images.githubusercontent.com/43855029/115074998-6f20cb00-9ec8-11eb-9dfd-ff747655ff6a.png)
 
