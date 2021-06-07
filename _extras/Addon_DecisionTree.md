@@ -55,7 +55,7 @@ The process is continue with the next nodes.
 
 #### Chi-Squared
 
-![image](https://user-images.githubusercontent.com/43855029/121095090-ac655300-c7bd-11eb-9372-8de0b21e2007.png)
+![image](https://user-images.githubusercontent.com/43855029/121095363-37464d80-c7be-11eb-87bc-dd2fa3093c2c.png)
 
 #### Entropy
 
