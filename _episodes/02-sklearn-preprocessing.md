@@ -57,6 +57,7 @@ data2.fillna(data2.mean(), inplace=True)
 ```
 Or
 ```python
+import numpy as np
 from sklearn.impute import SimpleImputer
 imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
 data3 = pd.DataFrame(imputer.fit_transform(data_df))
