@@ -92,7 +92,7 @@ More information on Decision Tree can be found [here](https://scikit-learn.org/s
 
 ### Implementation of Random Forest
 
-```r
+```python
 from sklearn.ensemble import RandomForestClassifier
 model_RF = RandomForestClassifier(n_estimators=20,criterion="gini").fit(X_train,y_train)
 y_pred_RF = model_RF.predict(X_test)
