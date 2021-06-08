@@ -79,20 +79,6 @@ model_bag_DT.score(X_train,y_train),model_bag_DT.score(X_test,y_test)
 ```
 The output accuracy from **Bagging** with **DecisionTree** for train/testing have : `(1.0, 0.9666666666666667)`
 
-Aternatively, apply **Bagging** with **RandomForest** model:
-```python
-from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
-model_RF = RandomForestClassifier()
-
-model_bag_RF = BaggingClassifier(base_estimator=model_RF, n_estimators=100,
-                            bootstrap=True, n_jobs=-1,
-                            random_state=123)
-model_bag_RF.fit(X_train, y_train)
-
-model_bag_RF.score(X_train,y_train),model_bag_RF.score(X_test,y_test)
-```
-The output accuracy from **Bagging** with **RandomForest**  for train/testing have : `(0.9888888888888889, 0.9666666666666667)`
-
 ## 7.4 Train model using Boosting
 - Boosting is an approach to convert weak predictors to get stronger predictors.
 - Boosting follows a sequential order: output of base learner will be input to another
