@@ -64,7 +64,7 @@ X = iris.data
 y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6, random_state = 123)
 ```
-First apply **Bagging** with **DecisionTree** model:
+First apply **Bagging** with **DecisionTree** model, Bagging's parameter can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html):
 ```python
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import BaggingClassifier
