@@ -81,8 +81,7 @@ The output accuracy from **Bagging** with **DecisionTree** for train/testing hav
 
 ## 7.4 Train model using Boosting
 
-![image](https://user-images.githubusercontent.com/43855029/121254302-18a48d00-c878-11eb-91e2-3002e0885f36.png)
-
+https://freakonometrics.hypotheses.org/files/2015/07/boosting-algo-0_v2.gif
 
 - Boosting is an approach to convert weak predictors to get stronger predictors.
 - Boosting follows a sequential order: output of base learner will be input to another
