@@ -5,9 +5,9 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 ---
 
 > ## Instructor
-> - **Instructor**: Tue Vu
+> - **Instructor**: Tue Vu, PhD
 > - **Office**: 2119 Barre Hall, Clemson University
-> - **Office Hours**: Wed 8.30-11.30 Zoom
+> - **Office Hours**: Wed 8.30-11.30 & Fri 9.00-10.00, Zoom
 > - **Email**: tuev@clemson.edu
 {: .prereq}
 
