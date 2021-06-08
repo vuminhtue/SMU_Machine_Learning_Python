@@ -80,6 +80,10 @@ model_bag_DT.score(X_train,y_train),model_bag_DT.score(X_test,y_test)
 The output accuracy from **Bagging** with **DecisionTree** for train/testing have : `(1.0, 0.9666666666666667)`
 
 ## 7.4 Train model using Boosting
+
+![image](https://user-images.githubusercontent.com/43855029/121254143-ec890c00-c877-11eb-84a4-6030603d4843.png)
+
+
 - Boosting is an approach to convert weak predictors to get stronger predictors.
 - Boosting follows a sequential order: output of base learner will be input to another
 - If a base classifier is misclassifier (red box), its weight is increased and the next base learner will classify more correctly.
