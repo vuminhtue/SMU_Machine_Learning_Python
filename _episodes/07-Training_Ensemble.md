@@ -87,6 +87,7 @@ The output accuracy from **Bagging** with **DecisionTree** for train/testing hav
 
 ![image](https://user-images.githubusercontent.com/43855029/115079476-39331500-9ecf-11eb-9af5-cb3cb2948cf0.png)
 
+More information on Boosting can be found [here](https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/)
 
 ### 7.4.1 Adaptive Boosting: Adaboost
 - Adaptive: weaker learners are tweaked by misclassify from previous classifier
