@@ -132,7 +132,7 @@ The plot shows different coefficients for all predictors with **𝜆** variation
 - Ridge Regression's cons: **β** never be 0, so all predictors are included in the final model. Therefore, it is not good for best feature selection.
 
 ### 9.2 LASSO: Least Absolute Shrinkage & Selection Operator
-![image](https://user-images.githubusercontent.com/43855029/114440016-a4ab7880-9b97-11eb-8a57-b112cd78f785.png)
+![image](https://user-images.githubusercontent.com/43855029/121297770-d18eba00-c8c0-11eb-8ffb-6b4bfa11ff7b.png)
 
 - In order to overcome the cons issue in Ridge Regression, the LASSO is introduced with the similar shrinkage parameter, but the different is not in square term of the coefficient but only absolute value
 - Similar to Ridge Regression, LASSO also shrink the coefficient, but **force** coefficients to be equal to 0. Making it ability to perform **feature selection**
