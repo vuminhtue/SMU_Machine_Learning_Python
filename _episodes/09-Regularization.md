@@ -38,7 +38,7 @@ There are 3 main types of Regularization.
 - Elastics Nets
 
 ### 9.1 Ridge Regression
-![image](https://user-images.githubusercontent.com/43855029/114440609-58ad0380-9b98-11eb-8dd5-643428f60c31.png)
+![image](https://user-images.githubusercontent.com/43855029/121278968-b496be80-c8a1-11eb-9117-250db80ca4d8.png)
 
 **𝜆**: Regularization Penalty, to be selected that the model minimized the error
 
