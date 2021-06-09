@@ -49,7 +49,7 @@ The Ridge Regression loss function contains 2 elements: (1) RSS is actually the 
 - Selecting good **𝜆** is essential. In this case, Cross Validation method should be used
 - Ridge Regression enforces **β** to be lower but not 0. By doing so, it will not get rid of irrelevant features but rather minimize their impact on the trained model.
 - In statistics the coefficient esimated produced by this method is know as **L2 norm**
-- It is good practice to normalize predictors to the same sacle before performing Ridge Regression (Because in OLS, the coefficients are scale equivalent)
+- It is good practice to normalize predictors to the same scale before performing Ridge Regression (Because in OLS, the coefficients are scale equivalent)
 
 #### 9.1.1 Implementation
 Setting up training/testing model using the Stanford's [prostate cancer data](https://web.stanford.edu/~hastie/ElemStatLearn/datasets/prostate.data)
