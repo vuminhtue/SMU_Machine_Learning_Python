@@ -31,6 +31,7 @@ This mechanism of mapping inputs to output is known as Activation Function.
 
 ```python
 import matplotlib.pyplot as plt
+import numpy as np
 
 xrange = np.linspace(-2, 2, 200)
 
@@ -105,6 +106,7 @@ for example `hidden_layer_sizes=(50,20)` means there are 2 hidden layers used, t
 More information can be found [here](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html)
 
 ```python
+from sklearn.neural_network import MLPClassifier
 model_NN = MLPClassifier(hidden_layer_sizes = (50,20),solver='lbfgs',activation='relu',random_state=123).fit(X_train_scaled, y_train['Species'])
 model_NN.score(X_test_scaled,y_test['Species'])
 ```
