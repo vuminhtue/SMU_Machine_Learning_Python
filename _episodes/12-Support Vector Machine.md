@@ -108,6 +108,10 @@ for name, clf in zip(names, classifiers):
     i+=1
 plt.show()
 ```
+
+![image](https://user-images.githubusercontent.com/43855029/121306330-b3c75200-c8cc-11eb-996d-5a98e7619f98.png)
+
+
 In this model, **C** is the regularization parameter `Default C=1`. The strength of the regularization is inversely proportional to C. Must be strictly positive.
 
 ### 12.5. Tips on using SVM
