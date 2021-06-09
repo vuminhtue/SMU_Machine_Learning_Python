@@ -81,6 +81,7 @@ plt.scatter(X[:,2],X[:,3],c=model_KMeans.labels_)
 plt.xlabel(iris.feature_names[2])
 plt.ylabel(iris.feature_names[3])
 plt.title('KMeans clustering with 3 clusters')
+plt.show()
 ```
 
 ![image](https://user-images.githubusercontent.com/43855029/115735833-c99ea900-a358-11eb-87d8-774efc7fa459.png)
@@ -103,6 +104,7 @@ plt.plot(range(1,10),wss)
 plt.xlabel("Number of Clusters k")
 plt.ylabel("Within Sum of Square")
 plt.title("Optimal number of clusters based on WSS Method")
+plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/43855029/115737965-9b21cd80-a35a-11eb-9bcd-0d63e685ec0f.png)
 
