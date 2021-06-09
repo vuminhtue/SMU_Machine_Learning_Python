@@ -44,7 +44,8 @@ There are 3 main types of Regularization.
 
 The Ridge Regression loss function contains 2 elements: (1) RSS is actually the Ordinary Least Square (OLS) function for MLR and (2) The regularization term with **𝜆**:
 
-![image](https://user-images.githubusercontent.com/43855029/114422155-04982400-9b84-11eb-9f87-65a3d7aec3f3.png)
+![image](https://user-images.githubusercontent.com/43855029/121278620-01c66080-c8a1-11eb-8b78-029af5144ef6.png)
+
 - Selecting good **𝜆** is essential. In this case, Cross Validation method should be used
 - Ridge Regression enforces **β** to be lower but not 0. By doing so, it will not get rid of irrelevant features but rather minimize their impact on the trained model.
 - In statistics the coefficient esimated produced by this method is know as **L2 norm**
