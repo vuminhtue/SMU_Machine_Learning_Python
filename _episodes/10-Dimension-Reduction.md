@@ -43,6 +43,8 @@ Here we gonna use iris data set:
 ```python
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
 import numpy as np
 import pandas as pd
 iris = load_iris()
@@ -50,6 +52,9 @@ X = iris.data
 y = pd.DataFrame(iris.target)
 y['Species']=pd.Categorical.from_codes(iris.target, iris.target_names)
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+
+X_train_scaled = StandardScaler().fit_transform(X_train)
+X_test_scaled = StandardScaler().fit_transform(X_test)
 ```
 
 #### 10.2.1 Compute PCA using sklearn:
@@ -72,13 +77,11 @@ In this example: the PC1(0.74) and PC2 (0.21) consume 0.95 percent of explained 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score as acc_score
 
-X_train_scaled = StandardScaler().fit_transform(X_train)
-X_test_scaled = StandardScaler().fit_transform(X_test)
-
 pca = PCA(n_components=2) #We choose number of principal components to be 2
 
 X_train_pca = pca.fit_transform(X_train_scaled)
-X_test_pca = pca.transform(X_test_scaled)
+X_test_pca = pd.DataFrame(pca.transform(X_test_scaled))
+X_test_pca.columns=['PC1','PC2']
 
 print(pca.explained_variance_ratio_)
 
@@ -89,6 +92,8 @@ acc_score(y_test['Species'],y_pred_RF)
 ```
 Plotting the testing result with indicator of Wrong prediction
 ```python
+import matplotlib.pyplot as plt
+
 ax = plt.gca()
 
 targets = np.unique(y_pred_RF)
