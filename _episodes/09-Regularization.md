@@ -73,13 +73,17 @@ from sklearn.metrics import mean_squared_error as mse
 n_lambda = 100
 lambdas = np.logspace(-2,6, n_lambda)
 
-MSE1 = []
+MSE_train = []
+MSE_test = []
 coefs = []
+
 for ld in lambdas:
-    ridgecv = RidgeCV(alphas = ld, scoring = 'neg_mean_squared_error', normalize = True)
+    ridgecv = RidgeCV(alphas = [ld], normalize = True)
     model_RR = ridgecv.fit(X_train, y_train)
-    y_pred_cv = model_RR.predict(X_train)
-    MSE1.append(mse(y_train,y_pred_cv))
+    y_predRR_cv_train = model_RR.predict(X_train)
+    y_predRR_cv_test  = model_RR.predict(X_test)    
+    MSE_train.append(mse(y_train,y_predRR_cv_train))
+    MSE_test.append(mse(y_test,y_predRR_cv_test))    
     coefs.append(model_RR.coef_)
 
 coef_df = pd.DataFrame(coefs)
@@ -88,6 +92,8 @@ coef_df.columns = X_train.columns
 
 Plotting the Mean Square Error for Training and Testing dataset based on **𝜆** variation
 ```python
+import matplotlib.pyplot as plt
+
 fig, ax = plt.subplots(1, 2, figsize=(16, 8), constrained_layout=False)
 
 ax1 = plt.subplot(221)
