@@ -67,7 +67,7 @@ y_test = data["lpsa"][~ind_train]
 
 Predict using Ridge Regression method and Cross Validation approach:
 ```python
-from sklearn.linear_model import Ridge, RidgeCV
+from sklearn.linear_model import RidgeCV
 from sklearn.metrics import mean_squared_error as mse
 
 n_lambda = 100
@@ -148,7 +148,7 @@ The plot shows different coefficients for all predictors with **𝜆** variation
 Predict using Lasso method:
 
 ```python
-from sklearn.linear_model import Lasso, LassoCV
+from sklearn.linear_model import Lasso
 
 n_lambda = 100
 lambdas1 = np.logspace(-6,0, n_lambda)
@@ -221,6 +221,8 @@ Elastic Nets Regularization is a method that includes both LASSO and Ridge Regre
 
 #### 9.3.1 Implementation 
 ```python
+from sklearn.linear_model import ElasticNet
+
 MSE_train = []
 MSE_test = []
 coefs = []
