@@ -122,7 +122,6 @@ import pandas as pd
 import numpy as np
 from sklearn.impute import KNNImputer
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
 
 data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
 
@@ -133,17 +132,12 @@ data_knnimpute.columns = data_df.columns
 X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Temp','Wind','Solar.R']],
                                                     data_knnimpute['Ozone'],
                                                     train_size=0.6,random_state=123)
-                                                    
-scaler = MinMaxScaler()
-                                               
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
 ```                                                    
 Fit **MLPRegressor** model
 ```python
 from sklearn.neural_network import MLPRegressor
-model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',activation='relu',max_iter=1000).fit(X_train_scaled, y_train)
-model_NN.score(X_test_scaled,y_test)
+model_NN = MLPRegressor(hidden_layer_sizes = (50,20),solver='lbfgs',activation='relu',max_iter=1000).fit(X_train,y_train)
+model_NN.score(X_test,y_test)
 ```
 
 ### 11.4. Tips on using MLP
