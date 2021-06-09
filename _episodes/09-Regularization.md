@@ -123,12 +123,12 @@ ax.legend(coef_df.columns)
 #ax.set_xscale('log')
 plt.xlabel("log($\\lambda$)")
 plt.ylabel('Coefficients')
-plt.title('Ridge coefficients Coefficients')
+plt.title('Ridge Regression Coefficients')
 plt.axis('tight')
 plt.show()
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/115433549-b44d4180-a1d5-11eb-8e75-1f0c5d43898c.png)
+![image](https://user-images.githubusercontent.com/43855029/121300671-259b9d80-c8c5-11eb-8d65-8abf3ba5632f.png)
 
 The plot shows different coefficients for all predictors with **𝜆** variation.
 
@@ -201,12 +201,12 @@ ax.legend(coef_df.columns,bbox_to_anchor = (1.05, 0.6))
 #ax.set_xscale('log')
 plt.xlabel("log($\\lambda$)")
 plt.ylabel('Coefficients')
-plt.title('LASSO coefficients Coefficients')
+plt.title('LASSO Coefficients')
 plt.axis('tight')
 plt.show()
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/115447833-f0d56900-a1e6-11eb-967f-e04515421010.png)
+![image](https://user-images.githubusercontent.com/43855029/121300854-5da2e080-c8c5-11eb-9eec-00c42b39dcbf.png)
 
 The plot shows different coefficients for all predictors with **𝜆** variation. Depending on **𝜆** values that the **β** varying and it can be 0 at certain point.
 
