@@ -112,5 +112,7 @@ ax.legend(['setosa','versicolor','virginica','Wrong Prediction'])
 ax.set_title("Testing set from Random Forest using PCA 2 components")
 ax.set_xlabel('PC1')
 ax.set_ylabel('PC2')
+
+plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/43855029/115561017-24fe6780-a283-11eb-8d9e-4a04b3a2e9a2.png)
