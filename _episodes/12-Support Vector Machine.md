@@ -106,7 +106,7 @@ for name, clf in zip(names, classifiers):
     handles, labels = ax.get_legend_handles_labels()
     ax.legend(handles,iris.target_names)
     i+=1
-
+plt.show()
 ```
 In this model, **C** is the regularization parameter `Default C=1`. The strength of the regularization is inversely proportional to C. Must be strictly positive.
 
