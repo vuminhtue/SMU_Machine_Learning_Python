@@ -6,7 +6,13 @@ We will use Palmetto cluster for this workshop with Jupyter Lab.
 
 Please follow this guideline to create a new conda environment and install scikit-learn package.
 
-- Open terminal (**MobaXTerm** for Windows OS/**Terminal** for MacOS & Linux platform/**Terminal** in JupyterHub platform)(For JupyterHub platform, you need to login here: https://www.palmetto.clemson.edu/jhub/hub/home with Clemson username and DUO and skip the next 2 steps)
+- Open any terminal 
+  - **MobaXTerm** for Windows OS
+  - **Terminal** for MacOS & Linux platform
+  - **Terminal** in JupyterHub platform (https://www.palmetto.clemson.edu/jhub)
+  - **Palmetto Shell Access** in Open OnDemand (https://openod02.palmetto.clemson.edu/)
+
+Below is the setup using Jupyter Hub:
 
 ![image](https://user-images.githubusercontent.com/43855029/120862838-98201c80-c557-11eb-8c80-73832a802412.png)
 
