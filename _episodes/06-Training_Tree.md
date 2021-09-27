@@ -54,13 +54,14 @@ However, in order to have a nicer plot:
 ```python
 import graphviz
 dot_data = tree.export_graphviz(model_DT, out_file=None,                      
-                      filled=True, rounded=True,  
+                      filled=True, rounded=True,
+                      feature_names=iris.feature_names,
                       special_characters=True)  
 graph = graphviz.Source(dot_data) 
 graph
 ```
-![image](https://user-images.githubusercontent.com/43855029/115074998-6f20cb00-9ec8-11eb-9dfd-ff747655ff6a.png)
 
+![image](https://user-images.githubusercontent.com/43855029/134966642-8f3d3009-3d3d-494b-890b-c1295bd01970.png)
 
 Apply decision tree model to predic output of testing data
 ```python
