@@ -27,8 +27,11 @@ Here are some functions for spliting training/testing set in `sklearn`:
 - `LeavePOut`
 
 Due to time constraint, we only focus on `train_test_split`, `KFolds` and `StratifiedKFold` 
+
 ## 3.1 Scikit-Learn data
+
 The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html)
+
 ```
 For each dataset, there are 4 varibles:
 - **data**: numpy array of predictors/X
@@ -36,22 +39,23 @@ For each dataset, there are 4 varibles:
 - **feature_names**: names of all predictors in X
 - **target_names**: names of all predictand in y
 ```
-For example:
+
+For example, we gonna load the California housing dataset:
+
 ```python
-from sklearn.datasets import load_iris
-data = load_iris()
+from sklearn.datasets import fetch_california_housing
+data = fetch_california_housing()
 print(data.data)
 print(data.target)
 print(data.feature_names)
 print(data.target_names)
 ```
 
-In this example we gonna use the renowned iris flower data
+Now we can assign the variables for input and output data:
+
 ```python
-from sklearn.datasets import load_iris
-iris = load_iris()
-X = iris.data
-y = iris.target
+X = data.data
+y = data.target
 ```
 
 ## 3.2 Data spliting using `train_test_split`: **Single fold**
@@ -78,6 +82,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_st
 
 
 ![image](https://user-images.githubusercontent.com/43855029/114211785-103edd00-992f-11eb-89d0-bbd7bd0c0178.png)
+
 ```python
 from sklearn.model_selection import KFold
 kf10 = KFold(n_splits=10,shuffle=True,random_state=20)
