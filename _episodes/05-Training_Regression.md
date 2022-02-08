@@ -11,57 +11,79 @@ keypoints:
 ---
 # 5 Supervised Learning training with Regression
 ## 5.1 For continuous output
-### 5.1.1 Train model using Linear Regression with 1 predictor
-Let use the **airquality** data in previous episodes:
+
+Let use the **california housing** data in previous episodes:
 
 ```python
 import pandas as pd
 import numpy as np
-from sklearn.impute import KNNImputer
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
 
-data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
+from sklearn.datasets import fetch_california_housing
 
-imputer = KNNImputer(n_neighbors=2, weights="uniform")
-data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
-data_knnimpute.columns = data_df.columns
+data = fetch_california_housing()
 
-X_train, X_test, y_train, y_test = train_test_split(data_knnimpute['Temp'],
-                                                    data_knnimpute['Ozone'],
-                                                    train_size=0.6,random_state=123)
+# Predictors/Input:
+X = pd.DataFrame(data.data,columns=data.feature_names)
+
+# Predictand/output:
+y = pd.DataFrame(data.target,columns=data.target_names)
 ```
-Fit a Linear model using `method=lm`
+
+Split model into training & testing set with 60% for training:
+
+```python
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+```
+
+### 5.1.1 Train model using Linear Regression with 1 predictor (for example Medium Income)
+
+Fit a Linear model using LinearRegression model:
+
 ```python
 from sklearn.linear_model import LinearRegression
-model_linreg = LinearRegression().fit(X_train[:,None],y_train)
+model_linreg1 = LinearRegression().fit(pd.DataFrame(X_train['MedInc']),y_train)
 ```
+
 Apply trained model to testing data set and evaluate output using R-squared:
+
 ```python
-y_pred = model_linreg.predict(X_test[:,None])
-metrics.r2_score(y_test,y_pred) # R^2
-metrics.mean_squared_error(y_test,y_pred,squared=False) #RMSE
+from sklearn import metrics
+y_pred = model_linreg1.predict(pd.DataFrame(X_test['MedInc']))
+print("R2 is: ", metrics.r2_score(y_test,y_pred)) # R^2
+print("RMSE is: ", metrics.mean_squared_error(y_test,y_pred,squared=False)) # R^2
+```
+
+the result is:
+
+```
+R2 is:  0.478776529946063
+RMSE is:  0.8389924888025216
 ```
 
 ### 5.1.2 Train model using Multi-Linear Regression (with 2 or more predictors)
-From the above model, the **R2=0.39**:
+From the above model, the **R2=0.48**:
 
-The reason is that we only build the model with 1 input `Temp`.
-In this section, we will build the model with more input `Solar Radiation, Wind, Temperature`:
-```r
-X_train, X_test, y_train, y_test = train_test_split(data_knnimpute[['Temp','Wind','Solar.R']],
-                                                    data_knnimpute['Ozone'],
-                                                    train_size=0.6,random_state=123)
-model_linreg = LinearRegression().fit(X_train,y_train)
-y_pred2 = model_linreg.predict(X_test)
+The reason is that we only build the model with 1 input `MedInc`.
+In this section, we will build the model with 4 inputs
 
-metrics.r2_score(y_test,y_pred2)
-metrics.mean_squared_error(y_test,y_pred2,squared=False)
+```python
+model_linreg = LinearRegression().fit(X_train[["MedInc","HouseAge","AveRooms","Population"]],y_train)
+y_pred2 = model_linreg.predict(X_test[["MedInc","HouseAge","AveRooms","Population"]])
+
+print("R2 is: ", metrics.r2_score(y_test,y_pred2)) # R^2
+print("RMSE is: ", metrics.mean_squared_error(y_test,y_pred2,squared=False)) # R^2
 ```
-Output is therefore better with smaller RMSE and higher Rsquared at **0.5**
+
+Output is therefore better with smaller RMSE and higher Rsquared:
+
+```
+R2 is:  0.5204729827199162
+RMSE is:  0.8047345206890052
+```
 
 ### 5.1.3 Train model using Polynomial Regression
-From Multi-Linear Regression, the best **R2=0.5** using 3 predictors.
+From Multi-Linear Regression, the best **R2=0.52** using 4 predictors.
 We can slightly improve this by using Polynomial Regression
 ![image](https://user-images.githubusercontent.com/43855029/115059030-f7e13c00-9eb3-11eb-9887-52461d7a87aa.png)
 
@@ -69,16 +91,25 @@ In this study, let use polynomial regression with `degree of freedom=2`
 ```python
 from sklearn.preprocessing import PolynomialFeatures
 poly = PolynomialFeatures(degree=2)
-X_train_poly = poly.fit_transform(data_knnimpute[['Temp','Wind','Solar.R']])
-X_train, X_test, y_train, y_test = train_test_split(X_train_poly,
-                                                    data_knnimpute['Ozone'],
-                                                    train_size=0.6,random_state=123)
+X_poly = poly.fit_transform(X[["MedInc","HouseAge","AveRooms","Population"]])
+
+X_train, X_test, y_train, y_test = train_test_split(pd.DataFrame(X_poly),y, train_size=0.6,random_state=123)
+
 model_linreg_poly = LinearRegression().fit(X_train,y_train)
 y_pred_poly = model_linreg_poly.predict(X_test)
-print(metrics.r2_score(y_test,y_pred_poly))
-print(metrics.mean_squared_error(y_test,y_pred_poly,squared=False))
+
+print("R2 is: ", metrics.r2_score(y_test,y_pred_poly)) # R^2
+print("RMSE is: ", metrics.mean_squared_error(y_test,y_pred_poly,squared=False)) # R^2
 ```
-The **R2=0.58** shows improvement using polynomial regression!
+
+The output is even better with R2 for testing data is 0.55 and lower RMSE.
+
+```
+R2 is:  0.5500832220590192
+RMSE is:  0.7794929391078119
+```
+
+The **R2=0.55** shows improvement using polynomial regression!
 
 ## 5.2 For categorical output
 ### 5.2.1 Train model using Logistic Regression
