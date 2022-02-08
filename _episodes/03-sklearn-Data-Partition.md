@@ -86,7 +86,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_st
 ```python
 from sklearn.model_selection import KFold
 kf10 = KFold(n_splits=10,shuffle=True,random_state=20)
-for train_index, test_index in kf10.split(iris.target):
+for train_index, test_index in kf10.split(data.target):
     X_train = X[train_index]
     y_train = y[train_index]
     X_test = X[test_index]
