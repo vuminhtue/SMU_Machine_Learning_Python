@@ -27,9 +27,7 @@ keypoints:
   
 ```
 ## 2.2 Install `sklearn`
-We have installed kernel **ML_SKLN** which contains the scikit-learn package in Palmetto. However for new conda environment installation, here is the command:
-`$ pip3 install -U scikit-learn`
-
+We have installed kernel **ML_SKLN** which contains the scikit-learn package in M2. More information can be found in the setup page
 
 ## 2.3 Pre-processing using `sklearn`
 There are several steps that we will use `sklearn` for. For preprocessing raw data, we gonna use `sklearn` in these tasks:
