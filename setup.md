@@ -7,17 +7,16 @@ title: Setup conda environment and creating Jupyter Kernel using your SMU ManeFr
 Open any terminal:
   - **MobaXTerm** for Windows OS
   - **Terminal** for MacOS & Linux platform
-  - **M2 Shell Access** in Open OnDemand (https://hpc.smu.edu/pun/sys/dashboard/)
+  - **M2 Shell Access** in Open OnDemand (https://hpc.smu.edu/pun/sys/dashboard/)(preferable)
 
 ### Below is the setup using M2 Shell Access:
 
 First, login to Open OnDemand and open Shell Access 
 ![image](https://user-images.githubusercontent.com/43855029/146410172-77d7531f-9673-48e7-8b3b-6e384a0893b2.png)
 
-Request a compute node and load python library
+Load python library
 
 ```bash
-$ srun -p htc --mem=6G --pty $SHELL
 $ module load python/3
 ```
 
