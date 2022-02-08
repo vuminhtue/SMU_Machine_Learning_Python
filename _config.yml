@@ -21,7 +21,7 @@ life_cycle: "beta"
 #------------------------------------------------------------
 
 # What kind of thing is this ("workshop" or "lesson")?
-kind: "lesson"
+kind: "workshop"
 
 # Magic to make URLs resolve both locally and on GitHub.
 # See https://help.github.com/articles/repository-metadata-on-github-pages/.
@@ -29,11 +29,11 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "tuev@g.clemson.edu"
+email: "tuev@smu.edu"
 
 # Sites.
-csc_site: "https://www.palmetto.clemson.edu"
-instructor_site: "https://www.palmetto.clemson.edu"
+csc_site: "https://www.smu.edu/OIT/Services/DataScience"
+instructor_site: "https://www.smu.edu/OIT/Services/DataScience"
 
 # Surveys.
 #pre_survey: "https://carpentries.typeform.com/to/wi32rS?slug="
