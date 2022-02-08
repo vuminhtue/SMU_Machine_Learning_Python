@@ -42,7 +42,8 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 - These missing values need to be treated/cleaned before we can use because "Garbage in => Garbage out".
 - There are several ways to treat the missing values:
 
-- Method 1: remove all missing `NA` values
+#### Method 1: remove all missing `NA` values
+
 ```python
 import pandas as pd
 data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
@@ -50,7 +51,7 @@ data_df.head()
 data1 = data_df.dropna()
 ``` 
 
-- Method 2: Set `NA` to mean value 
+#### Method 2: Set `NA` to mean value 
 ```python
 data2 = data_df.copy()
 data2.fillna(data2.mean(), inplace=True)
@@ -63,10 +64,11 @@ imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
 data3 = pd.DataFrame(imputer.fit_transform(data_df))
 data3.columns = data_df.columns
 ```
+
 **Note:**
 SimpleImputer converts missing values to **mean, median, most_frequent and constant**.
 
-- Method 3: Use `Impute` to handle missing values
+#### Method 3: Use `Impute` to handle missing values
 In statistics, imputation is the process of replacing missing data with substituted values. Because missing data can create problems for analyzing data, imputation is seen as a way to avoid pitfalls involved with listwise deletion of cases that have missing values. That is to say, when one or more values are missing for a case, most statistical packages default to discarding any case that has a missing value, which may introduce bias or affect the representativeness of the results. Imputation preserves all cases by replacing missing data with an estimated value based on other available information. Once all missing values have been imputed, the data set can then be analysed using standard techniques for complete data. There have been many theories embraced by scientists to account for missing data but the majority of them introduce bias. A few of the well known attempts to deal with missing data include: hot deck and cold deck imputation; listwise and pairwise deletion; mean imputation; non-negative matrix factorization; regression imputation; last observation carried forward; stochastic imputation; and multiple imputation.
 
 `knnImpute` can also be used to fill in missing value
