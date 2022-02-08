@@ -96,35 +96,3 @@ for train_index, test_index in kf10.split(iris.target):
     y_pred = model.predict(X_test)
     print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")
 ```
-
-## 3.4 Data spliting using `Stratified K-fold`
-- StratifiedKFold takes the cross validation one step further: it ensures that the target has balance class distribution.
-- Look at the sample below:
-The target has imbalanced class distribution with 12 values of 1 and 4 values of 0. KFold will not take that into consideration when splitting the Fold
-
-![image](https://user-images.githubusercontent.com/43855029/120677513-2667a600-c465-11eb-814e-f4979ac9d123.png)
-
-Here is the reuslt if using K-Fold:
-
-![image](https://user-images.githubusercontent.com/43855029/120677884-8c542d80-c465-11eb-832a-bf05e1d73d28.png)
-
-Here is the result of using Stratified K-Fold:
-
-![image](https://user-images.githubusercontent.com/43855029/120677539-2d8eb400-c465-11eb-8227-9921b6f32362.png)
-
-
-```python
-from sklearn.model_selection import StratifiedKFold
-kf = StratifiedKFold(n_splits=10, shuffle=True, random_state=123)
-i = 1
-
-for train_index, test_index in kf.split(iris.target):
-    X_train = X[train_index]
-    y_train = y[train_index]
-    X_test = X[test_index]
-    y_test = y[test_index]
-    
-    model.fit(X_train, y_train) #Training the model
-    y_pred = model.predict(X_test)
-    print(f"Accuracy for the fold no. {i} on the test set: {accuracy_score(y_test, y_pred)}")    
-```
