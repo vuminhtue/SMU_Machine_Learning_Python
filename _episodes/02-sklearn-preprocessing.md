@@ -44,7 +44,7 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 
 ```python
 import pandas as pd
-data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/Machine-Learning-Python/master/data/r_airquality.csv'))
+data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/SMU_Machine_Learning_Python/master/data/airquality.csv'))
 data_df.head()
 data1 = data_df.dropna()
 ``` 
