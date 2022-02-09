@@ -40,6 +40,9 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 - These missing values need to be treated/cleaned before we can use because "Garbage in => Garbage out".
 - There are several ways to treat the missing values:
 
+![image](https://user-images.githubusercontent.com/43855029/153270189-5bf6f452-64ab-4af7-b30d-de985c8c5661.png)
+
+
 #### Method 1: remove all missing `NA` values
 
 ```python
