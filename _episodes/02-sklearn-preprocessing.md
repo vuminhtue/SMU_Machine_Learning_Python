@@ -42,22 +42,48 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 
 ![image](https://user-images.githubusercontent.com/43855029/153270189-5bf6f452-64ab-4af7-b30d-de985c8c5661.png)
 
-
-#### Method 1: remove all missing `NA` values
+#### Read in data with missing value and check the missing values:
 
 ```python
 import pandas as pd
-data_df = pd.DataFrame(pd.read_csv('https://raw.githubusercontent.com/vuminhtue/SMU_Machine_Learning_Python/master/data/airquality.csv'))
+data_df = pd.read_csv('https://raw.githubusercontent.com/vuminhtue/SMU_Machine_Learning_Python/master/data/airquality.csv')
 data_df.head()
+data_df.isnull().sum()
+``` 
+#### Method 1: ignore missing values:
+
+Many function in python ignore the missing values, for example the mean & count function:
+
+```python
+data_df['Ozone'].mean() 
+data_df['Ozone'].count()
+```
+
+You will see that the count function only print 116 values (out of 153 values (including NA) in total) of Ozone columns
+
+#### Method 2: remove entire row with missing `NA` values
+
+```python
 data1 = data_df.dropna()
 ``` 
 
-#### Method 2: Set `NA` to mean value 
+#### Method 3: drop the entire column (not recommended):
+
 ```python
-data2 = data_df.copy()
-data2.fillna(data2.mean(), inplace=True)
+data2 = data_df.drop("Ozone",axis=1)
 ```
-Or
+
+Note: axis = 1 (column), axis = 0 (row)
+
+#### Method 4: Imputation by setting `NA` to mean value 
+
+```python
+data3 = data_df.copy()
+data3.fillna(data3.mean(), inplace=True)
+```
+
+Or using SimpleImputer function from sklearn:
+
 ```python
 import numpy as np
 from sklearn.impute import SimpleImputer
@@ -69,15 +95,18 @@ data3.columns = data_df.columns
 **Note:**
 SimpleImputer converts missing values to **mean, median, most_frequent and constant**.
 
-#### Method 3: Use `Impute` to handle missing values
+#### Method 5: Use KN-based `Impute` to handle missing values
+
 In statistics, imputation is the process of replacing missing data with substituted values. Because missing data can create problems for analyzing data, imputation is seen as a way to avoid pitfalls involved with listwise deletion of cases that have missing values. That is to say, when one or more values are missing for a case, most statistical packages default to discarding any case that has a missing value, which may introduce bias or affect the representativeness of the results. Imputation preserves all cases by replacing missing data with an estimated value based on other available information. Once all missing values have been imputed, the data set can then be analysed using standard techniques for complete data. There have been many theories embraced by scientists to account for missing data but the majority of them introduce bias. A few of the well known attempts to deal with missing data include: hot deck and cold deck imputation; listwise and pairwise deletion; mean imputation; non-negative matrix factorization; regression imputation; last observation carried forward; stochastic imputation; and multiple imputation.
 
 `knnImpute` can also be used to fill in missing value
+
 ```python
 from sklearn.impute import KNNImputer
 imputer = KNNImputer(n_neighbors=2, weights="uniform")
 data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
 ```
+
 **Note:**
 - In addition to KNNImputer, there are **IterativeImputer** (Multivariate imputer that estimates each feature from all the others) and **MissingIndicator**(Binary indicators for missing values)
 - More information on sklearn.impute can be found [here](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.impute)
