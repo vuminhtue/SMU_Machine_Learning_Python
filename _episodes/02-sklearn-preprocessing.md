@@ -64,22 +64,33 @@ You will see that the count function only print 116 values (out of 153 values (i
 #### Method 2: remove entire row with missing `NA` values
 
 ```python
-data1 = data_df.dropna()
+data2 = data_df.dropna()
 ``` 
 
 #### Method 3: drop the entire column (not recommended):
 
 ```python
-data2 = data_df.drop("Ozone",axis=1)
+data3 = data_df.drop("Ozone",axis=1)
 ```
 
 Note: axis = 1 (column), axis = 0 (row)
 
-#### Method 4: Imputation by setting `NA` to mean value 
+#### Method 4: Fill `NA` with constant values
+
+Often time, the mising data can be set to 0 or 1 (or any other meaningful data set in your field):
+Following code fill the missing value with 0:
 
 ```python
-data3 = data_df.copy()
-data3.fillna(data3.mean(), inplace=True)
+data4 = data_df.copy()
+data4.fillna(0, inplace=True)
+```
+
+#### Method 5: Full `NA` to mean/median/max/min value 
+Very similar to filling with constant value:
+
+```python
+data5 = data_df.copy()
+data5.fillna(data5.mean(), inplace=True)
 ```
 
 Or using SimpleImputer function from sklearn:
@@ -88,14 +99,14 @@ Or using SimpleImputer function from sklearn:
 import numpy as np
 from sklearn.impute import SimpleImputer
 imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
-data3 = pd.DataFrame(imputer.fit_transform(data_df))
-data3.columns = data_df.columns
+data5 = pd.DataFrame(imputer.fit_transform(data_df))
+data5.columns = data_df.columns
 ```
 
 **Note:**
 SimpleImputer converts missing values to **mean, median, most_frequent and constant**.
 
-#### Method 5: Use KN-based `Impute` to handle missing values
+#### Method 6: **Advanced** Use KN-based `Impute` to handle missing values
 
 In statistics, imputation is the process of replacing missing data with substituted values. Because missing data can create problems for analyzing data, imputation is seen as a way to avoid pitfalls involved with listwise deletion of cases that have missing values. That is to say, when one or more values are missing for a case, most statistical packages default to discarding any case that has a missing value, which may introduce bias or affect the representativeness of the results. Imputation preserves all cases by replacing missing data with an estimated value based on other available information. Once all missing values have been imputed, the data set can then be analysed using standard techniques for complete data. There have been many theories embraced by scientists to account for missing data but the majority of them introduce bias. A few of the well known attempts to deal with missing data include: hot deck and cold deck imputation; listwise and pairwise deletion; mean imputation; non-negative matrix factorization; regression imputation; last observation carried forward; stochastic imputation; and multiple imputation.
 
