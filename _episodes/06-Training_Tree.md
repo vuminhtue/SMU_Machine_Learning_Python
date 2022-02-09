@@ -30,21 +30,30 @@ More information on how to apply the spliting algorithm to split the data can be
 ![image](https://user-images.githubusercontent.com/43855029/114234120-548ca600-994c-11eb-889e-e8ec6d313e52.png)
 
 ### Implementation
-Here we will use `iris` data
-```python
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+Let's use the toy dataset **California housing**
 
-iris = load_iris()
-X = iris.data
-y = iris.target
+```python
+from sklearn.datasets import fetch_california_housing
+data = fetch_california_housing()
+
+X = pd.DataFrame(data.data,columns=data.feature_names)
+y = pd.DataFrame(data.target,columns=data.target_names)
+```
+
+Split data into training and testing set with 60% for training, 40% for testing:
+
+```python
+from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
+
 Next we will train using `DecisionTree` with `gini` splitting algorithm:
+
 ```python
 from sklearn.tree import DecisionTreeClassifier
 model_DT = DecisionTreeClassifier(max_depth=3,criterion="gini").fit(X_train,y_train)
 ```
+
 Once done, we can visualize the tree:
 ```python
 from sklearn import tree
