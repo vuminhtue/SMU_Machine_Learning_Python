@@ -21,19 +21,18 @@ Here are some functions for spliting training/testing set in `sklearn`:
 - `train_test_split`: create series of test/training partitions
 - `Kfold` splits the data into k groups
 - `StratifiedKFold` splits the data into k groups based on a grouping factor.
-- `RepeatKfold`
-- `ShuffleSplit`
-- `LeaveOneOut`
-- `LeavePOut`
+- `RepeatKfold`, `ShuffleSplit`, `LeaveOneOut`, `LeavePOut`
 
-Due to time constraint, we only focus on `train_test_split`, `KFolds` and `StratifiedKFold` 
+Due to time constraint, we only focus on `train_test_split` and  `KFolds` 
 
 ## 3.1 Scikit-Learn data
 
-The `sklearn.datasets` package embeds some small toy [datasets](https://scikit-learn.org/stable/datasets.html)
+The `sklearn.datasets` package embeds some small sample datasets or toy [datasets](https://scikit-learn.org/stable/datasets.html)
+
+In this workshop, we gonna use some toy datasets but in real life, we can import any csv or table dataset:
 
 ```
-For each dataset, there are 4 varibles:
+For each toy dataset, there are 4 varibles:
 - **data**: numpy array of predictors/X
 - **target**: numpy array of predictant/target/y
 - **feature_names**: names of all predictors in X
