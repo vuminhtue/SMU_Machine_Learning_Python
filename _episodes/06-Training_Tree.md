@@ -23,7 +23,10 @@ keypoints:
 
 For supervised ML model with continuous output data, we use the model **DecisionTreeRegressor** with following splitting algorithm:
 
-criterion{“squared_error”, “friedman_mse”, “absolute_error”, “poisson”}
+- squared_error
+- friedman_mse
+- absolute_error
+- poisson
 
 #### Classification for categorical output
 
