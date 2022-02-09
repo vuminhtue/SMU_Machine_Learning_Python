@@ -16,15 +16,21 @@ keypoints:
 -   Tree based methods empower predictive models with high accuracy, stability and ease of interpretation
 -   Non-parametric and non-linear relationships
 -   Types: Categorical and Continuous
+
 ![image](https://user-images.githubusercontent.com/43855029/114233972-198a7280-994c-11eb-9f4f-da4ed958961e.png)
 
-### Spliting algorithm
-- Gini Impurity: (Categorical)
-- Chi-Square index (Categorical)
-- Cross-Entropy & Information gain (Categorical)
-- Reduction Variance (Continuous)
+#### Regression for continuous output
 
-More information on how to apply the spliting algorithm to split the data can be found [here](https://clemsonciti.github.io/Workshop-Python-ML/Addon_DecisionTree/index.html)
+For supervised ML model with continuous output data, we use the model **DecisionTreeRegressor** with following splitting algorithm:
+
+criterion{“squared_error”, “friedman_mse”, “absolute_error”, “poisson”}
+
+#### Classification for categorical output
+
+For categorical output data, we use model **DecisionTreeClassifier** with 2 splitting algorithm:
+
+- Gini Impurity
+- Cross-Entropy 
 
 ### Pros & Cons
 ![image](https://user-images.githubusercontent.com/43855029/114234120-548ca600-994c-11eb-889e-e8ec6d313e52.png)
