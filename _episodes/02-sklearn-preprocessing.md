@@ -41,6 +41,7 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 - There are several ways to treat the missing values:
 
 ![image](https://user-images.githubusercontent.com/43855029/153270189-5bf6f452-64ab-4af7-b30d-de985c8c5661.png)
+[source](https://www.kaggle.com/parulpandey/a-guide-to-handling-missing-values-in-python)
 
 #### Read in data with missing value and check the missing values:
 
