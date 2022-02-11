@@ -283,9 +283,9 @@ RMSE using Random Forest is: 0.51
 
 ## 5.5 Ensemble Machine Learning
 
-- Random Forest is considered the Ensemble method.
 - Ensemble is a method in Machine Learning that combine decision from several ML models to obtain optimum output.
 - Ensemble methods use multiple learning algorithms to obtain better predictive performance than could be obtained from any of the constituent learning algorithms alone. Unlike a statistical ensemble in statistical mechanics, which is usually infinite, a machine learning ensemble consists of only a concrete finite set of alternative models, but typically allows for much more flexible structure to exist among those alternatives
+- The bonus point when applying both Bagging and Boosting in sklearn that they can be run in parallel!
 
 **Types of Ensembles:**
 
@@ -295,11 +295,82 @@ There are 2 main types of Ensembles in ML:
 
 ![image](https://user-images.githubusercontent.com/43855029/153652070-c067fc10-6322-49d1-92ed-b27532af11b6.png)
 
+Random Forest is considered Bagging Ensemble method!
+
 - Boosting: Boost the weak predictors
 
 ![image](https://user-images.githubusercontent.com/43855029/153652096-4e93d213-58b9-4b27-88fa-e8b42a9cd6e5.png)
 
 
+### 5.5.1 Bagging with RandomForest
+
+We can apply Bagging to different ML algorithm like Linear Regression, Decision Tree, Random Forest, etc. 
+Following are the syntax:
+
+```python
+from sklearn.ensemble import BaggingRegressor, RandomForestRegressor
+
+model_RF = RandomForestRegressor()
+
+model_bag_RF = BaggingRegressor(base_estimator=model_RF, n_estimators=100,
+                            bootstrap=True, n_jobs=-1,
+                            random_state=123)
+                            
+model_bag_RF.fit(X_train, y_train)
+
+y_pred_bagRF = model_bag_RF.predict(X_test)
+
+print("R2 using Bagging Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_bagRF)) 
+print("RMSE using Baggin Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_bagRF,squared=False))
+```
+
+Note that here we use n_estimators = 100 for bagging model (it grows 100 times the RandomForest model).
+The n_jobs=-1 means that it utilizes all the cores inside a compute nodes that we have
+
+And the output is slightly better:
+
+```
+R2 using Bagging Random Forest is: 0.80 
+RMSE using Baggin Random Forest is: 0.51
+```
+
+Let's try with some Boosting Ensemble approach:
+
+### 5.5.2 Boosting with Adaboost
+
+```python
+from sklearn.ensemble import AdaBoostRegressor
+model_ADA = AdaBoostRegressor(n_estimators=100, learning_rate=0.03).fit(X_train, y_train)
+y_pred_ADA = model_ADA.predict(X_test)
+
+print("R2 using Adaboost is: %1.2f " % metrics.r2_score(y_test,y_pred_ADA)) 
+print("RMSE using Adaboost is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_ADA,squared=False))
+```
+
+The output is not as good as Bagging RF
+
+```
+R2 using Adaboost is: 0.59 
+RMSE using Adaboost is: 0.75
+```
+
+### 5.5.3 Gradient Boosting Machine
+
+```python
+from sklearn.ensemble import GradientBoostingRegressor
+model_GBM = GradientBoostingRegressor(n_estimators=100).fit(X_train,y_train)
+y_pred_GBM = model_GBM.predict(X_test)
+
+print("R2 using GBM is: %1.2f " % metrics.r2_score(y_test,y_pred_GBM)) 
+print("RMSE using GBM is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_GBM,squared=False))
+```
+
+The output is better than Adaboost:
+
+```
+R2 using GBM is: 0.79 
+RMSE using GBM is: 0.53
+```
 
 
 ## 5.2 For categorical output
