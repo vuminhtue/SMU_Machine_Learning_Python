@@ -10,13 +10,13 @@ keypoints:
 - "PCA"
 ---
 
-## 10 Principal Component Analysis
+# 7 Principal Component Analysis
 - Handy with large data
 - Where many variables correlate with one another, they will all contribute strongly to the same principal component
 - Each principal component sums up a certain percentage of the total variation in the dataset
 - More Principal Components, more summarization of the original data sets
 
-### 10.1 PCA formulation
+## 7.1 PCA formulation
 - For example, we have 3 data sets: `X, Y, Z`
 - We need to compute the covariance matrix **M** for the 3 data set:
 ![image](https://user-images.githubusercontent.com/43855029/114459677-d67c0980-9bae-11eb-85b2-758a98f0cd29.png)
@@ -38,7 +38,7 @@ in which, the covariance value between 2 data sets can be computed as:
 **Eigenvector with the largest eigenvalue forms the first principal component of the data set
 … and so on …***
 
-### 10.2 Implementation
+## 7.2 Implementation
 Here we gonna use iris data set:
 ```python
 from sklearn.datasets import load_iris
@@ -47,6 +47,7 @@ from sklearn.preprocessing import StandardScaler
 
 import numpy as np
 import pandas as pd
+
 iris = load_iris()
 X = iris.data
 y = pd.DataFrame(iris.target)
@@ -57,7 +58,7 @@ X_train_scaled = StandardScaler().fit_transform(X_train)
 X_test_scaled = StandardScaler().fit_transform(X_test)
 ```
 
-#### 10.2.1 Compute PCA using sklearn:
+### 7.2.1 Compute PCA using sklearn:
 ```python
 from sklearn.decomposition import PCA
 pca = PCA(n_components=4)
@@ -65,13 +66,13 @@ PCs = pca.fit_transform(X_train_scaled)
 PCs = pd.DataFrame(PCs,columns = ['PC1','PC2','PC3','PC4'])
 ```
 We can see that PCs computed from sklearn package are similar to newpca computed from using eigen vectors
-#### 10.2.2 Explained Variance
+### 7.2.2 Explained Variance
 The explained variance tells you how much information (variance) can be attributed to each of the principal components. 
 ```python
 pca.explained_variance_ratio_
 ```
 In this example: the PC1(0.74) and PC2 (0.21) consume 0.95 percent of explained variance. Therefore, using 2 Principal Components should be good enough
-#### 10.2.3 Application of PCA model in Machine Learning:
+### 7.2.3 Application of PCA model in Machine Learning:
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
