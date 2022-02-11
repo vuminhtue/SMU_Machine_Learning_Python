@@ -31,38 +31,18 @@ Neural Network in Machine Learning:
 
 
 Here:
-- x1,x2....xn are input variables. w1,w2....wn are weights of respective inputs.
+- x1,x2....xn are input variables. 
+- w1,w2....wn are weights of respective inputs.
 - b is the bias, which is summed with the weighted inputs to form the net inputs. 
+
+In which: 
 - Bias and weights are both adjustable parameters of the neuron.
 - Parameters are adjusted using some learning rules. 
-- The output of a neuron can range from -inf to +inf.
-- The neuron doesn’t know the boundary. So we need a mapping mechanism between the input and output of the neuron. 
-- This mechanism of mapping inputs to output is known as Activation Function.
+- The output of a neuron can range from -inf to +inf. As the neuron doesn’t know the boundary, so we need a mapping mechanism between the input and output of the neuron. This mechanism of mapping inputs to output is known as Activation Function.
 
-- Activation functions:
+**Activation functions:**
+
 ![image](https://user-images.githubusercontent.com/43855029/114575672-6752f380-9c48-11eb-8d53-c78d052cdf17.png)
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-xrange = np.linspace(-2, 2, 200)
-
-plt.figure(figsize=(7,6))
-
-plt.plot(xrange, np.maximum(xrange, 0), label = 'ReLU')
-plt.plot(xrange, np.tanh(xrange), label = 'Hyperbolic Tangent')
-plt.plot(xrange, 1 / (1 + np.exp(-xrange)), label = 'Sigmoid/Logistic')
-plt.plot(xrange, xrange, label = 'Linear')
-plt.plot(xrange, np.heaviside(xrange, 0.5), label = 'Step')
-plt.legend()
-plt.title('Neural network activation functions')
-plt.xlabel('Input value (x)')
-plt.ylabel('Activation function output')
-
-plt.show()
-```
-![image](https://user-images.githubusercontent.com/43855029/115588329-9e568400-a29c-11eb-92b3-abe0c2db16c5.png)
 
 - Neural Network formulation: Multi-Layer Perceptron (MLP)
 **Multi-layer Perceptron (MLP)** is a supervised learning algorithm.
