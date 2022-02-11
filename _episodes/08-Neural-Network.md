@@ -19,9 +19,13 @@ keypoints:
 - If a Neuron received enough signal, it is then activated to decide whether or not it should transmitt the signal to other neuron or not.
 
 ![image](https://user-images.githubusercontent.com/43855029/114472746-da188c00-9bc0-11eb-913c-9dcd14f872ac.png)
+
+Neural Network in Machine Learning:
+
 ![image](https://user-images.githubusercontent.com/43855029/114472756-dd137c80-9bc0-11eb-863d-7c4d054efa89.png)
 
-- Formulation of Neural Network
+- Formulation of Neural Network:
+
 
 ![image](https://user-images.githubusercontent.com/43855029/114472776-e997d500-9bc0-11eb-9f70-450389c912df.png)
 
