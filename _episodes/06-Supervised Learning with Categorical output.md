@@ -10,8 +10,18 @@ keypoints:
 - "Decision Tree, Random Forest"
 ---
 
-## 5.2 For categorical output
-### 5.2.1 Train model using Logistic Regression
+# 6 Supervised Learning with categorical output
+
+- Typical Classification problem with 2, 3, 4 (or more) outputs.
+- Most of the time the output consists of binary (male/female, spam/nospam,yes/no) 
+- Sometime, there are more than binary output: dog/cat/mouse, red/green/yellow.
+
+In this category, we gonna use 2 existing dataset from [sklearn](https://scikit-learn.org/stable/datasets.html):
+- [Breast Cancer Wisconsine](https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-wisconsin-diagnostic-dataset) data for Binary output
+- [Iris plant](https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-plants-dataset) data for multiple (3) output.
+
+## 6.1 Logistic Regression
+
 - Logistic regression is another technique borrowed by machine learning from the field of statistics. It is the go-to method for binary classification problems (problems with two class values).
 - Typical binary classification: True/False, Yes/No, Pass/Fail, Spam/No Spam, Male/Female
 - Unlike linear regression, the prediction for the output is transformed using a non-linear function called the logistic function.
@@ -21,51 +31,57 @@ keypoints:
 
 ![image](https://user-images.githubusercontent.com/43855029/114233189-fb704280-994a-11eb-9019-8355f5337b37.png)
 
-In this example, we create a sample data set and use logistic regression to solve it. The example is taken from [here](https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python/)
+In this example, we load a sample dataset called [Breast Cancer Wisconsine](https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-wisconsin-diagnostic-dataset).
 
-Load library and create sample data set:
+### Load Breast Cancer Wisconsine data
 
 ```python
-from sklearn.datasets import make_classification
+from sklearn.datasets import load_breast_cancer
 
 # generate sample data
-X, y = make_classification(n_samples=1000, n_classes=2, random_state=1)
+X = data.data
+y = data.target
+print("There are", X.shape[1], " Predictors: ", data.feature_names)
+print("The output has 2 values: ", data.target_names)
+print("Total size of data is ", X.shape[0], " rows")
 ```
 
-Partitioning Data to train/test:
+We can see that there are 30 input data representing the shape and size of 569 tumours.
+Base on that, the tumour can be considered _malignant_ or _benign_ (0 or 1 as in number)
+
+### Partitioning Data to train/test:
+
 ```python
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.6, random_state=123)
 ```
 
-Train model using Logistic Regression
+### Train model using Logistic Regression
+For simplicity, we use all predictors for the regression:
+
 ```python
 from sklearn.linear_model import LogisticRegression
-model_LogReg = LogisticRegression().fit(X_train, y_train)
-y_pred = model_LogReg.predict(X_test)
+model_LogReg = LogisticRegression(solver='newton-cg').fit(X_train, y_train)
 
-from sklearn.linear_model import LogisticRegression
-model_LogReg = LogisticRegression().fit(X_train, y_train)
-# predict output:
-y_pred = model_LogReg.predict(X_test)
-# predict probabilities
-lr_probs = model_LogReg.predict_proba(X_test)
-```
+### Evaluate model output:
 
-Evaluate output with accurary level:
 ```python
+y_pred = model_LogReg.predict(X_test)
+
 from sklearn import metrics
-metrics.accuracy_score(y_test,y_pred)
+print("The accuracy score is %1.3f" % metrics.accuracy_score(y_test,y_pred))
 ```
-We retrieve the **accuracy = 0.834**
 
-Now compute AUC-ROC and plot curve
+We retrieve the **accuracy = 0.965** using all predictors
+
+### Compute AUC-ROC and plot curve
 
 ```python
 from sklearn.metrics import roc_curve, roc_auc_score
 import matplotlib.pyplot as plt
 import numpy as np
 
+lr_probs = model_LogReg.predict_proba(X_test)
 # generate a no skill prediction (majority class)
 ns_probs = np.zeros(len(y_test))
 
@@ -88,11 +104,13 @@ plt.ylabel('True Positive Rate')
 plt.legend()
 # show the plot
 plt.show()
+
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/120822169-22e72400-c524-11eb-97fe-46f711a11072.png)
+![image](https://user-images.githubusercontent.com/43855029/153662934-d4c5929f-72cf-43b8-8b1f-085d315022e7.png)
 
 An alternative way to plot AUC-ROC curve, using additional toolbox ["scikit-plot"](https://scikit-plot.readthedocs.io/en/stable/)
+
 ```python
 pip install scikit-plot
 ```
@@ -105,6 +123,6 @@ skplt.metrics.plot_roc(y_test, lr_probs)
 plt.show()
 ```
 
-![image](https://user-images.githubusercontent.com/43855029/120822378-588c0d00-c524-11eb-9cdc-431bd927ad48.png)
+![image](https://user-images.githubusercontent.com/43855029/153663219-f27aad2b-b76d-4abf-a093-0a433e79bd28.png)
 
 
