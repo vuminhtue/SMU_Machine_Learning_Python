@@ -48,9 +48,8 @@ hpc.smu.edu
 => Note: while using **ML_SKLN** conda environment, if we are missing anything, we can always come back and update using **pip install**
 or **conda install** method.
 
-You will see the new kernel created:
+Refresh, you will see the new kernel created:
 
-![image](https://user-images.githubusercontent.com/43855029/146412731-58cdc03b-158c-48b8-aee9-7f1f1e842efb.png)
-
+![image](https://user-images.githubusercontent.com/43855029/153683326-deba2952-8e20-45f7-828a-0c53bd0081cd.png)
 
 {% include links.md %}
