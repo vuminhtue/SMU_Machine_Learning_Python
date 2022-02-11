@@ -1,5 +1,5 @@
 ---
-title: "05-Supervised Learning with continuous output"
+title: "Supervised Learning with continuous output"
 teaching: 20
 exercises: 0
 questions:
