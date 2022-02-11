@@ -123,3 +123,5 @@ plt.show()
 ```
 
 ![image](https://user-images.githubusercontent.com/43855029/153672409-2bcefb86-5bf2-497f-b1ca-00af35b776d1.png)
+
+As seen, there are 4 points that were wrongly identified
