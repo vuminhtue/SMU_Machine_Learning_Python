@@ -12,19 +12,20 @@ keypoints:
 
 ## 11. Neural Network
 
-- Neural network is a series of algorithms that endeavors to recognize underlying relationships in a set of data through a process that mimics the way the human brain operates. 
+### The Neural Network of a brain
 
+- Neural network is a series of algorithms that endeavors to recognize underlying relationships in a set of data through a process that mimics the way the human brain operates. 
 - Neuron is a basic unit in a nervous system and is the most important component of the brain.
 - In each Neuron, there is a cell body (node), dendrite (input signal) and axon (output signal to other neuron).
 - If a Neuron received enough signal, it is then activated to decide whether or not it should transmitt the signal to other neuron or not.
 
 ![image](https://user-images.githubusercontent.com/43855029/114472746-da188c00-9bc0-11eb-913c-9dcd14f872ac.png)
 
-Neural Network in Machine Learning:
+### Neural Network in Machine Learning:
 
 ![image](https://user-images.githubusercontent.com/43855029/114472756-dd137c80-9bc0-11eb-863d-7c4d054efa89.png)
 
-- Formulation of Neural Network:
+### Formulation of Neural Network:
 
 
 ![image](https://user-images.githubusercontent.com/43855029/114472776-e997d500-9bc0-11eb-9f70-450389c912df.png)
@@ -44,7 +45,8 @@ In which:
 
 ![image](https://user-images.githubusercontent.com/43855029/114575672-6752f380-9c48-11eb-8d53-c78d052cdf17.png)
 
-- Neural Network formulation: Multi-Layer Perceptron (MLP)
+### Multi-Layer Perceptron (MLP)
+
 **Multi-layer Perceptron (MLP)** is a supervised learning algorithm.
 Given a set of features `X = x1, x2, ... xm`, and target `y`, MLP can learn a non-linear function approximator for either classification or regression.
 
