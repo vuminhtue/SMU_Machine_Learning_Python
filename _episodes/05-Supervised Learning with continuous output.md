@@ -201,16 +201,20 @@ There are many other ML algorithm that helps to overcome the issue of overfittin
 
 ### 5.4.1 Decision Tree
 
-Let use all data in this exercise, the Decision Tree algorithm for continuous output in sklearn is called **DecisionTreeRegressor**
+- Tree based learning algorithms are considered to be one of the best and mostly used supervised learning methods.
+- Tree based methods empower predictive models with high accuracy, stability and ease of interpretation
+- Non-parametric and non-linear relationships
+- Types: Continuous (DecisionTreeRegressor) and Categorical (DecisionTreeClassifier)
 
 ![image](https://user-images.githubusercontent.com/43855029/153648313-da3a9a08-c4ad-48c9-bebd-df34f1651f98.png)
+
+Let use all data in this exercise, the Decision Tree algorithm for continuous output in sklearn is called **DecisionTreeRegressor**
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 
 from sklearn.tree import DecisionTreeRegressor
-model_DT = DecisionTreeRegressor().fit(X_train,y_train)
-
+model_DT = DecisionTreeRegressor(max_depth=6).fit(X_train,y_train)
 y_pred_DT = model_DT.predict(X_test)
 
 print("R2 using Decision Tree is: %1.2f " % metrics.r2_score(y_test,y_pred_DT)) 
@@ -220,14 +224,28 @@ print("RMSE using Decision Tree is: %1.2f" % metrics.mean_squared_error(y_test,y
 output:
 
 ```
-R2 using Decision Tree is: 0.61 
-RMSE using Decision Tree is: 0.73
+R2 using Decision Tree is: 0.65 
+RMSE using Decision Tree is: 0.68
 ```
 
 Now we can see that Decision Tree helps to overcome the overfitting by trimming down the unnecessary input data.
 
+#### Visualization the Decision Tree:
 
+The following required graphviz model to be loaded when you requested for a Python Notebook.
 
+![image](https://user-images.githubusercontent.com/43855029/153649826-000cc8ab-dfb9-43b7-b31c-26ecaf03d0a1.png)
+
+```python
+from sklearn import tree
+import graphviz
+dot_data = tree.export_graphviz(model_DT, out_file=None,                      
+                      filled=True, rounded=True,
+                      feature_names=data.feature_names,
+                      special_characters=True)  
+graph = graphviz.Source(dot_data) 
+graph
+```
 
 ## 5.2 For categorical output
 ### 5.2.1 Train model using Logistic Regression
