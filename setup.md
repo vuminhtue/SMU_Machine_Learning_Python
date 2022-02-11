@@ -41,7 +41,7 @@ hpc.smu.edu
 ### Step 8: Install jupyter and create ML_SKLN kernel:
 
 ```bash
-(MK_SKLN) [tuev@b136 ~]$ conda install jupyter
+(MK_SKLN) [tuev@b136 ~]$ conda install jupyter -y
 (MK_SKLN) [tuev@b136 ~]$ python -m ipykernel install --user --name ML_SKLN --display-name "ML_SKLN"
 ```
 
