@@ -189,6 +189,10 @@ Overfitting occurs when we used lots of unesscessary input data for training pro
 
 Exercise 1: Let use all dataset to train the data to see if using all input data, we have overfitting?
 
+```python
+
+```
+
 Exercise 2: Let's check the R2 and RMSE for training set using 2 and 4 degree of freedom to see if the 4 dof is better than 2 dof in fitting back to training data?
 
 ```python
@@ -246,6 +250,57 @@ dot_data = tree.export_graphviz(model_DT, out_file=None,
 graph = graphviz.Source(dot_data) 
 graph
 ```
+
+### 5.4.2 Random Forest
+
+![image](https://user-images.githubusercontent.com/43855029/153650870-13494bba-d440-4006-b98a-6fb1509d10d5.png)
+
+
+- Random Forest is considered to be a panacea of all data science problems. On a funny note, when you can’t think of any algorithm (irrespective of situation), use random forest!
+- Opposite to Decision Tree, Random Forest use bootstrapping technique to grow multiple tree
+- Random Forest is a versatile machine learning method capable of performing both regression and classification tasks.
+- It is a type of ensemble learning method, where a group of weak models combine to form a powerful model.
+- The end output of the model is like a black box and hence should be used judiciously.
+
+
+![image](https://user-images.githubusercontent.com/43855029/153650921-ecc70313-6e17-4bb6-92cb-bab11a39ab0c.png)
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+model_RF = RandomForestRegressor(n_estimators=10).fit(X_train,y_train)
+y_pred_RF = model_RF.predict(X_test)
+
+print("R2 using Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_RF)) 
+print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_RF,squared=False))
+```
+
+Here we use n=10 estimators (growing using n trees in the forest) and The output is much better:
+
+```
+R2 using Random Forest is: 0.81 
+RMSE using Random Forest is: 0.51
+```
+
+## 5.5 Ensemble Machine Learning
+
+- Random Forest is considered the Ensemble method.
+- Ensemble is a method in Machine Learning that combine decision from several ML models to obtain optimum output.
+- Ensemble methods use multiple learning algorithms to obtain better predictive performance than could be obtained from any of the constituent learning algorithms alone. Unlike a statistical ensemble in statistical mechanics, which is usually infinite, a machine learning ensemble consists of only a concrete finite set of alternative models, but typically allows for much more flexible structure to exist among those alternatives
+
+**Types of Ensembles:**
+
+There are 2 main types of Ensembles in ML:
+
+- Bagging: Boostrap Aggregation
+
+![image](https://user-images.githubusercontent.com/43855029/153652070-c067fc10-6322-49d1-92ed-b27532af11b6.png)
+
+- Boosting: Boost the weak predictors
+
+![image](https://user-images.githubusercontent.com/43855029/153652096-4e93d213-58b9-4b27-88fa-e8b42a9cd6e5.png)
+
+
+
 
 ## 5.2 For categorical output
 ### 5.2.1 Train model using Logistic Regression
