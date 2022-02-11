@@ -14,18 +14,22 @@ keypoints:
 
 - No labels are given to the learning algorithm leaving it on its own to find structure in its input. 
 - Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).
-
-![image](https://user-images.githubusercontent.com/43855029/114584282-82c1fc80-9c50-11eb-9342-41e5592e7b67.png) ![image](https://user-images.githubusercontent.com/43855029/114584314-89507400-9c50-11eb-9c54-5a589075fd48.png)
-
 - Used when no feature output data
 - Often used for clustering data
-- Typical method:
+
+![image](https://user-images.githubusercontent.com/43855029/114584282-82c1fc80-9c50-11eb-9342-41e5592e7b67.png) 
+
+![image](https://user-images.githubusercontent.com/43855029/114584314-89507400-9c50-11eb-9c54-5a589075fd48.png)
+
+**Typical method:**
+
 ```
 K-means clustering
 Hierarchical clustering
 Ward clustering
 Partition Around Median (PAM)
 ```
+
 ## 9.1 K-means clustering
 ### 9.1.1 Explanation of K-means clustering method:
 - Given a set of data, we choose K=2 clusters to be splited:
