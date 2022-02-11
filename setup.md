@@ -1,50 +1,52 @@
 ---
 title: Setup conda environment and creating Jupyter Kernel using your SMU ManeFrame account
 ---
+### Step 1: Login to SMU Open OnDemand via web browser:
 
-### Please follow this guideline to create a new conda environment and install scikit-learn package.
-
-Open any terminal:
-  - **MobaXTerm** for Windows OS
-  - **Terminal** for MacOS & Linux platform
-  - **M2 Shell Access** in Open OnDemand (https://hpc.smu.edu/pun/sys/dashboard/)(preferable)
-
-### Below is the setup using M2 Shell Access:
-
-First, login to Open OnDemand and open Shell Access 
-![image](https://user-images.githubusercontent.com/43855029/146410172-77d7531f-9673-48e7-8b3b-6e384a0893b2.png)
-
-Load python library
-
-```bash
-$ module load python/3
+```
+hpc.smu.edu
 ```
 
-Create a conda environment named MyPEnv with python version 3.6
+![image](https://user-images.githubusercontent.com/43855029/153682287-97f59016-5b64-49c6-bfd2-a12dd0861a55.png)
+
+### Step 2: Request JupyterLab Instance:
+
+![image](https://user-images.githubusercontent.com/43855029/153682171-28f85d28-086c-4c25-9f58-987d9c300728.png)
+
+### Step 3: Fill in the following information and hit Launch:
+
+![image](https://user-images.githubusercontent.com/43855029/153682400-1eb87cd9-91f3-4177-b63e-100d49fa77d9.png)
+
+### Step 4: Connect to Jupyter Lab when it is ready:
+
+![image](https://user-images.githubusercontent.com/43855029/153682468-7f759b33-b246-4bb5-801f-f2d36fad76dd.png)
+
+### Step 5: Click on Terminal:
+
+![image](https://user-images.githubusercontent.com/43855029/153682514-b89dcd3b-866e-4782-94e7-d61ac2b1b492.png)
+
+### Step 6: Create a conda environment named ML_SKLN with python version 3.6
 
 ```bash
-$ conda create -y -n MyPEnv python=3.7
+[tuev@b136 ~]$ conda create -y -n ML_SKLN python=3.6
 ```
 
-Activate the conda environment and install matplotlib and any other needed packages.
+### Step 7: Activate the conda environment and install scikit-learn, matplotlib and any other needed packages.
 
 ```bash
-[tuev@b136 ~]$ source activate myPenv
-(myPenv) [tuev@b136 ~]$ conda install numpy pandas scikit-learn seaborn matplotlib -y
+[tuev@b136 ~]$ source activate ML_SKLN
+(MK_SKLN) [tuev@b136 ~]$ conda install numpy pandas scikit-learn seaborn matplotlib -y
 ```
 
-You can also create your own Jupyter Hub kernel:
+### Step 8: Install jupyter and create ML_SKLN kernel:
 
 ```bash
-(myPenv) [tuev@b136 ~]$ conda install jupyter
-(myPenv) [tuev@b136 ~]$ python -m ipykernel install --user --name myPenv --display-name "My 1st conda env"
+(MK_SKLN) [tuev@b136 ~]$ conda install jupyter
+(MK_SKLN) [tuev@b136 ~]$ python -m ipykernel install --user --name ML_SKLN --display-name "ML_SKLN"
 ```
 
-=> Note: while using **myPenv** conda environment, if we are missing anything, we can always come back and update using **pip install**
+=> Note: while using **ML_SKLN** conda environment, if we are missing anything, we can always come back and update using **pip install**
 or **conda install** method.
-
-- Back to Open OnDemand, request for Jupyter Notebook instance:
-![image](https://user-images.githubusercontent.com/43855029/146412276-f9dd833f-2436-43cd-80b9-93b578cda2df.png)
 
 You will see the new kernel created:
 
