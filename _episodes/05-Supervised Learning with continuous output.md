@@ -327,7 +327,7 @@ print("RMSE using Baggin Random Forest is: %1.2f" % metrics.mean_squared_error(y
 Note that here we use n_estimators = 100 for bagging model (it grows 100 times the RandomForest model).
 The n_jobs=-1 means that it utilizes all the cores inside a compute nodes that we have
 
-And the output is slightly better:
+And the output is very similar to RandomForest:
 
 ```
 R2 using Bagging Random Forest is: 0.80 
@@ -372,6 +372,12 @@ R2 using GBM is: 0.79
 RMSE using GBM is: 0.53
 ```
 
+### Which is better in Ensemble? Bagging or Boosting?
+
+![image](https://user-images.githubusercontent.com/43855029/153654625-d7efe94d-1fc4-4ee6-9b4b-f897f52a909e.png)
+
+Ensemble overcome the limitation of using only single model
+Between bagging and boosting, there is no better approach without trial & error.
 
 ## 5.2 For categorical output
 ### 5.2.1 Train model using Logistic Regression
