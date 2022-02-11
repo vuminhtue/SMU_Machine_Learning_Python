@@ -176,7 +176,7 @@ Exercise: create an LDA model to predict the breast cancer Wisconsine data
 
 ```
 
-## 6.3 Other Algorithm
+## 6.3 Other Algorithms
 
 There are many other algorithms that work well for both classification and regression data such as Decision Tree, RandomForest, Bagging/Boosting.
 Very similar to chapter 5, the following model should be loaded:
