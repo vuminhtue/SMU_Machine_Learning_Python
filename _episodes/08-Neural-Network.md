@@ -138,3 +138,5 @@ model_NN.score(X_test,y_test)
 - Since backpropagation has a high time complexity, it is advisable to start with smaller number of hidden neurons and few hidden layers for training.
 - The loss function for Classifier is **Cross-Entropy** while for Regression is **Square-Error**
 
+## 8.9. Notes
+- There are many other NN algorithms which will be introduced in the Deep Learning class
