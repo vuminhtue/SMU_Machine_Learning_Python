@@ -24,15 +24,17 @@ keypoints:
 - Formulation of Neural Network
 
 ![image](https://user-images.githubusercontent.com/43855029/114472776-e997d500-9bc0-11eb-9f70-450389c912df.png)
-```
-Here, x1,x2....xn are input variables. w1,w2....wn are weights of respective inputs.
-b is the bias, which is summed with the weighted inputs to form the net inputs. 
-Bias and weights are both adjustable parameters of the neuron.
-Parameters are adjusted using some learning rules. 
-The output of a neuron can range from -inf to +inf.
-The neuron doesn’t know the boundary. So we need a mapping mechanism between the input and output of the neuron. 
-This mechanism of mapping inputs to output is known as Activation Function.
-```
+
+
+Here:
+- x1,x2....xn are input variables. w1,w2....wn are weights of respective inputs.
+- b is the bias, which is summed with the weighted inputs to form the net inputs. 
+- Bias and weights are both adjustable parameters of the neuron.
+- Parameters are adjusted using some learning rules. 
+- The output of a neuron can range from -inf to +inf.
+- The neuron doesn’t know the boundary. So we need a mapping mechanism between the input and output of the neuron. 
+- This mechanism of mapping inputs to output is known as Activation Function.
+
 - Activation functions:
 ![image](https://user-images.githubusercontent.com/43855029/114575672-6752f380-9c48-11eb-8d53-c78d052cdf17.png)
 
