@@ -20,7 +20,7 @@ In this category, we gonna use 2 existing dataset from [sklearn](https://scikit-
 - [Breast Cancer Wisconsine](https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-wisconsin-diagnostic-dataset) data for Binary output
 - [Iris plant](https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-plants-dataset) data for multiple (3) output.
 
-## 6.1 Logistic Regression
+## 6.1 Logistic Regression for binary output
 
 - Logistic regression is another technique borrowed by machine learning from the field of statistics. It is the go-to method for binary classification problems (problems with two class values).
 - Typical binary classification: True/False, Yes/No, Pass/Fail, Spam/No Spam, Male/Female
@@ -126,3 +126,71 @@ plt.show()
 ![image](https://user-images.githubusercontent.com/43855029/153663219-f27aad2b-b76d-4abf-a093-0a433e79bd28.png)
 
 
+## 6.2 Classification problem with more than 3 outputs
+
+Here we use [Iris plant](https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-plants-dataset) data for multiple (3) output.
+
+### Import data
+
+```python
+from sklearn.datasets import load_iris
+data = load_iris()
+X = data.data
+y = data.target
+
+print("There are", X.shape[1], " Predictors: ", data.feature_names)
+print("The output has 3 values: ", data.target_names)
+print("Total size of data is ", X.shape[0], " rows")
+```
+
+- We can see that there are 4 input data representing the petal/sepal width and length of 3 different kind of iris flowers.
+- Base on that, the iris plants can be classified as 'setosa' 'versicolor' 'virginica'.
+
+### Partitioning Data to train/test:
+
+```python
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.6, random_state=123)
+```
+
+### Train model using Linear Discriminant Analysis (LDA):
+
+For simplicity, we use all predictors for the regression:
+
+```python
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+model_LDA = LinearDiscriminantAnalysis().fit(X_train,y_train)
+```
+
+### Evaluate model output:
+
+```python
+print("The accuracy score is %1.3f" % model_LDA.score(X_test,y_test))
+```
+
+### LDA can be used for both binary and more categorical output
+
+Exercise: create an LDA model to predict the breast cancer Wisconsine data
+
+```python
+
+```
+
+## 6.3 Other Algorithm
+
+There are many other algorithms that work well for both classification and regression data such as Decision Tree, RandomForest, Bagging/Boosting.
+Very similar to chapter 5, the following model should be loaded:
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.naive_bayes import GaussianNB
+```
+
+Exercise: create a Random Forest model to predict the iris flower data using the same method:
+
+```python
+
+```
