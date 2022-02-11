@@ -38,7 +38,7 @@ In this example, we load a sample dataset called [Breast Cancer Wisconsine](http
 ```python
 from sklearn.datasets import load_breast_cancer
 
-# generate sample data
+data = load_breast_cancer()
 X = data.data
 y = data.target
 print("There are", X.shape[1], " Predictors: ", data.feature_names)
