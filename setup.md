@@ -52,4 +52,11 @@ Refresh the web browser and click on the + button on the left, you will see the 
 
 ![image](https://user-images.githubusercontent.com/43855029/153921136-48ef26a8-3010-45a2-b17d-d3a5d5cf6805.png)
 
+### Step 9: Make sure your installation looks ok.
+Click on the ML_SKLN notebook, you will open up a Jupyter notebook. Make sure you see the ML_SKLN kernel on the top right and type in these command to check the installed version:
+
+![image](https://user-images.githubusercontent.com/43855029/153921499-64e9cfce-46da-43a8-a0ad-9eac9fd03ca8.png)
+
+
+
 {% include links.md %}
