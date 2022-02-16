@@ -54,6 +54,25 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 ```
 
+### 5.1.4 Visualization the inputs and output:
+
+We can visualize the inputs and output data using pair plotting with seaborn package.
+
+Make sure that you install seaborn package in advance (Open the ML_SKLN Console (Not Notebook) and run this command:)
+
+```
+pip install seaborn
+```
+
+Once seaborn is installed, you can plot visualize the input/output data:
+
+```python
+df = pd.concat([X_train,y_train], axis=1)
+sns.pairplot(df)
+```
+
+![image](https://user-images.githubusercontent.com/43855029/154369953-8fcbc740-9d98-41b8-9c68-1f91149d59b2.png)
+
 Now the input data is ready for supervised learning model, let's select several ML algorithms to work with:
 
 ## 5.2 Machine Learning algorithm with Linear Regression
@@ -218,7 +237,7 @@ Let use all data in this exercise, the Decision Tree algorithm for continuous ou
 X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
 
 from sklearn.tree import DecisionTreeRegressor
-model_DT = DecisionTreeRegressor(max_depth=6).fit(X_train,y_train)
+model_DT = DecisionTreeRegressor(max_depth=4).fit(X_train,y_train)
 y_pred_DT = model_DT.predict(X_test)
 
 print("R2 using Decision Tree is: %1.2f " % metrics.r2_score(y_test,y_pred_DT)) 
@@ -228,8 +247,8 @@ print("RMSE using Decision Tree is: %1.2f" % metrics.mean_squared_error(y_test,y
 output:
 
 ```
-R2 using Decision Tree is: 0.65 
-RMSE using Decision Tree is: 0.68
+R2 using Decision Tree is: 0.58 
+RMSE using Decision Tree is: 0.76
 ```
 
 Now we can see that Decision Tree helps to overcome the overfitting by trimming down the unnecessary input data.
@@ -250,6 +269,9 @@ dot_data = tree.export_graphviz(model_DT, out_file=None,
 graph = graphviz.Source(dot_data) 
 graph
 ```
+
+![image](https://user-images.githubusercontent.com/43855029/154372355-9660f717-0bd4-4f32-aaf1-24ae092fc1ff.png)
+
 
 ### 5.4.2 Random Forest
 
