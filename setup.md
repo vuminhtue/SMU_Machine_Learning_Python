@@ -70,7 +70,7 @@ If you do not have an M2 account, not to worry, you can always use your own Lapt
 
 ### Step 1: Download Anaconda Invididual 
 
-Go to this [ink](https://www.anaconda.com/products/individual) and download your matched Anaconda version:
+Go to this [link](https://www.anaconda.com/products/individual) and download your matched Anaconda version:
 
 ![image](https://user-images.githubusercontent.com/43855029/154314785-a13471de-1e72-4f40-b950-4c8a324e3991.png)
 
