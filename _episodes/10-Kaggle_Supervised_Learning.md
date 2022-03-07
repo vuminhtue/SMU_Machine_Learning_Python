@@ -51,7 +51,7 @@ There are 4 files in this folder:
 
 ### Step 2: Select variables.
 - Since there are 80 input variables, we should not use all of them to avoid collinearity.
-- For simplicity, select the following columns: "OverallQual","OverallCond","YearBuilt","X1stFlrSF","FullBath","GarageCars","SaleCondition","SalePrice"
+- For simplicity, select the following columns: "OverallQual","OverallCond","YearBuilt","1stFlrSF","FullBath","GarageCars","SaleCondition","SalePrice"
 - Visualize the importancy of variables
 
 ```python
