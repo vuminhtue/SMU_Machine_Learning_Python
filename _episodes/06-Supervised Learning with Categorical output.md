@@ -62,6 +62,7 @@ For simplicity, we use all predictors for the regression:
 ```python
 from sklearn.linear_model import LogisticRegression
 model_LogReg = LogisticRegression(solver='newton-cg').fit(X_train, y_train)
+```
 
 ### Evaluate model output:
 
