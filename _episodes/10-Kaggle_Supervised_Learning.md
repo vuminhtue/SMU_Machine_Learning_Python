@@ -9,7 +9,7 @@ objectives:
 keypoints:
 - "Kaggle"
 ---
-# 9. Kaggle online competition: Supervised Learning
+# 10. Kaggle online competition: Supervised Learning
  
 This is a perfect competition for data science students who have completed an online course in machine learning and are looking to expand their skill set before trying a featured competition. 
 
@@ -28,7 +28,7 @@ For simpilicity: I downloaded the data for you and put it here:
 https://github.com/vuminhtue/SMU_Data_Science_workflow_R/tree/master/data/Kaggle_house_prices
 
 
-## 9.1 Understand the data
+## 10.1 Understand the data
 
 There are 4 files in this folder: 
 - train.csv: the trained data with 1460 rows and 81 columns. The last column "**SalePrice**" is for output with continuous value
@@ -41,11 +41,11 @@ There are 4 files in this folder:
 - Once model built and trained, apply to the **test.csv**__ and create the output as in format of sample_submission.csv
 - Write all analyses in Rmd format.
 
-## 9.2 Create the Rmd format with following Data Science workflow:
+## 10.2 Create the Rmd format with following Data Science workflow:
 
 ### Step 1: Load library, Load data
 
-```r
+```python
 
 ```
 
@@ -54,34 +54,24 @@ There are 4 files in this folder:
 - For simplicity, select the following columns: "OverallQual","OverallCond","YearBuilt","X1stFlrSF","FullBath","GarageCars","SaleCondition","SalePrice"
 - Visualize the importancy of variables
 
-```r
+```python
 
 ```
 
 ### Step 3: Create partition for the data
 
-```r
+```python
 
 ```
 
 ### Step 4: Apply 1 ML algorithm to the data and calculate prediction
 
-```r
+```python
 
 ```
 
 ### Step 5: Evaluate the model output
 
-```r
+```python
 
 ```
-
-### Step 6: Knit the documentation
-
-```r
-
-```
-
->! [Solution](https://raw.githubusercontent.com/vuminhtue/SMU_Data_Science_workflow_R/master/files/house-prices/Kaggle_house_price.Rmd)
-
-
