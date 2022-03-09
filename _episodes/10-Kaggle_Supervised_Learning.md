@@ -79,7 +79,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 plt.figure(figsize=(20, 10))
-sns.heatmap(numerical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(numerical.corr()) < 0.6))
+sns.heatmap(df_numerical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(df_numerical.corr()) < 0.6))
 ```
                                                                                                   
 </details>
