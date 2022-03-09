@@ -133,7 +133,11 @@ print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y
 In python pandas, we can utilize the **get_dummy** function
  
 ```python
- 
+Color = ['Red','Red','Yellow','Green','Yellow']
+Color_OHE = pd.get_dummies(Color,drop_first=False)
+
+# To reduce the number of input values, we can set the flag *drop_first=True*
+
 ```
 
 #### Application to this project:
@@ -176,4 +180,63 @@ Let's see the value of categorical inputs?
 df_categorical_ohe=pd.get_dummies(df_categorical,drop_first=True)
 df_categorical_ohe.head()
  ```
+ 
+Now let's visualize the heatmap between categorical input and output SalePrice:
+
+<details><summary>Solution using Random Forest</summary>
+```python
+plt.figure(figsize=(20, 10))
+sns.heatmap(df_categorical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(df_categorical.corr()) < 0.5))
+```
+                                                                                                        
+                                                                                                       
+Select the best variables:
+
+```python
+cate_selected = df_categorical[["KitchenQual_Gd","ExterQual_TA"]]
+```
+
+Merge with the numerical data:
+
+```python
+df_train2 = pd.concat([cate_selected,df_train1],axis=1)
+X = df_train1.iloc[:,0:8]
+y = df_train1.iloc[:,-1]                                                                                                            
+```
+
+Split to training and testing:
+
+```python
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.6,random_state=123)
+```
+
+Apply 1 ML model
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+model_RF = RandomForestRegressor(n_estimators=100).fit(X_train,y_train)
+y_pred_RF = model_RF.predict(X_test)
+```
+
+Evaluate the output:
+
+```python
+from sklearn import metrics
+print("R2 using Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_RF)) 
+print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_RF,squared=False))
+```
+
+
+                                                                                                            
+                                                                                                            
+                                                                                                          
+                                                                                                            
+                                                                                                            
+
+                                                                                                       
+                                                                                                        
+                                                                                                    
+</details>
+
  
