@@ -90,7 +90,7 @@ sns.heatmap(numerical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(numeric
 df_train1 = df_train[["OverallQual","TotalBsmtSF","1stFlrSF","GrLivArea","GarageCars","GarageArea","SalePrice"]]
 ```
 
- </details> 
+</details> 
  
 ### Step 3: Create partition for the data
 
@@ -105,6 +105,7 @@ y = df_train1.iloc[:,-1]
 ### Step 4: Apply 1 ML algorithm to the data and calculate prediction
 
 <details><summary>Solution using Random Forest</summary>
+ 
 ```python
 from sklearn.ensemble import RandomForestRegressor
 model_RF = RandomForestRegressor(n_estimators=100).fit(X_train,y_train)
@@ -115,10 +116,64 @@ y_pred_RF = model_RF.predict(X_test)
  
 ### Step 5: Evaluate the model output
 
- <details><summary>Solution using Random Forest</summary>
-```python
+<details><summary>Solution using Random Forest</summary>
+
+ ```python
 from sklearn import metrics
 print("R2 using Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_RF)) 
 print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_RF,squared=False))
 ```
 </details>
+ 
+### Step 6: Application of One Hot Encoding to string/categorical input
+
+#### One Hot Encoding?
+![image](https://i.imgur.com/mtimFxh.png)
+
+In python pandas, we can utilize the **get_dummy** function
+ 
+```python
+ 
+```
+
+#### Application to this project:
+ 
+Just now we have only utilize the numerical inputs and ignore the categorical inputs such as SaleConditions.
+ 
+Let's see the value of categorical inputs?
+ 
+ ```python
+ df_categorical.head()
+ df_categorical.shape
+ ```
+ 
+ We see that there are total 43 inputs for categorical values and some missing values.
+ 
+ Let's check the missing values:
+ 
+ ```python
+ df_categorical.isnull().sum()
+ ```
+ 
+ We can remove the columns with missing values:
+ 
+ ```python
+ df_categorical = df_categorical.dropna(axis=1)
+ df_categorical.shape
+ ```
+ 
+ Now 16 columns with missing values are removed.
+ 
+ Now, merge the SalePrice output with this categorical data:
+ 
+ ```python
+ df_categorical = pd.concat([df_categorical,df_train["SalePrice"]],axis=1)
+ ```
+ 
+ Let's create One Hot Encoding to split the categorical data:
+ 
+ ```python
+df_categorical_ohe=pd.get_dummies(df_categorical,drop_first=True)
+df_categorical_ohe.head()
+ ```
+ 
