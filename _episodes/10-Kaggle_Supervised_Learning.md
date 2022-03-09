@@ -46,7 +46,10 @@ There are 4 files in this folder:
 ### Step 1: Load library, Load data
 
 ```python
-
+import pandas as pd
+import numpy as np
+df_train = pd.read_csv("https://raw.githubusercontent.com/vuminhtue/SMU_Data_Science_workflow_R/master/data/Kaggle_house_prices/train.csv")
+df_test = pd.read_csv("https://raw.githubusercontent.com/vuminhtue/SMU_Data_Science_workflow_R/master/data/Kaggle_house_prices/test.csv") 
 ```
 
 ### Step 2: Select variables.
