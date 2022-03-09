@@ -176,14 +176,15 @@ Let's see the value of categorical inputs?
  
  Let's create One Hot Encoding to split the categorical data:
  
- ```python
+```python
 df_categorical_ohe=pd.get_dummies(df_categorical,drop_first=True)
 df_categorical_ohe.head()
- ```
+```
  
 Now let's visualize the heatmap between categorical input and output SalePrice:
 
 <details><summary>Solution using Random Forest</summary>
+ 
 ```python
 plt.figure(figsize=(20, 10))
 sns.heatmap(df_categorical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(df_categorical.corr()) < 0.5))
@@ -226,17 +227,6 @@ from sklearn import metrics
 print("R2 using Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_RF)) 
 print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_RF,squared=False))
 ```
-
-
-                                                                                                            
-                                                                                                            
-                                                                                                          
-                                                                                                            
-                                                                                                            
-
-                                                                                                       
-                                                                                                        
-                                                                                                    
 </details>
 
  
