@@ -41,7 +41,7 @@ There are 4 files in this folder:
 - Once model built and trained, apply to the **test.csv**__ and create the output as in format of sample_submission.csv
 - Write all analyses in Rmd format.
 
-## 10.2 Create the Rmd format with following Data Science workflow:
+## 10.2 Create the content with following Data Science workflow:
 
 ### Step 1: Load library, Load data
 
@@ -50,9 +50,8 @@ There are 4 files in this folder:
 ```
 
 ### Step 2: Select variables.
-- Since there are 80 input variables, we should not use all of them to avoid collinearity.
-- For simplicity, select the following columns: "OverallQual","OverallCond","YearBuilt","1stFlrSF","FullBath","GarageCars","SaleCondition","SalePrice"
-- Visualize the importancy of variables
+
+Visualize the variables and select the best one
 
 ```python
 
