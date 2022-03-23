@@ -57,76 +57,52 @@ df_train.head()
 
 First split the input variables into numerical and categorical (string) values:
 
-<details><summary>Solution</summary>
- 
+```python 
 df_numerical=df_train.select_dtypes(exclude=['object'])
-
 df_categorical=df_train.select_dtypes(include=['object'])
- 
-</details> 
-
+```
 
 Visualize  the cross correlation for all numerical input and output **SalePrice**:
 
 Here, we plot the heatmap and retain only the cross corelation higher than 0.6
 
-<details><summary>Solution</summary>
-
-```
- 
+```python
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 plt.figure(figsize=(20, 10))
 sns.heatmap(df_numerical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(df_numerical.corr()) < 0.6))
-                                                                                                 
 ```
                                                                                                   
-</details>
- 
 - What do you see from the heatmap?
 - For now, given only the input values as numerical, what input values would you choose to predict the output **SalePrice**?
-
-<details><summary>Solution</summary>
 
 ```python
 df_train1 = df_train[["OverallQual","TotalBsmtSF","1stFlrSF","GrLivArea","GarageCars","GarageArea","SalePrice"]]
 ```
-
-</details> 
  
 ### Step 3: Create partition for the data
-
-<details><summary>Solution</summary>
 
 ```python
 X = df_train1.iloc[:,0:6]
 y = df_train1.iloc[:,-1] 
 ```
-</details>
  
 ### Step 4: Apply 1 ML algorithm to the data and calculate prediction
 
-<details><summary>Solution using Random Forest</summary>
- 
 ```python
 from sklearn.ensemble import RandomForestRegressor
 model_RF = RandomForestRegressor(n_estimators=100).fit(X_train,y_train)
 y_pred_RF = model_RF.predict(X_test)
-
 ```
-</details>
  
 ### Step 5: Evaluate the model output
 
-<details><summary>Solution using Random Forest</summary>
-
- ```python
+```python
 from sklearn import metrics
 print("R2 using Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_RF)) 
 print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_RF,squared=False))
 ```
-</details>
  
 ### Step 6: Application of One Hot Encoding to string/categorical input
 
@@ -185,8 +161,6 @@ df_categorical_ohe.head()
 ```
  
 Now let's visualize the heatmap between categorical input and output SalePrice:
-
-<details><summary>Solution using Random Forest</summary>
  
 ```python
 plt.figure(figsize=(20, 10))
@@ -204,8 +178,8 @@ Merge with the numerical data:
 
 ```python
 df_train2 = pd.concat([cate_selected,df_train1],axis=1)
-X = df_train1.iloc[:,0:8]
-y = df_train1.iloc[:,-1]                                                                                                            
+X = df_train2.iloc[:,0:8]
+y = df_train2.iloc[:,-1]                                                                                                         
 ```
 
 Split to training and testing:
@@ -230,6 +204,5 @@ from sklearn import metrics
 print("R2 using Random Forest is: %1.2f " % metrics.r2_score(y_test,y_pred_RF)) 
 print("RMSE using Random Forest is: %1.2f" % metrics.mean_squared_error(y_test,y_pred_RF,squared=False))
 ```
-</details>
 
  
