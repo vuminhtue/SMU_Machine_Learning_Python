@@ -60,10 +60,8 @@ First split the input variables into numerical and categorical (string) values:
 
 <details><summary>Solution</summary>
  
-```python
 df_numerical=df_train.select_dtypes(exclude=['object'])
 df_categorical=df_train.select_dtypes(include=['object'])
-```
  
 </details> 
 
