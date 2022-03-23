@@ -72,14 +72,14 @@ Here, we plot the heatmap and retain only the cross corelation higher than 0.6
 
 <details><summary>Solution</summary>
 
-```python
+```
  
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 plt.figure(figsize=(20, 10))
 sns.heatmap(df_numerical.corr(), cmap='RdYlGn_r', annot=True,mask = (np.abs(df_numerical.corr()) < 0.6))
-                                                                                                        
+                                                                                                 
 ```
                                                                                                   
 </details>
