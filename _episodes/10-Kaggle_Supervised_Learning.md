@@ -48,9 +48,8 @@ There are 4 files in this folder:
 ```python
 import pandas as pd
 import numpy as np
-df_train = pd.read_csv("https://raw.githubusercontent.com/vuminhtue/SMU_Data_Science_workflow_R/master/data/Kaggle_house_prices/train.csv")
-df_test = pd.read_csv("https://raw.githubusercontent.com/vuminhtue/SMU_Data_Science_workflow_R/master/data/Kaggle_house_prices/test.csv") 
-
+df_train = pd.read_csv("https://raw.githubusercontent.com/vuminhtue/SMU_Machine_Learning_Python/master/data/house-prices/train.csv")
+df_test = pd.read_csv("https://raw.githubusercontent.com/vuminhtue/SMU_Machine_Learning_Python/master/data/house-prices/test.csv")
 df_train.head()
 ```
 
@@ -61,6 +60,7 @@ First split the input variables into numerical and categorical (string) values:
 <details><summary>Solution</summary>
  
 df_numerical=df_train.select_dtypes(exclude=['object'])
+
 df_categorical=df_train.select_dtypes(include=['object'])
  
 </details> 
