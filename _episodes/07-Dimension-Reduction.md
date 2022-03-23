@@ -90,9 +90,9 @@ X_train_pca.columns = ['PC1','PC2','PC3','PC4']
 X_test_pca.columns  = ['PC1','PC2','PC3','PC4']
 
 # Use random forest to train model
-model_RF = KNeighborsClassifier().fit(X_train_pca, y_train)
-y_pred_RF = model_RF.predict(X_test_pca)
-print("The accuracy score is %1.3f" % acc_score(y_test,y_pred_RF))
+model_KNN = KNeighborsClassifier().fit(X_train_pca, y_train)
+y_pred_KNN = model_KNN.predict(X_test_pca)
+print("The accuracy score is %1.3f" % acc_score(y_test,y_pred_KNN))
 ```
 
 Plotting the testing result with indicator of Wrong prediction
