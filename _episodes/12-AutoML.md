@@ -11,6 +11,8 @@ keypoints:
 ---
 # 12. AutoML for Regression problem
 
+Part of this tutorial following this [github](https://github.com/pycaret/pycaret/blob/master/tutorials/Regression%20Tutorial%20Level%20Beginner%20-%20REG101.ipynb)
+
 ## Load input data
 
 Here, we utilize the California housing data introduced in the previous part:
