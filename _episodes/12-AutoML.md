@@ -253,6 +253,7 @@ unseen_predictions.head()
 ![image](https://user-images.githubusercontent.com/43855029/165798173-90ba3d7e-ff70-44da-ba48-3cbd6c24ebb4.png)
 
 # 12b. AutoML for Classification problem with multiple output
+The material following this pycaret tutorial on [github](https://github.com/pycaret/pycaret/blob/master/tutorials/Multiclass%20Classification%20Tutorial%20Level%20Beginner%20-%20MCLF101.ipynb)
 
 Here we utilize the renown **iris** dataset as an example for the AutoML using pycaret.
 
@@ -279,17 +280,31 @@ Unseen Data For Predictions: (15, 5)
 
 ## Setting up the model and compare all of them
 
+Comparing all models to evaluate performance is the recommended starting point for modeling once the setup is completed (unless you exactly know what kind of model you need, which is often not the case). This function trains all models in the model library and scores them using stratified cross validation for metric evaluation. The output prints a score grid that shows average Accuracy, Recall, Precision, F1, Kappa, and MCC accross the folds (10 by default) along with training times.
+
 ```python
 best = compare_models()
 ```
 
 ![image](https://user-images.githubusercontent.com/43855029/165795503-f043d63d-610c-4ff5-a42b-3cffda5b5c3a.png)
 
+Two simple words of code (not even a line) have trained and evaluated over 15 models using cross validation. The score grid printed above highlights the highest performing metric for comparison purposes only. The grid by default is sorted using 'Accuracy' (highest to lowest) which can be changed by passing the sort parameter. For example compare_models(sort = 'Recall') will sort the grid by Recall instead of Accuracy. If you want to change the fold parameter from the default value of 10 to a different value then you can use the fold parameter. For example compare_models(fold = 5) will compare all models on 5 fold cross validation. Reducing the number of folds will improve the training time. By default, compare_models return the best performing model based on default sort order but can be used to return a list of top N models by using n_select parameter.
+
+Note: The AUC metric is not available for Multiclass classification however the column will still be shown with zero values to maintain consistency between the Binary Classification and Multiclass Classification display grids.
+
 
 ## Create 3 models
-- Decision Tree
-- K-Nearest Neighbours
-- Linear Regression
+
+create_model is the most granular function in PyCaret and is often the foundation behind most of the PyCaret functionalities. As the name suggests this function trains and evaluates a model using cross validation that can be set with fold parameter. The output prints a score grid that shows Accuracy, Recall, Precision, F1, Kappa and MCC by fold.
+
+For the remaining part of this tutorial, we will work with the below models as our candidate models. The selections are for illustration purposes only and do not necessarily mean they are the top performing or ideal for this type of data.
+
+- Decision Tree Classifier ('dt')
+- K Neighbors Classifier ('knn')
+- Logistic Regression ('lr')
+
+There are 18 classifiers available in the model library of PyCaret. Please view the create_model() docstring for the list of all available models.
+
 
 ```python
 dt = create_model('dt')
@@ -297,7 +312,11 @@ knn = create_model('knn')
 lr = create_model('lr')
 ```
 
+Notice that the Mean score of all models matches with the score printed in compare_models(). This is because the metrics printed in the compare_models() score grid are the average scores across all CV folds. Similar to compare_models(), if you want to change the fold parameter from the default value of 10 to a different value then you can use the fold parameter. For Example: create_model('dt', fold = 5) will create a Decision Tree Classifier using 5 fold stratified CV.
+
 ## Tune these 3 models
+
+When a model is created using the create_model() function it uses the default hyperparameters to train the model. In order to tune hyperparameters, the tune_model() function is used. This function automatically tunes the hyperparameters of a model using Random Grid Search on a pre-defined search space. The output prints a score grid that shows Accuracy, AUC, Recall, Precision, F1, Kappa, and MCC by fold for the best model. To use the custom search grid, you can pass custom_grid parameter in the tune_model function (see 9.2 KNN tuning below).
 
 ```python
 tuned_dt = tune_model(dt)
@@ -305,7 +324,15 @@ tuned_knn = tune_model(knn, custom_grid = {'n_neighbors' : np.arange(0,50,1)})
 tuned_lr = tune_model(lr)
 ```
 
+The tune_model() function is a random grid search of hyperparameters over a pre-defined search space. By default, it is set to optimize Accuracy but this can be changed using the optimize parameter. For example: tune_model(dt, optimize = 'Recall') will search for the hyperparameters of a Decision Tree Classifier that result in the highest Recall. For the purposes of this example, we have used the default metric Accuracy for the sake of simplicity only. The methodology behind selecting the right metric to evaluate a classifier is beyond the scope of this tutorial but if you would like to learn more about it, you can click here to read an article on how to choose the right evaluation metric.
+
+Metrics alone are not the only criteria you should consider when finalizing the best model for production. Other factors to consider include training time, standard deviation of kfolds etc. As you progress through the tutorial series we will discuss those factors in detail at the intermediate and expert levels. For now, let's move forward considering the Tuned K Neighbors Classifier as our best model for the remainder of this tutorial.
+
+
 ## Plot models
+Before model finalization, the plot_model() function can be used to analyze the performance across different aspects such as AUC, confusion_matrix, decision boundary etc. This function takes a trained model object and returns a plot based on the test / hold-out set.
+
+There are 15 different plots available, please see the plot_model() docstring for the list of available plots.
 
 ### Plotting confusion matrix
 
@@ -351,6 +378,8 @@ plot_model(tuned_knn, plot = 'error')
 
 ### Evaluate the model
 
+Another way to analyze the performance of models is to use the evaluate_model() function which displays a user interface for all of the available plots for a given model. It internally uses the plot_model() function.
+
 ```python
 evaluate_model(tuned_knn)
 ```
@@ -359,20 +388,30 @@ evaluate_model(tuned_knn)
 
 ## Predict on test / hold-out Sample
 
+Before finalizing the model, it is advisable to perform one final check by predicting the test/hold-out set and reviewing the evaluation metrics. If you look at the information grid in Section 6 above, you will see that 30% (41 samples) of the data has been separated out as a test/hold-out sample. All of the evaluation metrics we have seen above are cross validated results based on the training set (70%) only. Now, using our final trained model stored in the tuned_knn variable we will predict against the hold-out sample and evaluate the metrics to see if they are materially different than the CV results.
+
 ```python
 predict_model(tuned_knn)
 ```
 
 ![image](https://user-images.githubusercontent.com/43855029/165796658-bba23d68-57ba-4778-93a8-4262f3a7a097.png)
 
+The accuracy on the test/hold-out set is 0.9512 compared to 0.9356 achieved on the tuned_knn CV results (in section 9.2 above). This is not a significant difference. If there is a large variation between the test/hold-out and CV results, then this would normally indicate over-fitting but could also be due to several other factors and would require further investigation. In this case, we will move forward with finalizing the model and predicting on unseen data (the 10% that we had separated in the beginning and never exposed to PyCaret).
+
+(TIP : It's always good to look at the standard deviation of CV results when using create_model().)
 
 ## Finalize Model for Deployment
+
+Model finalization is the last step in the experiment. A normal machine learning workflow in PyCaret starts with setup(), followed by comparing all models using compare_models() and shortlisting a few candidate models (based on the metric of interest) to perform several modeling techniques such as hyperparameter tuning, ensembling, stacking etc. This workflow will eventually lead you to the best model for use in making predictions on new and unseen data. The finalize_model() function fits the model onto the complete dataset including the test/hold-out sample (30% in this case). The purpose of this function is to train the model on the complete dataset before it is deployed in production.
+
 
 ```python
 final_knn = finalize_model(tuned_knn)
 ```
 
 ## Predict on unseen data
+
+The predict_model() function is also used to predict on the unseen dataset. The only difference from section 11 above is that this time we will pass the data_unseen parameter. data_unseen is the variable created at the beginning of the tutorial and contains 10% (15 samples) of the original dataset which was never exposed to PyCaret. (see section 5 for explanation)
 
 ```python
 unseen_predictions = predict_model(final_knn, data=data_unseen)
