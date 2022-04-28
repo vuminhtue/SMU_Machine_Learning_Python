@@ -9,7 +9,8 @@ objectives:
 keypoints:
 - "Kaggle"
 ---
-# 12. AutoML for Regression problem
+
+# 12a. AutoML for Regression problem
 
 Part of this tutorial following this [github](https://github.com/pycaret/pycaret/blob/master/tutorials/Regression%20Tutorial%20Level%20Beginner%20-%20REG101.ipynb)
 
@@ -76,6 +77,8 @@ The output prints a score grid that shows average MAE, MSE, RMSE, R2, RMSLE and 
 ```python
 best=compare_models()
 ```
+ 
+![image](https://user-images.githubusercontent.com/43855029/165794495-e0083b0b-7026-408d-b0f2-9df3ce924a27.png)
  
 Two simple lines of code have trained and evaluated over 20 models using cross validation. 
 The score grid printed above highlights the highest performing metric for comparison purposes only. 
@@ -226,3 +229,133 @@ final_lightgbm = finalize_model(tuned_lightgbm)
 unseen_predictions = predict_model(final_lightgbm, data=data_unseen)
 unseen_predictions.head()
 ```
+
+# 12b. AutoML for Classification problem with multiple output
+
+Here we utilize the renown **iris** dataset as an example for the AutoML using pycaret.
+
+```python
+from pycaret.datasets import get_data
+dataset = get_data('iris')
+```
+
+## Split training/testing & unseen data
+
+```python
+data = dataset.sample(frac=0.9, random_state=123)
+data_unseen = dataset.drop(data.index)
+
+data.reset_index(drop=True, inplace=True)
+data_unseen.reset_index(drop=True, inplace=True)
+
+print('Data for Modeling: ' + str(data.shape))
+print('Unseen Data For Predictions: ' + str(data_unseen.shape))
+```
+
+Data for Modeling: (135, 5)
+Unseen Data For Predictions: (15, 5)
+
+## Setting up the model and compare all of them
+
+```python
+best = compare_models()
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165795503-f043d63d-610c-4ff5-a42b-3cffda5b5c3a.png)
+
+
+## Create 3 models
+- Decision Tree
+- K-Nearest Neighbours
+- Linear Regression
+
+```python
+dt = create_model('dt')
+knn = create_model('knn')
+lr = create_model('lr')
+```
+
+## Tune these 3 models
+
+```python
+tuned_dt = tune_model(dt)
+tuned_knn = tune_model(knn, custom_grid = {'n_neighbors' : np.arange(0,50,1)})
+tuned_lr = tune_model(lr)
+```
+
+## Plot models
+
+### Plotting confusion matrix
+
+Sample plot using tuned_knn model
+
+```python
+plot_model(tuned_knn, plot = 'confusion_matrix')
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165796078-359ec6ac-6dc5-4fde-b7f2-3c99eef0cdaa.png)
+
+
+### Classication report
+Get the class report for tuned_knn model
+
+```python
+plot_model(tuned_knn, plot = 'class_report')
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165796210-a41cc45b-75ed-4906-aa2b-191b7dcf3cf9.png)
+
+
+### Decision Boundary
+
+Plot the decision boundary for tuned_knn model
+
+```python
+plot_model(tuned_knn, plot='boundary')
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165796294-2398128b-0877-4768-8e8a-ce3e16468dd0.png)
+
+### Prediction Error
+
+Plot the prediction error for tuned_knn model
+
+```python
+plot_model(tuned_knn, plot = 'error')
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165796448-6587d9ac-d95e-4049-abd4-89f04cd3de13.png)
+
+
+### Evaluate the model
+
+```python
+evaluate_model(tuned_knn)
+```
+![image](https://user-images.githubusercontent.com/43855029/165796558-fa500878-8a7a-4f8d-b854-c8d67e62a995.png)
+
+
+## Predict on test / hold-out Sample
+
+```python
+predict_model(tuned_knn)
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165796658-bba23d68-57ba-4778-93a8-4262f3a7a097.png)
+
+
+## Finalize Model for Deployment
+
+```python
+final_knn = finalize_model(tuned_knn)
+```
+
+## Predict on unseen data
+
+```python
+unseen_predictions = predict_model(final_knn, data=data_unseen)
+unseen_predictions.head()
+```
+
+![image](https://user-images.githubusercontent.com/43855029/165796831-f942565d-1de7-4033-bf4e-7bddb0aa4cf2.png)
+
