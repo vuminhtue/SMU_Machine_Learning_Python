@@ -232,7 +232,10 @@ Now, using our final trained model stored in the tuned_lightgbm variable we will
 predict_model(tuned_lightgbm);
 ```
 
-The R2 on the test/hold-out set is 0.9652 compared to 0.9708 achieved on tuned_lightgbm CV results (in section 9.2 above). This is not a significant difference. If there is a large variation between the test/hold-out and CV results, then this would normally indicate over-fitting but could also be due to several other factors and would require further investigation. In this case, we will move forward with finalizing the model and predicting on unseen data (the 10% that we had separated in the beginning and never exposed to PyCaret).
+![image](https://user-images.githubusercontent.com/43855029/165797862-e2bcff7f-bd79-4983-9a29-09f60c1ee139.png)
+
+
+The R2 on the test/hold-out set is 0.8414 compared to 0.8325 mean achieved on tuned_lightgbm CV results. This is not a significant difference. If there is a large variation between the test/hold-out and CV results, then this would normally indicate over-fitting but could also be due to several other factors and would require further investigation. In this case, we will move forward with finalizing the model and predicting on unseen data (the 10% that we had separated in the beginning and never exposed to PyCaret).
 
 (TIP : It's always good to look at the standard deviation of CV results when using create_model.)
 
@@ -246,6 +249,8 @@ final_lightgbm = finalize_model(tuned_lightgbm)
 unseen_predictions = predict_model(final_lightgbm, data=data_unseen)
 unseen_predictions.head()
 ```
+
+![image](https://user-images.githubusercontent.com/43855029/165798173-90ba3d7e-ff70-44da-ba48-3cbd6c24ebb4.png)
 
 # 12b. AutoML for Classification problem with multiple output
 
