@@ -420,3 +420,4 @@ unseen_predictions.head()
 
 ![image](https://user-images.githubusercontent.com/43855029/165796831-f942565d-1de7-4033-bf4e-7bddb0aa4cf2.png)
 
+The Label and Score columns are added onto the data_unseen set. Label is the prediction and score is the probability of the prediction. Notice that predicted results are concatenated to the original dataset while all the transformations are automatically performed in the background.
