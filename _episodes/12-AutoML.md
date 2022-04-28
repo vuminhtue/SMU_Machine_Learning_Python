@@ -101,7 +101,7 @@ The selections are for illustration purposes only and do not necessarily mean th
 - Ada ('ada')
 - Light Gradient Boosting Machine ('lightgbm')
 - Decision Tree ('dt')
-- 
+
 There are 25 regressors available in the model library of PyCaret. 
 To see list of all regressors either check the docstring or use models function to see the library.
 
@@ -115,17 +115,26 @@ models()
 ada = create_model('ada')
 ```
 
+![image](https://user-images.githubusercontent.com/43855029/165797287-f2ce17ae-b34d-4e68-bb47-b445b61721fb.png)
+
+
 #### Create Light Gradient Boosting Model
 
 ```python
 lightgbm = create_model('lightgbm')
 ```
 
+![image](https://user-images.githubusercontent.com/43855029/165797325-232aeb7c-6f74-4b5c-9076-22e43de9ff41.png)
+
+
 #### Create Decision Tree Model
 
 ```python
 dt = create_model("dt")
 ```
+
+![image](https://user-images.githubusercontent.com/43855029/165797394-84303e44-0ac5-4d8b-bbfb-04ce15c10718.png)
+
 
 Notice that the Mean score of all models matches with the score printed in compare_models(). 
 This is because the metrics printed in the compare_models() score grid are the average scores across all CV folds.
@@ -146,6 +155,8 @@ To use the custom search grid, you can pass custom_grid parameter in the tune_mo
 tuned_ada = tune_model(ada)
 ```
 
+![image](https://user-images.githubusercontent.com/43855029/165797486-16cd6d7e-dd40-446c-8c50-13a54c8fbed0.png)
+
 ### Light GBM
 
 ```python
@@ -156,11 +167,17 @@ lgbm_params = {'num_leaves': np.arange(10,200,10),
 tuned_lightgbm = tune_model(lightgbm)                        
 ```
 
+![image](https://user-images.githubusercontent.com/43855029/165797544-8cba1824-8bf5-4210-aa4a-92f9019093d9.png)
+
+
 ### Decision Tree
 
 ```python
 tuned_dt = tune_model(dt)
 ```
+
+![image](https://user-images.githubusercontent.com/43855029/165797580-266b5230-9d36-4d5f-ac4a-b48a5370fd2e.png)
+
 
 By default, tune_model optimizes R2 but this can be changed using optimize parameter.
 For example: tune_model(dt, optimize = 'MAE') will search for the hyperparameters of a Decision Tree Regressor that results in the lowest MAE instead of highest R2. 
