@@ -48,6 +48,7 @@ There are several steps that we will use `sklearn` for. For preprocessing raw da
 ```python
 import pandas as pd
 data_df = pd.read_csv('https://raw.githubusercontent.com/vuminhtue/SMU_Machine_Learning_Python/master/data/airquality.csv')
+data_df.shape
 data_df.head()
 data_df.isnull().sum()
 ``` 
@@ -117,10 +118,20 @@ In statistics, imputation is the process of replacing missing data with substitu
 from sklearn.impute import KNNImputer
 imputer = KNNImputer(n_neighbors=2, weights="uniform")
 data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
+data_knnimpute.columns = data_df.columns
 ```
 
 **Note:**
 - In addition to KNNImputer, there are **IterativeImputer** (Multivariate imputer that estimates each feature from all the others) and **MissingIndicator**(Binary indicators for missing values)
+
+```python
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
+Iimputer = IterativeImputer()
+data_mice = pd.DataFrame(Iimputer.fit_transform(data_df))
+data_mice.columns = data_df.columns
+```
+
 - More information on sklearn.impute can be found [here](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.impute)
 
 ### 2.3.2 Pre-processing with Transforming data
@@ -131,10 +142,13 @@ data_knnimpute = pd.DataFrame(imputer.fit_transform(data_df))
 - Standardition Convert all independent variables into the same scale (mean=0, std=1) 
 - These differences in the ranges of initial features causes trouble to many machine learning models. For example, for the models that are based on distance computation, if one of the features has a broad range of values, the distance will be governed by this particular feature.
 - The example below use data from above:
+
 ```python
 from sklearn.preprocessing import scale
-data_std = pd.DataFrame(scale(data3,axis=0, with_mean=True, with_std=True, copy=True))
+data_std = pd.DataFrame(scale(data_knnimpute,axis=0, with_mean=True, with_std=True, copy=True))
 # axis used to compute the means and standard deviations along. If 0, independently standardize each feature, otherwise (if 1) standardize each sample.
+data_std.columns = data_knnimpute.columns
+data_std
 ```
 
 #### 2.3.2.2 Using scaling with predefine range
@@ -151,38 +165,52 @@ X_scaled = X_std * (max - min) + min
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 #By default, it scales for (0, 1) range
-data_scaler = pd.DataFrame(scaler.fit_transform(data3))
+data_scaler = pd.DataFrame(scaler.fit_transform(data_knnimpute))
+data_scaler.columns = data_knnimpute.columns
+data_scaler
 ```
 
 #### 2.3.2.3 Using Box-Cox Transformation
+
 - A [Box Cox](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.2517-6161.1964.tb00553.x) transformation is a transformation of a non-normal dependent variables into a normal shape. 
 - Normality is an important assumption for many statistical techniques; if your data isn’t normal, applying a Box-Cox means that you are able to run a broader number of tests.
 - The Box Cox transformation is named after statisticians George Box and Sir David Roxbee Cox who collaborated on a 1964 paper and developed the technique.
 - BoxCox can only be applied to stricly positive values
+
+![image](https://user-images.githubusercontent.com/43855029/191553926-cbdb29bf-cab1-47c7-838d-8243c120106e.png)
+
+
 ```python
 from sklearn.preprocessing import power_transform
-data_BxCx = pd.DataFrame(power_transform(data3,method="box-cox"))
-data_BxCx.columns = data3.columns
+data_BxCx = pd.DataFrame(power_transform(data_knnimpute,method="box-cox"))
+data_BxCx.columns = data_knnimpute.columns
+data_BxCx
 ```
+
 #### 2.3.2.4 Using Yeo Johnson Transformation
 While BoxCox only works with positive value, a more recent transformation method [Yeo Johnson](https://www.jstor.org/stable/2673623) can transform both positive and negative values
 ```python
-data_yeo_johnson = sklearn.preprocessing.power_transform(data3,method="yeo-johnson")
+data_yeo_johnson = pd.DataFrame(power_transform(data_knnimpute,method="yeo-johnson"))
+data_yeo_johnson.columns = data_knnimpute.columns
+data_yeo_johnson
 ```
 
 ```python
+import seaborn as sns
 import matplotlib.pyplot as plt
+
+sns.set_style('darkgrid')
+
 ax1 = plt.subplot(1,2,1)
-ax1.hist(data3["Ozone"])
+sns.distplot(data_knnimpute["Ozone"])
 ax1.set_title("Original probability")
-ax1.set_xlabel('Ozone')
-ax1.set_ylabel('Count')
+
 ax2 = plt.subplot(1,2,2)
-ax2.hist(data_BxCx["Ozone"])
+sns.distplot(data_BxCx["Ozone"])
 ax2.set_title("Box-Cox Transformation")
-ax2.set_xlabel('Ozone')
-ax2.set_ylabel('Count')
-plt.show()
 ```
-![image](https://user-images.githubusercontent.com/43855029/114884951-30a9e400-9dd4-11eb-9c42-4d108743a551.png)
+
+![image](https://user-images.githubusercontent.com/43855029/191554249-8fc8f758-33b9-4ee6-94eb-816052b6f665.png)
+
+
 
