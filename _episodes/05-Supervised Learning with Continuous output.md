@@ -309,17 +309,30 @@ RMSE using Random Forest is: 0.51
 - Ensemble methods use multiple learning algorithms to obtain better predictive performance than could be obtained from any of the constituent learning algorithms alone. Unlike a statistical ensemble in statistical mechanics, which is usually infinite, a machine learning ensemble consists of only a concrete finite set of alternative models, but typically allows for much more flexible structure to exist among those alternatives
 - The bonus point when applying both Bagging and Boosting in sklearn that they can be run in parallel!
 
-**Types of Ensembles:**
+
+### Types of Ensembles:
 
 There are 2 main types of Ensembles in ML:
 
-- Bagging: Boostrap Aggregation
+#### Bagging: Boostrap Aggregation
+
+- Bagging, also known as bootstrap aggregation, is the ensemble learning method that is commonly used to reduce variance within a noisy dataset.
+- In bagging, a random sample of data in a training set is selected with replacement—meaning that the individual data points can be chosen more than once.
+- After several data samples are generated, these weak models are then trained independently, and depending on the type of task—regression or classification, for example—the average or majority of those predictions yield a more accurate estimate. 
+
+- As a note, the **Random Forest** algorithm is considered an extension of the bagging method, using both bagging and feature randomness to create an uncorrelated forest of decision trees.
 
 ![image](https://user-images.githubusercontent.com/43855029/153652070-c067fc10-6322-49d1-92ed-b27532af11b6.png)
 
-Random Forest is considered Bagging Ensemble method!
 
-- Boosting: Boost the weak predictors
+
+
+#### Boosting: Boost the weak predictors
+
+- Boosting is an ensemble learning method that combines a set of weak learners into a strong learner to minimize training errors.
+- In boosting, a random sample of data is selected, fitted with a model and then trained sequentially—that is, each model tries to compensate for the weaknesses of its predecessor.
+- With each iteration, the weak rules from each individual classifier are combined to form one, strong prediction rule. 
+
 
 ![image](https://user-images.githubusercontent.com/43855029/153652096-4e93d213-58b9-4b27-88fa-e8b42a9cd6e5.png)
 
