@@ -156,7 +156,7 @@ Transform features by scaling each feature to a given range.
 This estimator scales and translates each feature individually such that it is in the given range on the training set, e.g. between zero and one.
 Formulation for this is:
 
-```
+```python
 X_std = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
 X_scaled = X_std * (max - min) + min
 ```
