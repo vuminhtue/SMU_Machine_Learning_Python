@@ -182,16 +182,18 @@ data_scaler
 
 ```python
 from sklearn.preprocessing import power_transform
-data_BxCx = pd.DataFrame(power_transform(data_knnimpute,method="box-cox"))
-data_BxCx.columns = data_knnimpute.columns
+data_BxCx = pd.DataFrame(power_transform(data_knnimpute.iloc[:,0:4],method="box-cox"))
+data_BxCx.columns = data_knnimpute.columns[0:4]
+data_BxCx[["Month","Day"]]=data_knnimpute[["Month","Day"]]
 data_BxCx
 ```
 
 #### 2.3.2.4 Using Yeo Johnson Transformation
 While BoxCox only works with positive value, a more recent transformation method [Yeo Johnson](https://www.jstor.org/stable/2673623) can transform both positive and negative values
 ```python
-data_yeo_johnson = pd.DataFrame(power_transform(data_knnimpute,method="yeo-johnson"))
-data_yeo_johnson.columns = data_knnimpute.columns
+data_yeo_johnson = pd.DataFrame(power_transform(data_knnimpute.iloc[:,0:4],method="yeo-johnson"))
+data_yeo_johnson.columns = data_knnimpute.columns[0:4]
+data_yeo_johnson[["Month","Day"]]=data_knnimpute[["Month","Day"]]
 data_yeo_johnson
 ```
 
