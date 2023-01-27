@@ -397,6 +397,10 @@ RMSE using Adaboost is: 0.75
 
 ### 5.5.3 Gradient Boosting Machine
 
+
+Gradient Boosting trains many models in a gradual, additive and sequential manner. The major difference between AdaBoost and Gradient Boosting Algorithm is how the two algorithms identify the shortcomings of weak learners (eg. decision trees). While the AdaBoost model identifies the shortcomings by using high weight data points, gradient boosting performs the same by using gradients in the loss function (y=ax+b+e , e needs a special mention as it is the error term). More information can be found [here](https://towardsdatascience.com/understanding-gradient-boosting-machines-9be756fe76ab)
+
+
 ```python
 from sklearn.ensemble import GradientBoostingRegressor
 model_GBM = GradientBoostingRegressor(n_estimators=100).fit(X_train,y_train)
