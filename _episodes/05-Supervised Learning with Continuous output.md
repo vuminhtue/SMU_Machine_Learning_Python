@@ -227,7 +227,7 @@ There are many other ML algorithm that helps to overcome the issue of overfittin
 - Tree based learning algorithms are considered to be one of the best and mostly used supervised learning methods.
 - Tree based methods empower predictive models with high accuracy, stability and ease of interpretation
 - Non-parametric and non-linear relationships
-- Types: Continuous (DecisionTreeRegressor) and Categorical (DecisionTreeClassifier)
+- Types: Continuous (**DecisionTreeRegressor**) and Categorical (**DecisionTreeClassifier**)
 
 ![image](https://user-images.githubusercontent.com/43855029/153648313-da3a9a08-c4ad-48c9-bebd-df34f1651f98.png)
 
