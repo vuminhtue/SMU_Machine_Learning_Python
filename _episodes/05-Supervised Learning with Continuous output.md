@@ -373,6 +373,12 @@ Let's try with some Boosting Ensemble approach:
 
 ### 5.5.2 Boosting with Adaboost
 
+A single classifier may not be able to accurately predict the class of an object, but when we group multiple **weak classifiers** with each one progressively learning from the others' wrongly classified objects, we can build one such strong model.
+
+A **weak classifier** is one that performs better than random guessing, but still performs poorly at designating classes to objects.
+
+To understand more about Adaboost, you are encouraged to read [here](https://towardsdatascience.com/understanding-gradient-boosting-machines-9be756fe76ab)
+
 ```python
 from sklearn.ensemble import AdaBoostRegressor
 model_ADA = AdaBoostRegressor(n_estimators=100, learning_rate=0.03).fit(X_train, y_train)
