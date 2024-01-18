@@ -5,7 +5,7 @@ from [The Carpentries](https://carpentries.org/).
 
 ## Maintainer(s)
 
-* Linh B. Ngo
+* Tue Vu
 
 ## Authors
 
