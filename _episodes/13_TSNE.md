@@ -193,3 +193,29 @@ tsne = sns.lmplot(x="TSNE1", y="TSNE2",
 ```
 
 <img width="746" alt="image" src="https://github.com/user-attachments/assets/2905b525-4174-4069-a170-820e8a905d18">
+
+
+- We can even visualize the 784 dimension data in 3D perspective by fitting TSNE with 3 dimensions:
+
+```python
+model_tsne = TSNE(n_components=3)
+tsne_X = model_tsne.fit_transform(X)
+df_tsne = pd.DataFrame(tsne_X,columns=['TSNE1','TSNE2','TSNE3'])
+df_tsne['Cluster'] = y
+```
+
+```python
+fig = plt.figure(figsize=(50, 30))
+ax = plt.axes(projection ='3d')
+# defining all 3 axis
+x = df_tsne["TSNE1"]
+y = df_tsne["TSNE2"]
+z = df_tsne["TSNE3"]
+
+# plotting
+ax.scatter(x, y, z, c = df_tsne["Cluster"])
+ax.set_title('3D line plot geeks for geeks')
+plt.show()
+```
+
+<img width="977" alt="image" src="https://github.com/user-attachments/assets/7b0852a9-022e-41fa-8418-b0f404f24a6c">
