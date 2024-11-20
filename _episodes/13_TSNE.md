@@ -106,3 +106,20 @@ ani.save('noisy_moon.gif', writer='pillow')
 ```
 
 ![noisy_circle_i10](https://github.com/user-attachments/assets/62b02479-1483-48a8-8526-ec141f74c079)
+
+## Noisy Moon
+
+- To create noisy moon, we use the datasets make_moons:
+
+```python
+noisy_moons = datasets.make_moons(n_samples=n_samples, noise=0.05, random_state=seed)
+X,y = noisy_moons
+```
+
+- The sensitivity of noisy moon with different perplexity is plotted below:
+
+![Noisy_moon](https://github.com/user-attachments/assets/04485d3d-5fae-4861-a467-1b3247c638a4)
+
+- Similarly, we have the animation of TSNE with 2D for this Noisy moon:
+
+![noisy_moon](https://github.com/user-attachments/assets/0fa0a2dd-821a-4329-bab8-1980b67eaf56)
