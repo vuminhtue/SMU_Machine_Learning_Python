@@ -83,6 +83,26 @@ sns.scatterplot(x="TSNE1", y="TSNE2",
 
 ![my_plot](https://github.com/user-attachments/assets/a53eca14-71de-4c7a-9c9f-1858641d4c02)
 
-- And here is the animation of TSNE with perplexity range from 1 to 100:
+- And here is the animation code of TSNE for noisy circle with perplexity range from 1 to 100:
+
+```python
+import matplotlib.animation as animation
+prange = range(0,100)
+
+def animate(p):
+    plt.clf()  # Clear the previous frame
+    model_tsne = TSNE(n_components=2,perplexity=p+1)
+    tsne_X = model_tsne.fit_transform(dfX)
+    df_tsne = pd.DataFrame(tsne_X,columns=['TSNE1','TSNE2'])
+    df_tsne['Cluster'] = y
+    
+    sns.scatterplot(x="TSNE1", y="TSNE2",
+        data=df_tsne, 
+        hue='Cluster', # color by cluster
+        legend=True).set(title="Perplexity = {}".format(p))
+
+ani = animation.FuncAnimation(plt.gcf(), animate, frames=len(prange),interval=10)
+ani.save('noisy_moon.gif', writer='pillow') 
+```
 
 ![noisy_circle_i10](https://github.com/user-attachments/assets/62b02479-1483-48a8-8526-ec141f74c079)
