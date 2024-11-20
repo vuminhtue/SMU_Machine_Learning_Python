@@ -81,5 +81,8 @@ sns.scatterplot(x="TSNE1", y="TSNE2",
 - We can visualize the transformation of TSNE with different variable of perplexity
 - Here, we compare the raw data with perplexity range from 1 to 200:
 
-  ![my_plot](https://github.com/user-attachments/assets/a53eca14-71de-4c7a-9c9f-1858641d4c02)
+![my_plot](https://github.com/user-attachments/assets/a53eca14-71de-4c7a-9c9f-1858641d4c02)
 
+- And here is the animation of TSNE with perplexity range from 1 to 100:
+
+![noisy_circle_i10](https://github.com/user-attachments/assets/62b02479-1483-48a8-8526-ec141f74c079)
