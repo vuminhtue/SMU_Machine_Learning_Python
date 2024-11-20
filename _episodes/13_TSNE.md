@@ -219,3 +219,27 @@ plt.show()
 ```
 
 <img width="977" alt="image" src="https://github.com/user-attachments/assets/7b0852a9-022e-41fa-8418-b0f404f24a6c">
+
+- Additionally, we can also plot using raw images from Xtest data:
+
+```python
+from PIL import Image
+
+tx, ty = df_tsne['TSNE1'], df_tsne['TSNE2']
+tx = (tx-np.min(tx)) / (np.max(tx) - np.min(tx))
+ty = (ty-np.min(ty)) / (np.max(ty) - np.min(ty))
+
+width = 4000
+height = 3000
+max_dim = 10
+full_image = Image.new(mode="RGB", size=(width, height),color = (255, 255, 255))
+for idx, x in enumerate(X_test):
+    tile = Image.fromarray(np.uint8(x * 255))
+    rs = max(1, tile.width / max_dim, tile.height / max_dim)
+    full_image.paste(tile, (int((width-max_dim) * tx[idx]),
+                            int((height-max_dim) * ty[idx])))
+full_image
+full_image.save("MNIST_number.jpg")
+```
+
+![MNIST_number](https://github.com/user-attachments/assets/b72c0746-67f5-4e23-8557-24ef2b85385e)
