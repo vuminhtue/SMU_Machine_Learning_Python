@@ -139,3 +139,57 @@ X, y = datasets.make_blobs(n_samples=n_samples, cluster_std=[1.0, 2.5, 0.5],rand
 - And the animation of TSNE visualization with perplexity range from 1-100:
 
 ![blobs](https://github.com/user-attachments/assets/7f6ff69e-25ea-4b44-b835-f2a6bb3cfd8d)
+
+## MNIST data
+- Not only using the 2D plane model, we can use TSNE to visualize the multi-dimension.
+- One of the example that we are using is the digital number data called [MNIST](https://www.tensorflow.org/datasets/catalog/mnist)
+- To download the MNIST data, we can use tensorflow keras datasets:
+
+```python
+from tensorflow.keras.datasets import mnist
+(X_train,y_train),(X_test,y_test) = mnist.load_data()
+```
+
+- The training data contains 60000 images and the testing contains 10000 images.
+- The image has resolution of 28x28 and is in gray scale with color range from 0-255
+- To quickly visualize the MNIST data:
+
+```python
+for i in range(64):
+    ax = plt.subplot(8, 8, i+1)
+    ax.axis('off')
+    plt.imshow(X_train[i], cmap='Greys')
+```
+
+<img width="434" alt="image" src="https://github.com/user-attachments/assets/c586f5ac-19fd-4ffb-b962-3bd6e17d0a95">
+
+- Because of its resolution 28x28 = 784, this dataset has the dimension of 784 and we can utilize TSNE to visualize the 10000 testing images in 2D or 3D scale
+- First, let reshape the data:
+
+```python
+X = X_test.reshape(10000,28*28)
+y = y_test
+```
+
+- And apply TSNE with 2D plane and default perplexity
+
+```python
+model_tsne = TSNE(n_components=2)
+tsne_X = model_tsne.fit_transform(X)
+df_tsne = pd.DataFrame(tsne_X,columns=['TSNE1','TSNE2'])
+df_tsne['Cluster'] = y
+```
+
+- We can then visualize the MNIST dataset on 2D plane of TSNE:
+
+```python
+tsne = sns.lmplot(x="TSNE1", y="TSNE2",
+  data=df_tsne, 
+  fit_reg=False, 
+  hue='Cluster', # color by cluster
+  legend=True,
+  scatter_kws={"s": 5}, # specify the point size
+  height=8)
+```
+
+<img width="746" alt="image" src="https://github.com/user-attachments/assets/2905b525-4174-4069-a170-820e8a905d18">
