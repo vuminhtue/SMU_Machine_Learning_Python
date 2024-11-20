@@ -246,3 +246,73 @@ full_image.save("MNIST_number.jpg")
 ```
 
 ![MNIST_number](https://github.com/user-attachments/assets/b72c0746-67f5-4e23-8557-24ef2b85385e)
+
+
+## FMNIST data
+- Fashion MNIST is similar to MNIST data but using fashion image like shirt, trouser, shoes, etc 
+- One of the example that we are using is the digital number data called [FMNIST](https://www.tensorflow.org/datasets/catalog/fashion_mnist)
+- To download the FMNIST data, we can use tensorflow keras datasets and we will visualize using testing data
+
+```python
+from tensorflow.keras.datasets import fashion_mnist
+(X_train,y_train),(X_test,y_test) = fashion_mnist.load_data()
+X = X_test.reshape(10000,28*28)
+y = y_test
+```
+
+- Setup the model:
+
+```python
+model_tsne = TSNE(n_components=2,perplexity=30)
+tsne_X = model_tsne.fit_transform(X)
+
+Cluster_name = ["T-shirt/top","Trouser","Pullover","Dress","Coat",
+                "Sandal","Shirt","Sneaker","Bag","Ankle boot"]
+
+df_tsne = pd.DataFrame(tsne_X,columns=['TSNE1','TSNE2'])
+df_tsne['Cluster'] = y
+df_tsne['Cluster_name'] = pd.Series(y).apply(lambda x:Cluster_name[x])
+```
+
+- Visualize with TSNE using default perplexity:
+
+```python
+
+tsne1 = sns.lmplot(x="TSNE1", y="TSNE2",
+  data=df_tsne, 
+  fit_reg=False, 
+  hue='Cluster_name', # color by cluster
+  legend=True,
+  scatter_kws={"s": 5}, # specify the point size
+  height=8)
+```
+
+![image](https://github.com/user-attachments/assets/b46bdd34-aef8-4bb2-90a3-2a56c7813cbc)
+
+
+- We can also visulize using images and we can clearly the grouping to images by clicking on the image to zoom in :
+
+```python
+tx, ty = df_tsne['TSNE1'], df_tsne['TSNE2']
+tx = (tx-np.min(tx)) / (np.max(tx) - np.min(tx))
+ty = (ty-np.min(ty)) / (np.max(ty) - np.min(ty))
+
+from PIL import Image
+width = 4000
+height = 3000
+max_dim = 10
+full_image = Image.new(mode="RGB", size=(width, height),color = (255, 255, 255))
+
+
+for idx, x in enumerate(X_test):
+    tile = Image.fromarray(np.uint8(x * 255))
+    rs = max(1, tile.width / max_dim, tile.height / max_dim)
+    full_image.paste(tile, (int((width-max_dim) * tx[idx]),
+                            int((height-max_dim) * ty[idx])))
+
+full_image.save("FMNIST.jpg")
+
+```
+
+![Uploading FMNIST.jpg…]()
+
