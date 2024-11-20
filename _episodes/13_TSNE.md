@@ -123,3 +123,19 @@ X,y = noisy_moons
 - Similarly, we have the animation of TSNE with 2D for this Noisy moon:
 
 ![noisy_moon](https://github.com/user-attachments/assets/0fa0a2dd-821a-4329-bab8-1980b67eaf56)
+
+## Blobs data with 3 groups
+
+- Next, Let's create data with 3 separate group from make_blobs function in datasets
+
+```python
+X, y = datasets.make_blobs(n_samples=n_samples, cluster_std=[1.0, 2.5, 0.5],random_state=123)
+```
+
+- We can visualize the Raw data with TSNE from different perplexity as below on 2D plane:
+
+![Blobs](https://github.com/user-attachments/assets/5306146d-0c2f-4c80-b024-c37e05c0dec4)
+
+- And the animation of TSNE visualization with perplexity range from 1-100:
+
+![blobs](https://github.com/user-attachments/assets/7f6ff69e-25ea-4b44-b835-f2a6bb3cfd8d)
