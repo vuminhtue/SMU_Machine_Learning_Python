@@ -194,6 +194,9 @@ tsne = sns.lmplot(x="TSNE1", y="TSNE2",
 
 <img width="746" alt="image" src="https://github.com/user-attachments/assets/2905b525-4174-4069-a170-820e8a905d18">
 
+- Animation for perplexity from 1 to 100:
+
+![MNIST](https://github.com/user-attachments/assets/00269907-577a-4690-a1df-95425c0c6f0f)
 
 - We can even visualize the 784 dimension data in 3D perspective by fitting TSNE with 3 dimensions:
 
