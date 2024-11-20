@@ -314,5 +314,6 @@ full_image.save("FMNIST.jpg")
 
 ```
 
-![Uploading FMNIST.jpg…]()
+![FMNIST](https://github.com/user-attachments/assets/c7b503cf-b781-4388-aedd-1a20c20375ee)
+
 
