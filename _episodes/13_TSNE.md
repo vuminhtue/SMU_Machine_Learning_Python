@@ -15,6 +15,7 @@ keypoints:
 - It was developed by Laurens van der Maaten and Geoffrey Hinton in  2008
 - The algorithm is non-linear. Its goal is to take a set of points in a high-dimensional space and find a faithful representation of those points in a lower-dimensional space in 2D or 3D plane
 - TSNE has tunable parameters “perplexity,” which says (loosely) how to balance attention between local and global aspects the data.
+- "perplexity" can be considered to be number of nearest neighbors (the higher the number, the better fit the data) when considered for each data point when constructing the probability distribution of similarities in high-dimensional space.
 - According to authors, "The performance of SNE is fairly robust to changes in the perplexity, and typical values are between 5 and 50"
 - This chapter discusses some aspect of TSNE and its perplexity with different kind of input data. The code will be given as well
 
