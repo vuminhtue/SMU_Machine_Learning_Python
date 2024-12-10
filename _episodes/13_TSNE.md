@@ -17,7 +17,12 @@ keypoints:
 - TSNE has tunable parameters “perplexity,” which says (loosely) how to balance attention between local and global aspects the data.
 - "perplexity" can be considered to be number of nearest neighbors (the higher the number, the better fit the data) when considered for each data point when constructing the probability distribution of similarities in high-dimensional space.
 - According to authors, "The performance of SNE is fairly robust to changes in the perplexity, and typical values are between 5 and 50"
-- This chapter discusses some aspect of TSNE and its perplexity with different kind of input data. The code will be given as well
+- This chapter discusses some aspect of TSNE and its perplexity with different kind of input data. The code will be given as well.
+- What is good perplexity?
+      + typical range 5-50: small data (5-30), large data (30-50)
+      + 1-5: disconnected structure and poorly representation
+      + > 50: overlapping structure and loss detail
+  
 
 ## Load scikit-learn library and create some sample data
 - The data is taken from datasets, used in Unsupervised Learning chapter that I introduced earlier in Chapter 9
