@@ -19,6 +19,7 @@ keypoints:
 - According to authors, "The performance of SNE is fairly robust to changes in the perplexity, and typical values are between 5 and 50"
 - This chapter discusses some aspect of TSNE and its perplexity with different kind of input data. The code will be given as well.
 - What is good perplexity?
+  
       + typical range 5-50: small data (5-30), large data (30-50)
       + 1-5: disconnected structure and poorly representation
       + > 50: overlapping structure and loss detail
